@@ -3,12 +3,12 @@
 # App runs locally, only infrastructure in containers
 # Usage: docker-compose -f docker-compose.local.yml up
 
-name: phellow-community-local
+name: inkapp-local
 
 services:
   # PostgreSQL Database
   db:
-    container_name: phellow.community-db-local
+    container_name: inkapp-db-local
     image: postgres:17
     restart: always
     ports:
@@ -29,7 +29,7 @@ services:
 
   # Mockoon API Server
   mockoon:
-    container_name: phellow.community-mockoon-local
+    container_name: inkapp-mockoon-local
     image: mockoon/cli:latest
     command: --data "/data/mockoon-config.json" --port 3000
     volumes:
@@ -46,7 +46,7 @@ services:
 
   # OIDC Mock Server
   oidc-mock:
-    container_name: phellow.community-oidc-local
+    container_name: inkapp-oidc-local
     build:
       context: .
       dockerfile: docker/oidc-mock.Dockerfile

@@ -2,12 +2,12 @@
 # Isolated environment with test data and configuration
 # Usage: docker-compose -f docker-compose.test.yml up
 
-name: phellow-community-test
+name: inkapp-test
 
 services:
   # Test PostgreSQL Database
   db-test:
-    container_name: phellow.community-db-test
+    container_name: inkapp-db-test
     image: postgres:17
     restart: no
     ports:
@@ -26,7 +26,7 @@ services:
 
   # Mockoon with test data
   mockoon-test:
-    container_name: phellow.community-mockoon-test
+    container_name: inkapp-mockoon-test
     image: mockoon/cli:latest
     command: --data "/data/mockoon-test-config.json" --port 3000
     volumes:
@@ -43,7 +43,7 @@ services:
 
   # OIDC Mock for testing
   oidc-mock-test:
-    container_name: phellow.community-oidc-test
+    container_name: inkapp-oidc-test
     build:
       context: .
       dockerfile: docker/oidc-mock.Dockerfile
@@ -58,7 +58,7 @@ services:
 
   # Database Migration for testing
   migrate-test:
-    container_name: phellow.community-migrate-test
+    container_name: inkapp-migrate-test
     build:
       context: .
       dockerfile: Dockerfile
@@ -82,7 +82,7 @@ services:
 
   # Application for testing
   web-test:
-    container_name: phellow.community-app-test
+    container_name: inkapp-app-test
     build:
       context: .
       dockerfile: Dockerfile
@@ -110,7 +110,7 @@ services:
 
   # Test runner service
   test-runner:
-    container_name: phellow.community-test-runner
+    container_name: inkapp-test-runner
     build:
       context: .
       dockerfile: Dockerfile

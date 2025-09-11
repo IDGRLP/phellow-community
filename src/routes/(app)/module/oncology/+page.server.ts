@@ -1,4 +1,4 @@
-import { parseFHIRBundle } from "$components/oncology/parseBundle";
+import { parseFHIRBundle } from "$components/oncology/IDG/parseBundle";
 import { env } from "$env/dynamic/private";
 import { parseJWT } from "@oslojs/jwt";
 import { error } from "@sveltejs/kit";

@@ -7,12 +7,12 @@
 #   Local:       docker-compose -f docker-compose.local.yml up
 #   Testing:     docker-compose -f docker-compose.test.yml up
 
-name: phellow-community-prod
+name: inkapp-prod
 
 services:
   # PostgreSQL Database
   db:
-    container_name: phellow.community-db-prod
+    container_name: inkapp-db-prod
     image: postgres:17
     restart: always
     ports:
@@ -31,7 +31,7 @@ services:
 
   # Database Migration
   migrate:
-    container_name: phellow.community-migrate-prod
+    container_name: inkapp-migrate-prod
     build:
       context: .
       dockerfile: Dockerfile
@@ -55,7 +55,7 @@ services:
 
   # Main Application (Production)
   web:
-    container_name: phellow.community-app-prod
+    container_name: inkapp-app-prod
     build:
       context: .
       dockerfile: Dockerfile

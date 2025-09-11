@@ -12,12 +12,13 @@
 	import TimelineSpot from "./TimelineSpot.svelte";
 	import { computeLanes, formatLegendDate, type Event } from "./timelineHelper";
 
+	import IdgDiagnosis from "../IDG/IDGDiagnosis.svelte";
+	import IdgSurgery from "../IDG/IDGSurgery.svelte";
+	import IdgProgression from "../IDG/IDGProgression.svelte";
+	import IdgSystemicTherapy from "../IDG/IDGSystemicTherapy.svelte";
+	import IdgRadiation from "../IDG/IDGRadiation.svelte";
+	import IdgTNMDisplay from "../IDG/IDGTNMDisplay.svelte";
 	import type { Bundle } from "fhir/r4";
-	import Diagnosis from "../MII/Details/Diagnosis/Diagnosis.svelte";
-	import Radiation from "../MII/Details/Radiation/Radiation.svelte";
-	import Surgery from "../MII/Details/Surgery/Surgery.svelte";
-	import SystemicTherapy from "../MII/Details/SystemicTherapy/SystemicTherapy.svelte";
-	import Progression from "../MII/Details/Progression/Progression.svelte";
 
 	interface Props {
 		events: Event[];
@@ -243,15 +244,47 @@
 					</Drawer.Header>
 
 					{#if selectedEvent.type === "diagnosis"}
-						<Diagnosis />
+						<IdgDiagnosis
+							{showFeedback}
+							{cancelFeedback}
+							conditionId={selectedEvent.resourceId}
+							{bundle}
+						/>
 					{:else if selectedEvent.type === "surgery"}
-						<Surgery />
+						<IdgSurgery
+							{showFeedback}
+							{cancelFeedback}
+							procedureId={selectedEvent.resourceId}
+							{bundle}
+						/>
 					{:else if selectedEvent.type === "radiation"}
-						<Radiation />
+						<IdgRadiation
+							{showFeedback}
+							{cancelFeedback}
+							procedureId={selectedEvent.resourceId}
+							{bundle}
+						/>
 					{:else if selectedEvent.type === "systemicTherapy"}
-						<SystemicTherapy />
+						<IdgSystemicTherapy
+							{showFeedback}
+							{cancelFeedback}
+							procedureId={selectedEvent.resourceId}
+							{bundle}
+						/>
 					{:else if selectedEvent.type === "progression"}
-						<Progression />
+						<IdgProgression
+							{showFeedback}
+							{cancelFeedback}
+							observationId={selectedEvent.resourceId}
+							{bundle}
+						/>
+					{:else if selectedEvent.type === "tnm"}
+						<IdgTNMDisplay
+							{showFeedback}
+							{cancelFeedback}
+							observationId={selectedEvent.resourceId}
+							{bundle}
+						/>
 					{/if}
 					{#if showJson}
 						<pre>{JSON.stringify(entry, null, 2)}</pre>

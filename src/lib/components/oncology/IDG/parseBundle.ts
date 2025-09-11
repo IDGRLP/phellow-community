@@ -1,5 +1,5 @@
 import type { Bundle } from "fhir/r4";
-import type { Event } from "./Timeline/timelineHelper";
+import type { Event } from "../Timeline/timelineHelper";
 
 /**
  * Parses a FHIR Bundle and extracts relevant oncology events into a standardized array.

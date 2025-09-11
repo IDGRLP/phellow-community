@@ -2,12 +2,12 @@
 # Full stack with mocks and hot reloading
 # Usage: docker-compose -f docker-compose.development.yml up
 
-name: phellow-community-dev
+name: inkapp-dev
 
 services:
   # PostgreSQL Database
   db:
-    container_name: phellow.community-db-dev
+    container_name: inkapp-db-dev
     image: postgres:17
     restart: always
     ports:
@@ -26,7 +26,7 @@ services:
 
   # Mockoon API Server
   mockoon:
-    container_name: phellow.community-mockoon-dev
+    container_name: inkapp-mockoon-dev
     image: mockoon/cli:latest
     command: --data "/data/mockoon-config.json" --port 3000
     volumes:
@@ -43,7 +43,7 @@ services:
 
   # OIDC Mock Server
   oidc-mock:
-    container_name: phellow.community-oidc-dev
+    container_name: inkapp-oidc-dev
     build:
       context: .
       dockerfile: docker/oidc-mock.Dockerfile
@@ -60,7 +60,7 @@ services:
 
   # Database Migration
   migrate:
-    container_name: phellow.community-migrate-dev
+    container_name: inkapp-migrate-dev
     build:
       context: .
       dockerfile: Dockerfile
@@ -84,7 +84,7 @@ services:
 
   # Main Application (Development Mode)
   web:
-    container_name: phellow.community-app-dev
+    container_name: inkapp-app-dev
     build:
       context: .
       dockerfile: Dockerfile
@@ -107,10 +107,9 @@ services:
       - ./vite.config.ts:/home/node/app/vite.config.ts
       - ./svelte.config.js:/home/node/app/svelte.config.js
       - ./tsconfig.ts:/home/node/app/tsconfig.ts
+      - ./messages:/home/node/app/messages
     environment:
       - NODE_ENV=development
-      - VITE_API_URL=http://mockoon:3000
-      - VITE_OIDC_URL=http://oidc-mock:8080
     env_file:
       - .env.development
     restart: unless-stopped
