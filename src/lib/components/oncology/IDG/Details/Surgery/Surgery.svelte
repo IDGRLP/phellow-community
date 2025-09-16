@@ -2,6 +2,7 @@
 	import type { Procedure } from "fhir/r4";
 
 	import { parseResidualstatus } from "./helper";
+	import CodingCard from "../CodingCard.svelte";
 
 	interface Props {
 		class?: string;
@@ -41,19 +42,11 @@
 <div
 	class={["grid grid-cols-1 gap-8", showFeedback ? "md:grid-cols-1" : "md:grid-cols-2", classes]}
 >
-	{#if residualstatusCoding}
-		<div class="border-border bg-card flex flex-col gap-2 rounded-lg border p-4 shadow-xs">
-			<div class="flex items-center justify-start gap-2">
-				<h3 class="mt-0 font-medium">Residualstatus</h3>
-				<span
-					class="bg-muted text-muted-foreground inline-block rounded px-2 py-1 text-xs font-medium"
-				>
-					{residualstatusCoding.code}
-				</span>
-			</div>
-			<div class="text-muted-foreground mt-1">
-				{residualstatusCoding.display || parseResidualstatus(residualstatusCoding)}
-			</div>
-		</div>
-	{/if}
+	<!-- Residualstatus -->
+	<CodingCard
+		heading="Residualstatus"
+		coding={residualstatusCoding}
+		noDataText="Kein Residualstatus vorhanden"
+		codingDisplay={residualstatusCoding && parseResidualstatus(residualstatusCoding)}
+	/>
 </div>

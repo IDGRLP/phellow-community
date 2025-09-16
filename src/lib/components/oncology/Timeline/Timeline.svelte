@@ -200,7 +200,7 @@
 			{@const entry = bundle.entry?.find((e) => e.resource?.id === selectedEvent?.resourceId)}
 			<Drawer.Content
 				showDefaultOverlay={false}
-				class="border-b-none border-border bg-card fixed right-0 bottom-0 left-0 -mx-px flex h-full max-h-[95%] flex-col rounded-t-[10px] border"
+				class="border-b-none border-border fixed right-0 bottom-0 left-0 -mx-px flex h-full max-h-[95%] flex-col rounded-t-[10px] border"
 			>
 				<div
 					class="mx-auto flex w-full flex-col gap-8 overflow-y-auto p-2 px-4 pt-0 select-text md:p-4 md:px-8"

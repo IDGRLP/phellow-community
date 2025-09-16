@@ -1,4 +1,5 @@
-import type { Procedure } from "fhir/r4";
+import type { Coding, Procedure } from "fhir/r4";
+import { obdsTherapieEndeCodes } from "../helper";
 
 const bestrahlungZielgebiet: Record<string, string> = {
 	"1.1": "Ganzhirn (Neurokranium, inklusive Meningen)",
@@ -134,4 +135,43 @@ function getTargetAreas(radiationTherapy: Procedure): TargetArea[] | undefined {
 	return extractedAreas;
 }
 
-export { bestrahlungZielgebiet, getTargetAreas };
+// Helper function to format date
+function formatDate(dateString?: string) {
+	if (!dateString) return undefined;
+	const date = new Date(dateString);
+	return new Intl.DateTimeFormat("de-DE", {
+		year: "numeric",
+		month: "long",
+		day: "numeric",
+	}).format(date);
+}
+
+function getTreatmentPeriod(radiationTherapy: Procedure) {
+	const startDate = formatDate(radiationTherapy.performedPeriod?.start);
+	const endDate = formatDate(radiationTherapy.performedPeriod?.end);
+	return { startDate, endDate };
+}
+
+function getTreatmentEndReasonCoding(procedure: Procedure): Coding | undefined {
+	const reasonCoding = procedure.outcome?.coding?.find(
+		(coding) =>
+			coding.system ===
+			"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-therapie-ende-grund"
+	);
+
+	return reasonCoding;
+}
+
+function parseTreatmentEndReason(reasonCoding: Coding): string {
+	if (!reasonCoding.code) return "Unbekannt";
+	return obdsTherapieEndeCodes[reasonCoding.code] || reasonCoding.display || "Unbekannt";
+}
+
+export {
+	bestrahlungZielgebiet,
+	formatDate,
+	getTargetAreas,
+	getTreatmentEndReasonCoding,
+	getTreatmentPeriod,
+	parseTreatmentEndReason,
+};

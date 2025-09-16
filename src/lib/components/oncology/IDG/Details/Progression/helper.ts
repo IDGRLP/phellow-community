@@ -1,3 +1,5 @@
+import type { Coding, Observation } from "fhir/r4";
+
 // Helper function to determine status color
 function getStatusColor(code: string) {
 	const responseMap: Record<string, string> = {
@@ -30,21 +32,40 @@ function getStatusColor(code: string) {
 	return responseMap[code] || "bg-gray-500";
 }
 
-function getStatusDisplayString(code: string) {
-	const responseMap: Record<string, string> = {
-		V: "Vollremission",
-		T: "Teilremission",
-		K: "Keine Veränderung",
-		P: "Progression",
-		D: "divergentes Geschehen",
-		B: "klinische Besserung des Zustandes, Teilremissionkriterien jedoch nicht erfüllt",
-		R: "Vollremission mit residualen Auffälligkeiten",
-		Y: "Rezidiv",
-		U: "Beurteilung unmöglich",
-		X: "fehlende Angabe",
-	};
+const responseMap: Record<string, string> = {
+	V: "Vollremission",
+	T: "Teilremission",
+	K: "Keine Veränderung",
+	P: "Progression",
+	D: "divergentes Geschehen",
+	B: "klinische Besserung des Zustandes, Teilremissionkriterien jedoch nicht erfüllt",
+	R: "Vollremission mit residualen Auffälligkeiten",
+	Y: "Rezidiv",
+	U: "Beurteilung unmöglich",
+	X: "fehlende Angabe",
+};
 
-	return responseMap[code] || "Unbekannt";
+function parseGesamtbeurteilung(coding: Coding): string {
+	if (!coding.code) return "Unbekannt";
+	return responseMap[coding.code] || coding.display || "Unbekannt";
 }
 
-export { getStatusColor, getStatusDisplayString };
+function getGesamtbeurteilungCoding(progression: Observation): Coding | undefined {
+	return progression.valueCodeableConcept?.coding?.find(
+		(coding) =>
+			coding.system ===
+			"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-verlauf-gesamtbeurteilung"
+	);
+}
+
+function formatDate(dateString?: string) {
+	if (!dateString) return "Unbekannt";
+	const date = new Date(dateString);
+	return new Intl.DateTimeFormat("de-DE", {
+		year: "numeric",
+		month: "long",
+		day: "numeric",
+	}).format(date);
+}
+
+export { formatDate, getGesamtbeurteilungCoding, getStatusColor, parseGesamtbeurteilung };

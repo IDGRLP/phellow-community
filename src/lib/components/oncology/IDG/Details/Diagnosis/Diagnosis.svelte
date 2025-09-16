@@ -1,6 +1,7 @@
 <script lang="ts">
-	import type { Condition } from "fhir/r4";
+	import type { Coding, Condition } from "fhir/r4";
 	import { parseSeitenlokalisation } from "./helper";
+	import CodingCard from "../CodingCard.svelte";
 
 	interface Props {
 		class?: string;
@@ -58,69 +59,28 @@
 <div
 	class={["grid grid-cols-1 gap-8", showFeedback ? "md:grid-cols-1" : "md:grid-cols-3", classes]}
 >
-	{#if icdCoding}
-		<div class="border-border bg-card flex flex-col gap-2 rounded-lg border p-4 shadow-xs">
-			<div class="flex items-center justify-start gap-2">
-				<h3 class="mt-0 font-medium">ICD-10</h3>
-				<span
-					class="bg-muted text-muted-foreground inline-block rounded px-2 py-1 text-xs font-medium"
-				>
-					{icdCoding.code}
-				</span>
-			</div>
-			<div class="text-muted-foreground mt-1">{icdCoding.display || icdCoding.code}</div>
-			<!-- TODO: Seitenlokalisation -->
-			<!-- {#if icdCoding.side}
-				<div class="mt-1 text-sm">
-					Seite: <span class="text-muted-foreground">{icdCoding.side}</span>
-				</div>
-			{/if} -->
-		</div>
-	{/if}
+	<!-- ICD-10 Kodierung -->
+	<CodingCard heading="ICD-10" coding={icdCoding} noDataText="Keine ICD-10-Kodierung vorhanden" />
 
-	{#if morphologyCoding}
-		<div class="border-border bg-card flex flex-col gap-2 rounded-lg border p-4 shadow-xs">
-			<div class="flex items-center justify-start gap-2">
-				<h3 class="mt-0 font-medium">Morphologie</h3>
-				<span
-					class="bg-muted text-muted-foreground inline-block rounded px-2 py-1 text-xs font-medium"
-				>
-					{morphologyCoding.code}
-				</span>
-			</div>
-			<div class="text-muted-foreground mt-1">
-				{morphologyCoding.display || morphologyCoding.code}
-			</div>
-		</div>
-	{/if}
-	{#if topographyCoding}
-		<div class="border-border bg-card flex flex-col gap-2 rounded-lg border p-4 shadow-xs">
-			<div class="flex items-center justify-start gap-2">
-				<h3 class="mt-0 font-medium">Topographie</h3>
-				<span
-					class="bg-muted text-muted-foreground inline-block rounded px-2 py-1 text-xs font-medium"
-				>
-					{topographyCoding.code}
-				</span>
-			</div>
-			<div class="text-muted-foreground mt-1">
-				{topographyCoding.display || topographyCoding.code}
-			</div>
-		</div>
-	{/if}
-	{#if seitenlokalisation}
-		<div class="border-border bg-card flex flex-col gap-2 rounded-lg border p-4 shadow-xs">
-			<div class="flex items-center justify-start gap-2">
-				<h3 class="mt-0 font-medium">Seitenlokalisation</h3>
-				<span
-					class="bg-muted text-muted-foreground inline-block rounded px-2 py-1 text-xs font-medium"
-				>
-					{seitenlokalisation.code}
-				</span>
-			</div>
-			<div class="text-muted-foreground mt-1">
-				{seitenlokalisation.display || parseSeitenlokalisation(seitenlokalisation)}
-			</div>
-		</div>
-	{/if}
+	<!-- Seitenlokalisation -->
+	<CodingCard
+		heading="Seitenlokalisation"
+		coding={seitenlokalisation}
+		noDataText="Keine Seitenlokalisation vorhanden"
+		codingDisplay={seitenlokalisation && parseSeitenlokalisation(seitenlokalisation)}
+	/>
+
+	<!-- Morphologie -->
+	<CodingCard
+		heading="Morphologie"
+		coding={morphologyCoding}
+		noDataText="Keine Morphologie-Kodierung vorhanden"
+	/>
+
+	<!-- Topographie -->
+	<CodingCard
+		heading="Topographie"
+		coding={topographyCoding}
+		noDataText="Keine Topographie-Kodierung vorhanden"
+	/>
 </div>

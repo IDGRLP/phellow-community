@@ -609,9 +609,19 @@
 			<!-- <TnmDisplay {staging} /> -->
 			{#if histologyObservations && histologyObservations.length > 0}
 				<Histology {showFeedback} observations={histologyObservations} />
+			{:else}
+				<div>
+					<h3 class="font-xl my-0">Histologie</h3>
+					<p class="text-muted-foreground">Keine Histologieinformationen verfügbar.</p>
+				</div>
 			{/if}
 			{#if fernmetastasenObservations && fernmetastasenObservations.length > 0}
 				<Fernmetastasen {showFeedback} fernmetastasen={fernmetastasenObservations} />
+			{:else}
+				<div>
+					<h3 class="font-xl my-0">Fernmetastasen</h3>
+					<p class="text-muted-foreground">Keine Fernmetastaseninformationen verfügbar.</p>
+				</div>
 			{/if}
 		{:else}
 			<p class="text-muted-foreground">Keine Diagnoseinformationen verfügbar.</p>

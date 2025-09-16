@@ -1,8 +1,12 @@
 <script lang="ts">
 	import type { Procedure } from "fhir/r4";
 
-	import { obdsTherapieEndeCodes } from "../helper";
-	import { getTargetAreas } from "./helper";
+	import {
+		getTargetAreas,
+		getTreatmentEndReasonCoding,
+		getTreatmentPeriod,
+		parseTreatmentEndReason,
+	} from "./helper";
 
 	interface Props {
 		class?: string;
@@ -12,38 +16,7 @@
 
 	let { class: classes, radiationTherapy, showFeedback }: Props = $props();
 
-	// Helper function to format date
-	function formatDate(dateString?: string) {
-		if (!dateString) return undefined;
-		const date = new Date(dateString);
-		return new Intl.DateTimeFormat("de-DE", {
-			year: "numeric",
-			month: "long",
-			day: "numeric",
-		}).format(date);
-	}
-
-	// Helper function to get treatment period
-	function getTreatmentPeriod() {
-		const startDate = formatDate(radiationTherapy.performedPeriod?.start);
-		const endDate = formatDate(radiationTherapy.performedPeriod?.end);
-		return { startDate, endDate };
-	}
-
-	function getTreatmendEndReason(): string | undefined {
-		const reasonCode = radiationTherapy.outcome?.coding?.find(
-			(coding) =>
-				coding.system ===
-				"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-therapie-ende-grund"
-		);
-
-		if (!reasonCode?.code) return undefined;
-
-		return obdsTherapieEndeCodes[reasonCode.code] || undefined;
-	}
-
-	// Get data for display
-	const treatmentPeriod = $derived(getTreatmentPeriod());
+	const treatmentPeriod = $derived(getTreatmentPeriod(radiationTherapy));
 	let treatmentDateString = $derived.by(() => {
 		if (treatmentPeriod.startDate && treatmentPeriod.endDate) {
 			return `${treatmentPeriod.startDate} - ${treatmentPeriod.endDate}`;
@@ -55,9 +28,8 @@
 			return undefined;
 		}
 	});
-	let treatmentEndReason = $derived(getTreatmendEndReason());
+	let treatmentEndReason = $derived(getTreatmentEndReasonCoding(radiationTherapy));
 
-	// Get data for display
 	const targetAreas = $derived(getTargetAreas(radiationTherapy));
 </script>
 
@@ -74,18 +46,14 @@
 	{#if targetAreas}
 		{#each targetAreas as targetArea}
 			<div class="border-border bg-card flex flex-col gap-6 rounded-lg border p-4 shadow-xs">
-				<div>
-					<div class="flex items-center justify-start gap-2">
-						<h4 class="font-normal">Zielgebiet</h4>
-					</div>
-					<div class="text-muted-foreground">{targetArea.target}</div>
+				<div class="flex flex-col gap-2">
+					<h3 class="mt-0 font-medium">Zielgebiet</h3>
+					<div class="text-muted-foreground mt-1">{targetArea.target}</div>
 				</div>
 				{#if targetArea.laterality}
-					<div>
-						<div class="flex items-center justify-start gap-2">
-							<h4 class="font-normal">Seitenlokalisation</h4>
-						</div>
-						<div class="text-muted-foreground">{targetArea.laterality}</div>
+					<div class="flex flex-col gap-2">
+						<h3 class="mt-0 font-medium">Seitenlokalisation</h3>
+						<div class="text-muted-foreground mt-1">{targetArea.laterality}</div>
 					</div>
 				{/if}
 			</div>
@@ -93,11 +61,9 @@
 	{/if}
 	{#if treatmentEndReason}
 		<div class="border-border bg-card flex flex-col gap-6 rounded-lg border p-4 shadow-xs">
-			<div>
-				<div class="flex items-center justify-start gap-2">
-					<h4 class="font-normal">Grund für das Ende der Behandlung</h4>
-				</div>
-				<div class="text-muted-foreground">{treatmentEndReason}</div>
+			<div class="flex flex-col gap-2">
+				<h3 class="mt-0 font-medium">Grund für das Ende der Behandlung</h3>
+				<div class="text-muted-foreground mt-1">{parseTreatmentEndReason(treatmentEndReason)}</div>
 			</div>
 		</div>
 	{/if}

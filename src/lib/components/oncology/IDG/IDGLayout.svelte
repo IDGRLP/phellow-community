@@ -27,7 +27,9 @@
 		{@render children()}
 	</div>
 	{#if showFeedback}
-		<div class="bg-background flex flex-col justify-between gap-4 overflow-y-auto rounded-lg p-4">
+		<div
+			class="bg-card border-border flex flex-col justify-between gap-4 overflow-y-auto rounded-lg border p-4 shadow-xs"
+		>
 			{#if feedback}
 				{@render feedback()}
 			{:else if questionnaire}

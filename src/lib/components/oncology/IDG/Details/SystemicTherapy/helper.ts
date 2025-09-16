@@ -1,4 +1,4 @@
-import type { Procedure } from "fhir/r4";
+import type { Coding, Procedure } from "fhir/r4";
 import { obdsTherapieEndeCodes } from "../helper";
 
 const therapietypLabels: Record<string, string> = {
@@ -20,28 +20,33 @@ const therapietypLabels: Record<string, string> = {
 	SO: "Sonstiges",
 };
 
-function getTreatmentType(procedure: Procedure): string | undefined {
+function getTreatmentTypeCoding(procedure: Procedure): Coding | undefined {
 	const typeCode = procedure.code?.coding?.find(
 		(coding) =>
 			coding.system ===
 			"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-therapietyp"
-	)?.code;
-
-	if (!typeCode) return undefined;
-
-	return therapietypLabels[typeCode];
+	);
+	return typeCode;
 }
 
-function getTreatmendEndReason(procedure: Procedure): string | undefined {
-	const reasonCode = procedure.outcome?.coding?.find(
+function parseTreatmentType(typeCode: Coding): string {
+	if (!typeCode.code) return "Unbekannt";
+	return therapietypLabels[typeCode.code] || typeCode.display || "Unbekannt";
+}
+
+function getTreatmentEndReasonCoding(procedure: Procedure): Coding | undefined {
+	const reasonCoding = procedure.outcome?.coding?.find(
 		(coding) =>
 			coding.system ===
 			"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-therapie-ende-grund"
 	);
 
-	if (!reasonCode?.code) return undefined;
+	return reasonCoding;
+}
 
-	return obdsTherapieEndeCodes[reasonCode.code] || undefined;
+function parseTreatmentEndReason(reasonCoding: Coding): string {
+	if (!reasonCoding.code) return "Unbekannt";
+	return obdsTherapieEndeCodes[reasonCoding.code] || reasonCoding.display || "Unbekannt";
 }
 
 function formatDate(dateString?: string): string | undefined {
@@ -54,7 +59,6 @@ function formatDate(dateString?: string): string | undefined {
 	}).format(date);
 }
 
-// Helper function to get treatment period
 function getTreatmentPeriod(
 	procedure: Procedure
 ): { startDate?: string; endDate?: string } | undefined {
@@ -65,8 +69,10 @@ function getTreatmentPeriod(
 
 export {
 	formatDate,
-	getTreatmendEndReason,
+	getTreatmentEndReasonCoding,
 	getTreatmentPeriod,
-	getTreatmentType,
+	getTreatmentTypeCoding,
+	parseTreatmentEndReason,
+	parseTreatmentType,
 	therapietypLabels,
 };
