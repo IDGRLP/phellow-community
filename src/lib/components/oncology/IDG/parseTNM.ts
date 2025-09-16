@@ -41,10 +41,8 @@ function findTNMCategoryObservation(
 	category: TNMCategory
 ): Observation | undefined {
 	const profileUrl = `https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-tnm-kategorie-${category}`;
-	
-	return members.find((m) =>
-		m.meta?.profile?.some((profile) => profile === profileUrl)
-	);
+
+	return members.find((m) => m.meta?.profile?.some((profile) => profile === profileUrl));
 }
 
 /**
@@ -77,10 +75,7 @@ function normalizeTNMValue(value: string, category: TNMCategory): string {
 /**
  * Extracts complete TNM category data (value and prefix)
  */
-function extractTNMCategoryData(
-	members: Observation[],
-	category: TNMCategory
-): TNMCategoryData {
+function extractTNMCategoryData(members: Observation[], category: TNMCategory): TNMCategoryData {
 	const observation = findTNMCategoryObservation(members, category);
 	if (!observation) {
 		return {};
@@ -149,7 +144,7 @@ export function parseStageGroupObservation(
 
 	// Build prefix object with individual category prefixes taking precedence over global prefix
 	const prefixObject: { t?: TNMPrefix; n?: TNMPrefix; m?: TNMPrefix } = {};
-	
+
 	if (tData.prefix || nData.prefix || mData.prefix) {
 		// Use individual prefixes when available
 		if (tData.prefix) prefixObject.t = tData.prefix;
