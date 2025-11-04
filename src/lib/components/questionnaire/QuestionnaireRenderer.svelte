@@ -112,4 +112,10 @@
 		totalSteps={questionnaireState.getTotalSteps()}
 		answers={questionnaireState.answers}
 	/>
+	<QuestionnaireNavigation
+		previousDisabled={questionnaireState.currentIndex === 0}
+		previous={questionnaireState.previousQuestion}
+		nextDisabled={questionnaireState.currentIndex === questionnaireState.enabledGroups.length - 1}
+		next={handleNext}
+	/>
 </div>

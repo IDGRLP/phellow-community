@@ -66,7 +66,7 @@
 			</div>
 		{/if}
 
-		{#if import.meta.env.APP_ENV === "development"}
+		{#if import.meta.env.DEV}
 			<div class="bg-card rounded-lg border p-4">
 				<h3 class="mt-0">QuestionnaireResponse (Debug)</h3>
 				<pre class="overflow-auto text-xs">{JSON.stringify(response, null, 2)}</pre>

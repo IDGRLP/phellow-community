@@ -55,7 +55,7 @@
 
 		<Button
 			variant={isSelected(optionValue) ? "default" : "outline"}
-			class="flex h-auto w-full items-center justify-start gap-2 text-left whitespace-normal"
+			class="flex h-auto w-full items-center justify-start gap-2 border text-left whitespace-normal"
 			onclick={() => handleSelect(optionValue)}
 			{disabled}
 		>

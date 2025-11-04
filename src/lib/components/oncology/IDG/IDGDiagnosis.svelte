@@ -431,20 +431,70 @@
 				required: true,
 				type: "choice",
 				answerOption: [
-					{ valueCoding: { code: "yes", display: "Ja" } },
-					{ valueCoding: { code: "no", display: "Nein" } },
-					{ valueCoding: { code: "unknown", display: "Ich weiß nicht" } },
+					{
+						valueCoding: {
+							code: "correctAndComplete",
+							display:
+								"Ja, die angezeigten Informationen sind korrekt und vollständig (richtig und vollständig)",
+						},
+					},
+					{
+						valueCoding: {
+							code: "correctButIncomplete",
+							display:
+								"Ja, die angezeigten Informationen sind korrekt, aber es fehlt etwas (richtig, aber unvollständig)",
+						},
+					},
+					{
+						valueCoding: {
+							code: "incorrectButComplete",
+							display:
+								"Nein, die angezeigten Informationen sind fehlerhaft, aber an sich vollständig (falsch, aber vollständig)",
+						},
+					},
+					{
+						valueCoding: {
+							code: "incorrectAndIncomplete",
+							display:
+								"Nein, die angezeigten Informationen sind fehlerhaft und unvollständig (falsch und unvollständig)",
+						},
+					},
+					{
+						valueCoding: {
+							code: "correctButUnclearIfComplete",
+							display:
+								"Die angezeigten Informationen sind korrekt, aber ich weiß nicht, ob noch etwas fehlt (richtig, aber unklar, ob vollständig)",
+						},
+					},
+					{
+						valueCoding: {
+							code: "unknown",
+							display:
+								"Ich weiß nicht, ob die anzeigten Informationen korrekt sind und ob noch Informationen fehlen (Richtigkeit und Vollständigkeit unklar)",
+						},
+					},
 					{ valueCoding: { code: "na", display: "Keine Angabe" } },
 				],
 			},
 			{
 				linkId: "0_1_Fd_Diag_ICD",
 				type: "group",
+				enableBehavior: "any",
 				enableWhen: [
 					{
 						question: "0_Fd_Diag_ins",
 						operator: "=",
-						answerCoding: { code: "no" },
+						answerCoding: { code: "correctButIncomplete" },
+					},
+					{
+						question: "0_Fd_Diag_ins",
+						operator: "=",
+						answerCoding: { code: "incorrectButComplete" },
+					},
+					{
+						question: "0_Fd_Diag_ins",
+						operator: "=",
+						answerCoding: { code: "incorrectAndIncomplete" },
 					},
 				],
 				item: [
@@ -455,7 +505,8 @@
 						type: "choice",
 						answerOption: [
 							{ valueCoding: { code: "yes", display: "Ja" } },
-							{ valueCoding: { code: "no", display: "Nein" } },
+							{ valueCoding: { code: "no", display: "Nein, die Information stimmt nicht" } },
+							{ valueCoding: { code: "noMissing", display: "Nein, es fehlt etwas" } },
 							{ valueCoding: { code: "unknown", display: "Ich weiß nicht" } },
 							{ valueCoding: { code: "na", display: "Keine Angabe" } },
 						],
@@ -465,11 +516,17 @@
 						text: "Welche Information beim ICD-10 stimmt nicht bzw. fehlt? Seien Sie bitte möglichst präzise.",
 						type: "text",
 						required: true,
+						enableBehavior: "any",
 						enableWhen: [
 							{
 								question: "0_1_Fd_Diag_ICD_choice",
 								operator: "=",
 								answerCoding: { code: "no" },
+							},
+							{
+								question: "0_1_Fd_Diag_ICD_choice",
+								operator: "=",
+								answerCoding: { code: "noMissing" },
 							},
 						],
 					},
@@ -479,11 +536,22 @@
 				linkId: "0_1_Fd_Diag_Seitenlokalisation",
 				text: "",
 				type: "group",
+				enableBehavior: "any",
 				enableWhen: [
 					{
 						question: "0_Fd_Diag_ins",
 						operator: "=",
-						answerCoding: { code: "no" },
+						answerCoding: { code: "correctButIncomplete" },
+					},
+					{
+						question: "0_Fd_Diag_ins",
+						operator: "=",
+						answerCoding: { code: "incorrectButComplete" },
+					},
+					{
+						question: "0_Fd_Diag_ins",
+						operator: "=",
+						answerCoding: { code: "incorrectAndIncomplete" },
 					},
 				],
 				item: [
@@ -494,7 +562,8 @@
 						required: true,
 						answerOption: [
 							{ valueCoding: { code: "yes", display: "Ja" } },
-							{ valueCoding: { code: "no", display: "Nein" } },
+							{ valueCoding: { code: "no", display: "Nein, die Information stimmt nicht" } },
+							{ valueCoding: { code: "noMissing", display: "Nein, es fehlt etwas" } },
 							{ valueCoding: { code: "unknown", display: "Ich weiß nicht" } },
 							{ valueCoding: { code: "na", display: "Keine Angabe" } },
 						],
@@ -504,11 +573,17 @@
 						text: "Welche Information der Seitenlokalisation stimmt nicht bzw. fehlt? Seien Sie bitte möglichst präzise.",
 						type: "text",
 						required: true,
+						enableBehavior: "any",
 						enableWhen: [
 							{
 								question: "0_1_Fd_Diag_Seitenlokalisation_choice",
 								operator: "=",
 								answerCoding: { code: "no" },
+							},
+							{
+								question: "0_1_Fd_Diag_Seitenlokalisation_choice",
+								operator: "=",
+								answerCoding: { code: "noMissing" },
 							},
 						],
 					},
@@ -518,11 +593,22 @@
 				linkId: "0_1_Fd_Diag_Histologie",
 				text: "",
 				type: "group",
+				enableBehavior: "any",
 				enableWhen: [
 					{
 						question: "0_Fd_Diag_ins",
 						operator: "=",
-						answerCoding: { code: "no" },
+						answerCoding: { code: "correctButIncomplete" },
+					},
+					{
+						question: "0_Fd_Diag_ins",
+						operator: "=",
+						answerCoding: { code: "incorrectButComplete" },
+					},
+					{
+						question: "0_Fd_Diag_ins",
+						operator: "=",
+						answerCoding: { code: "incorrectAndIncomplete" },
 					},
 				],
 				item: [
@@ -533,7 +619,8 @@
 						required: true,
 						answerOption: [
 							{ valueCoding: { code: "yes", display: "Ja" } },
-							{ valueCoding: { code: "no", display: "Nein" } },
+							{ valueCoding: { code: "no", display: "Nein, die Information stimmt nicht" } },
+							{ valueCoding: { code: "noMissing", display: "Nein, es fehlt etwas" } },
 							{ valueCoding: { code: "unknown", display: "Ich weiß nicht" } },
 							{ valueCoding: { code: "na", display: "Keine Angabe" } },
 						],
@@ -543,11 +630,17 @@
 						text: "Welche Information der Histologie-Daten stimmen nicht bzw. fehlen? Seien Sie bitte möglichst präzise.",
 						type: "text",
 						required: true,
+						enableBehavior: "any",
 						enableWhen: [
 							{
 								question: "0_1_Fd_Diag_Histologie_choice",
 								operator: "=",
 								answerCoding: { code: "no" },
+							},
+							{
+								question: "0_1_Fd_Diag_Histologie_choice",
+								operator: "=",
+								answerCoding: { code: "noMissing" },
 							},
 						],
 					},
@@ -557,11 +650,22 @@
 				linkId: "0_1_Fd_Diag_Fernmetastasen",
 				text: "",
 				type: "group",
+				enableBehavior: "any",
 				enableWhen: [
 					{
 						question: "0_Fd_Diag_ins",
 						operator: "=",
-						answerCoding: { code: "no" },
+						answerCoding: { code: "correctButIncomplete" },
+					},
+					{
+						question: "0_Fd_Diag_ins",
+						operator: "=",
+						answerCoding: { code: "incorrectButComplete" },
+					},
+					{
+						question: "0_Fd_Diag_ins",
+						operator: "=",
+						answerCoding: { code: "incorrectAndIncomplete" },
 					},
 				],
 				item: [
@@ -572,7 +676,8 @@
 						required: true,
 						answerOption: [
 							{ valueCoding: { code: "yes", display: "Ja" } },
-							{ valueCoding: { code: "no", display: "Nein" } },
+							{ valueCoding: { code: "no", display: "Nein, die Information stimmt nicht" } },
+							{ valueCoding: { code: "noMissing", display: "Nein, es fehlt etwas" } },
 							{ valueCoding: { code: "unknown", display: "Ich weiß nicht" } },
 							{ valueCoding: { code: "na", display: "Keine Angabe" } },
 						],
@@ -582,11 +687,17 @@
 						text: "Welche Information der Fernmetastasen-Daten stimmen nicht bzw. fehlen? Seien Sie bitte möglichst präzise.",
 						type: "text",
 						required: true,
+						enableBehavior: "any",
 						enableWhen: [
 							{
 								question: "0_1_Fd_Diag_Fernmetastasen_choice",
 								operator: "=",
 								answerCoding: { code: "no" },
+							},
+							{
+								question: "0_1_Fd_Diag_Fernmetastasen_choice",
+								operator: "=",
+								answerCoding: { code: "noMissing" },
 							},
 						],
 					},

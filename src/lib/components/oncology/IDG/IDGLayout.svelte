@@ -15,7 +15,7 @@
 	let { showFeedback, cancelFeedback, questionnaire, children, feedback }: Props = $props();
 
 	function onSubmit(response: QuestionnaireResponse): void {
-		if (import.meta.env.APP_ENV === "development") {
+		if (import.meta.env.DEV) {
 			return;
 		}
 		cancelFeedback?.();
