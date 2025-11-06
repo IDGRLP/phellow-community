@@ -5,19 +5,25 @@ import { error } from "@sveltejs/kit";
 import type { Bundle } from "fhir/r4";
 import type { PageServerLoad } from "./$types";
 
-export const load = (async ({ locals }) => {
+export const load = (async ({ locals, url }) => {
 	const accessToken = await locals.validAccessToken();
 	const [, payload] = parseJWT(accessToken);
 	if ("scope" in payload) {
 		const scope = payload.scope as string;
 		if (scope.includes("module_onco")) {
-			let url = new URL(env.FHIR_ONCOLOGY_URL ?? `${env.FHIR_BASE_URL!}/Patient/$oncology`);
+			let fileParam = url.searchParams.get("file");
+			console.log("Fetching oncology data, file param:", fileParam);
+			let fetchURL = new URL(env.FHIR_ONCOLOGY_URL ?? `${env.FHIR_BASE_URL!}/Patient/$oncology`);
+			if (fileParam) {
+				fetchURL.searchParams.set("file", fileParam);
+			}
+			console.log("Fetch URL:", fetchURL.toString());
 			const accessToken = await locals.validAccessToken();
 			const headers = {
 				Authorization: "Bearer " + accessToken,
 				"Content-Type": "application/json; charset=utf-8",
 			};
-			const bundle = await fetch(url, { headers }).then(async (response) => {
+			const bundle = await fetch(fetchURL, { headers }).then(async (response) => {
 				if (!response.ok) {
 					throw error(response.status, response.statusText);
 				}
