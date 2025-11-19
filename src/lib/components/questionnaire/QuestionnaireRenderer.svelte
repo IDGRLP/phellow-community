@@ -18,15 +18,22 @@
 	interface Props {
 		questionnaire: Questionnaire;
 		onSubmit?: (response: QuestionnaireResponse) => void;
+		onCurrentItemChange?: (itemLinkId: string) => void;
 	}
 
-	let { questionnaire, onSubmit }: Props = $props();
+	let { questionnaire, onSubmit, onCurrentItemChange }: Props = $props();
 
 	const questionnaireState = createQuestionnaireState(questionnaire);
 
 	let currentGroup = $derived.by(() => {
 		const currentItem = questionnaireState.currentGroup;
 		return currentItem;
+	});
+
+	$effect(() => {
+		if (onCurrentItemChange && currentGroup) {
+			onCurrentItemChange(currentGroup.parentItem.linkId || "");
+		}
 	});
 
 	let isLastPage = $derived(

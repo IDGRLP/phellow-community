@@ -6,9 +6,22 @@
 		class?: string;
 		observations: Observation[];
 		showFeedback: boolean;
+		highlightLinkId?: string;
 	}
 
-	let { class: classes, observations, showFeedback }: Props = $props();
+	let { class: classes, observations, showFeedback, highlightLinkId }: Props = $props();
+
+	let highlight = $derived(
+		highlightLinkId === "0_1_Fd_Diag_Histologie" || highlightLinkId === "3_3_Fd_OP_Histologie"
+	);
+
+	let element: HTMLElement | null = null;
+
+	$effect(() => {
+		if (highlight && element) {
+			element.scrollIntoView({ behavior: "smooth", block: "center" });
+		}
+	});
 
 	// Helper function to format date
 	function formatDate(dateString?: string) {
@@ -26,10 +39,11 @@
 
 <div
 	class={["grid grid-cols-1 gap-8", showFeedback ? "md:grid-cols-1" : "md:grid-cols-3", classes]}
+	bind:this={element}
 >
 	{#each observations as probe}
 		{@const dateString = probe?.effectiveDateTime && formatDate(probe.effectiveDateTime)}
 		{@const coding = probe?.valueCodeableConcept?.coding?.[0]}
-		<GewebeProbe {dateString} {coding} />
+		<GewebeProbe {dateString} {coding} {highlight} />
 	{/each}
 </div>
