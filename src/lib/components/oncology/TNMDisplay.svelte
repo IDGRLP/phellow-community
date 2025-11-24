@@ -11,9 +11,10 @@
 	interface Props {
 		staging: TNMStaging;
 		type?: "clinical" | "pathological";
+		highlightLinkId?: string;
 	}
 
-	let { staging, type }: Props = $props();
+	let { staging, type, highlightLinkId }: Props = $props();
 
 	let hovered: hoverMarker | undefined = $state(undefined);
 	const showColorForClassifications = false;
@@ -91,7 +92,12 @@
 					: ""}TNM-Klassifikation
 		</h3>
 		{#if staging.date}
-			<span class="text-muted-foreground">({formatDate(staging.date)})</span>
+			<span
+				class={[
+					"text-muted-foreground",
+					highlightLinkId === "7_1_Fd_TNM_datum" ? "ring-ring ring-2" : undefined,
+				]}>({formatDate(staging.date)})</span
+			>
 		{/if}
 		<Drawer.NestedRoot>
 			<!-- snapPoints={[0.25, 0.5, 0.75, 1]} bind:activeSnapPoint -->
@@ -118,7 +124,12 @@
 
 <div class="space-y-4">
 	<!-- TNM Formula -->
-	<div class="bg-muted rounded-md p-3">
+	<div
+		class={[
+			"bg-muted m-0.5 rounded-md p-3",
+			highlightLinkId === "7_2_Fd_TNM_classification" ? "ring-ring ring-2" : undefined,
+		]}
+	>
 		<div class="font-mono text-lg">{formatTNM(staging)}</div>
 		{#if staging.uiccStage}
 			<div class="text-muted-foreground mt-1 text-sm">

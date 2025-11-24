@@ -7,14 +7,16 @@
 		getTreatmentPeriod,
 		parseTreatmentEndReason,
 	} from "./helper";
+	import CodingCard from "../CodingCard.svelte";
 
 	interface Props {
 		class?: string;
 		radiationTherapy: Procedure;
 		showFeedback: boolean;
+		highlightLinkId?: string;
 	}
 
-	let { class: classes, radiationTherapy, showFeedback }: Props = $props();
+	let { class: classes, radiationTherapy, showFeedback, highlightLinkId }: Props = $props();
 
 	const treatmentPeriod = $derived(getTreatmentPeriod(radiationTherapy));
 	let treatmentDateString = $derived.by(() => {
@@ -34,10 +36,19 @@
 </script>
 
 <div class="flex flex-row items-baseline justify-start gap-2">
-	<h3 class="font-xl mt-0">Strahlentherapie</h3>
+	<h2 class="font-2xl mt-0">Strahlentherapie</h2>
 	{#if treatmentDateString}
-		<span class="text-muted-foreground">({treatmentDateString})</span>
+		<span
+			class={[
+				"text-muted-foreground",
+				highlightLinkId === "4_1_Fd_Str_datum" ? "ring-ring ring-2" : undefined,
+			]}>({treatmentDateString})</span
+		>
 	{/if}
+</div>
+
+<div class="flex flex-row items-baseline justify-start gap-2">
+	<h3 class="font-xl mt-0">Zielgebiete</h3>
 </div>
 
 <div
@@ -45,26 +56,40 @@
 >
 	{#if targetAreas}
 		{#each targetAreas as targetArea}
-			<div class="border-border bg-card flex flex-col gap-6 rounded-lg border p-4 shadow-xs">
-				<div class="flex flex-col gap-2">
-					<h3 class="mt-0 font-medium">Zielgebiet</h3>
-					<div class="text-muted-foreground mt-1">{targetArea.target}</div>
-				</div>
+			<CodingCard
+				heading="Zielgebiet"
+				coding={targetArea.target}
+				noDataText="Kein Zielgebiet vorhanden"
+				codingDisplay={targetArea.target?.display}
+				highlight={highlightLinkId === "4_2_Fd_Str_target"}
+			>
 				{#if targetArea.laterality}
-					<div class="flex flex-col gap-2">
-						<h3 class="mt-0 font-medium">Seitenlokalisation</h3>
-						<div class="text-muted-foreground mt-1">{targetArea.laterality}</div>
+					<div class="flex flex-col gap-1">
+						<h4 class="mt-2 text-xl font-medium">Seitenlokalisation</h4>
+						<div class="text-muted-foreground">{targetArea.laterality}</div>
 					</div>
 				{/if}
-			</div>
+			</CodingCard>
 		{/each}
 	{/if}
-	{#if treatmentEndReason}
-		<div class="border-border bg-card flex flex-col gap-6 rounded-lg border p-4 shadow-xs">
+</div>
+
+<div class="flex flex-row items-baseline justify-start gap-2">
+	<h3 class="font-xl mt-0">Ende</h3>
+</div>
+
+{#if treatmentEndReason}
+	<div class="grid md:grid-cols-2">
+		<div
+			class={[
+				"border-border bg-card fle-col m-0.5 flex gap-6 rounded-lg border p-4 shadow-xs",
+				highlightLinkId === "4_3_Fd_Str_Ende" ? "ring-ring ring-2" : undefined,
+			]}
+		>
 			<div class="flex flex-col gap-2">
 				<h3 class="mt-0 font-medium">Grund für das Ende der Behandlung</h3>
 				<div class="text-muted-foreground mt-1">{parseTreatmentEndReason(treatmentEndReason)}</div>
 			</div>
 		</div>
-	{/if}
-</div>
+	</div>
+{/if}

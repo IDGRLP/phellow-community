@@ -7,9 +7,10 @@
 		class?: string;
 		condition: Condition;
 		showFeedback: boolean;
+		highlightLinkId?: string;
 	}
 
-	let { class: classes, condition, showFeedback }: Props = $props();
+	let { class: classes, condition, showFeedback, highlightLinkId }: Props = $props();
 
 	const icdCoding = $derived.by(() => {
 		return condition.code?.coding?.find(
@@ -60,7 +61,12 @@
 	class={["grid grid-cols-1 gap-8", showFeedback ? "md:grid-cols-1" : "md:grid-cols-3", classes]}
 >
 	<!-- ICD-10 Kodierung -->
-	<CodingCard heading="ICD-10" coding={icdCoding} noDataText="Keine ICD-10-Kodierung vorhanden" />
+	<CodingCard
+		heading="ICD-10"
+		coding={icdCoding}
+		noDataText="Keine ICD-10-Kodierung vorhanden"
+		highlight={highlightLinkId === "0_1_Fd_Diag_ICD"}
+	/>
 
 	<!-- Seitenlokalisation -->
 	<CodingCard
@@ -68,6 +74,7 @@
 		coding={seitenlokalisation}
 		noDataText="Keine Seitenlokalisation vorhanden"
 		codingDisplay={seitenlokalisation && parseSeitenlokalisation(seitenlokalisation)}
+		highlight={highlightLinkId === "0_1_Fd_Diag_Seitenlokalisation"}
 	/>
 
 	<!-- Morphologie -->
@@ -75,6 +82,7 @@
 		heading="Morphologie"
 		coding={morphologyCoding}
 		noDataText="Keine Morphologie-Kodierung vorhanden"
+		highlight={highlightLinkId === "0_1_Fd_Diag_Morphologie"}
 	/>
 
 	<!-- Topographie -->
@@ -82,5 +90,6 @@
 		heading="Topographie"
 		coding={topographyCoding}
 		noDataText="Keine Topographie-Kodierung vorhanden"
+		highlight={highlightLinkId === "0_1_Fd_Diag_Topographie"}
 	/>
 </div>

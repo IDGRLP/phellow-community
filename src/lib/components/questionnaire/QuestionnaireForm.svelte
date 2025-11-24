@@ -15,9 +15,10 @@
 		resource: Questionnaire;
 		onSubmit?: (response: QuestionnaireResponse) => void;
 		canStartOver?: boolean;
+		onCurrentItemChange?: (itemLinkId: string) => void;
 	}
 
-	let { resource, onSubmit, canStartOver = false }: Props = $props();
+	let { resource, onSubmit, canStartOver = false, onCurrentItemChange }: Props = $props();
 
 	let submitted = $state(false);
 	let response = $state<QuestionnaireResponse | null>(null);
@@ -46,7 +47,11 @@
 
 	{#if !submitted}
 		<div class="flex flex-1 flex-col">
-			<QuestionnaireRenderer questionnaire={resource} onSubmit={handleSubmit} />
+			<QuestionnaireRenderer
+				questionnaire={resource}
+				onSubmit={handleSubmit}
+				{onCurrentItemChange}
+			/>
 		</div>
 	{:else}
 		<Alert.Root class="bg-sidebar">
@@ -66,7 +71,7 @@
 			</div>
 		{/if}
 
-		{#if import.meta.env.APP_ENV === "development"}
+		{#if import.meta.env.DEV}
 			<div class="bg-card rounded-lg border p-4">
 				<h3 class="mt-0">QuestionnaireResponse (Debug)</h3>
 				<pre class="overflow-auto text-xs">{JSON.stringify(response, null, 2)}</pre>

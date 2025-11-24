@@ -12,11 +12,17 @@
 
 	let { observationId, bundle, showFeedback, cancelFeedback }: Props = $props();
 
+	let currentItemLinkId = $state<string | undefined>(undefined);
+
 	let observation = $derived(
 		bundle.entry?.find((entry) => entry.resource?.id === observationId)?.resource as
 			| Observation
 			| undefined
 	);
+
+	function handleCurrentItemChange(itemLinkId?: string): void {
+		currentItemLinkId = itemLinkId;
+	}
 
 	const progressionFeedback: Questionnaire = {
 		resourceType: "Questionnaire",
@@ -30,300 +36,165 @@
 				required: true,
 				type: "choice",
 				answerOption: [
-					{ valueCoding: { code: "yes", display: "Ja" } },
-					{ valueCoding: { code: "no", display: "Nein" } },
-					{ valueCoding: { code: "unknown", display: "Ich weiß nicht" } },
-					{ valueCoding: { code: "na", display: "Keine Angabe" } },
+					{
+						valueCoding: {
+							code: "correctAndComplete",
+							display:
+								"Ja, die angezeigten Informationen sind korrekt und vollständig (richtig und vollständig)",
+						},
+					},
+					{
+						valueCoding: {
+							code: "correctButIncomplete",
+							display:
+								"Ja, die angezeigten Informationen sind korrekt, aber es fehlt etwas (richtig, aber unvollständig)",
+						},
+					},
+					{
+						valueCoding: {
+							code: "incorrectButComplete",
+							display:
+								"Nein, die angezeigten Informationen sind fehlerhaft, aber an sich vollständig (falsch, aber vollständig)",
+						},
+					},
+					{
+						valueCoding: {
+							code: "incorrectAndIncomplete",
+							display:
+								"Nein, die angezeigten Informationen sind fehlerhaft und unvollständig (falsch und unvollständig)",
+						},
+					},
+					{
+						valueCoding: {
+							code: "correctButUnclearIfComplete",
+							display:
+								"Die angezeigten Informationen sind korrekt, aber ich weiß nicht, ob noch etwas fehlt (richtig, aber unklar, ob vollständig)",
+						},
+					},
+					{
+						valueCoding: {
+							code: "unknown",
+							display:
+								"Ich weiß nicht, ob die anzeigten Informationen korrekt sind und ob noch Informationen fehlen (Richtigkeit und Vollständigkeit unklar)",
+						},
+					},
+					{ valueCoding: { code: "na", display: "Hierzu möchte ich keine Angabe machen" } },
 				],
 			},
 			{
-				linkId: "6_1_Fd_Ver_ins_nein",
-				text: "Wenn nein, fehlt eine Verlaufsmeldung, fehlt eine Angabe der hier angezeigten Daten zum Verlauf und/oder sind vorhandende Daten fehlerhaft?",
-				type: "choice",
-				required: true,
-				repeats: true,
+				linkId: "6_1_Fd_Ver_datum",
+				type: "group",
+				enableBehavior: "any",
 				enableWhen: [
 					{
 						question: "6_Fd_Ver_ins",
 						operator: "=",
-						answerCoding: { code: "no" },
+						answerCoding: { code: "correctButIncomplete" },
 					},
-				],
-				answerOption: [
-					{ valueCoding: { code: "missingProgression", display: "Fehlende/r Verlauf/Verläufe" } },
-					{ valueCoding: { code: "missingInformation", display: "Fehlende Angabe/n" } },
-					{ valueCoding: { code: "incorrectInformation", display: "Fehlerhafte Angabe/n" } },
-					{ valueCoding: { code: "unknown", display: "Weiß nicht" } },
-					{ valueCoding: { code: "na", display: "Keine Angabe" } },
-				],
-			},
-			{
-				linkId: "6_1_1_Fd",
-				type: "group",
-				text: "Datum Verlauf",
-				enableWhen: [
 					{
-						question: "6_1_Fd_Ver_ins_nein",
+						question: "6_Fd_Ver_ins",
 						operator: "=",
-						answerCoding: { code: "missingProgression" },
+						answerCoding: { code: "incorrectButComplete" },
+					},
+					{
+						question: "6_Fd_Ver_ins",
+						operator: "=",
+						answerCoding: { code: "incorrectAndIncomplete" },
 					},
 				],
 				item: [
 					{
-						linkId: "6_1_1_Fd_Ver_Datum_f",
-						text: "Wenn fehlend, dann Angabe Datum Verlauf",
-						type: "date",
-						extension: [
-							{
-								url: "http://phellowseven.com/fhir/StructureDefinition/date-precision-mode",
-								valueCode: "auto",
-							},
-						],
-					},
-					{
-						linkId: "6_1_1_1_Fd_Ver_Datum_f_u",
-						text: "Fehlend, aber nicht bekannt",
-						type: "boolean",
-						required: false,
-					},
-					{
-						linkId: "6_1_1_2_Fd_Ver_Datum_f_kA",
-						text: "keine Angabe",
-						type: "boolean",
-						required: false,
-					},
-					{
-						linkId: "6_1_1_3_Fd_Ver_Datum_f_sonst",
-						text: "Kommentar",
-						type: "string",
-						required: false,
-					},
-				],
-			},
-			{
-				linkId: "6_1_2_Fd",
-				type: "group",
-				text: "Datum Verlauf",
-				enableWhen: [
-					{
-						question: "6_1_Fd_Ver_ins_nein",
-						operator: "=",
-						answerCoding: { code: "missingProgression" },
-					},
-				],
-				item: [
-					{
-						linkId: "6_1_2_Fd_Ver_Tumorstatus_k",
-						text: "Wenn fehlend, dann Angabe zum Tumorstatus",
-						type: "choice",
-						answerOption: [
-							{ valueCoding: { code: "CR", display: "Vollremission (complete remission, CR)" } },
-							{ valueCoding: { code: "PR", display: "Teilremission (partial remission, PR)" } },
-							{
-								valueCoding: {
-									code: "NC",
-									display: "keine aenderung (no change, NC) = stable disease",
-								},
-							},
-							{ valueCoding: { code: "PD", display: "Progression" } },
-							{ valueCoding: { code: "SD", display: "divergentes Geschehen" } },
-							{
-								valueCoding: {
-									code: "MR",
-									display:
-										"klinische Besserung des Zustandes, Teilremissionkriterien jedoch nicht erfuellt (minimal response, MR)",
-								},
-							},
-							{
-								valueCoding: {
-									code: "CRr",
-									display: "Vollremission mit residualen Auffaelligkeiten (CRr)",
-								},
-							},
-							{ valueCoding: { code: "Rec", display: "Rezidiv" } },
-							{ valueCoding: { code: "Unk", display: "Beurteilung unmoeglich" } },
-						],
-					},
-					{
-						linkId: "6_1_2_1_Fd_Ver_Tumorstatus_f_u",
-						text: "Fehlend, aber nicht bekannt",
-						type: "boolean",
-						required: false,
-					},
-					{
-						linkId: "6_1_2_2_Fd_Ver_Tumorstatus_f_kA",
-						text: "keine Angabe",
-						type: "boolean",
-						required: false,
-					},
-					{
-						linkId: "6_1_2_3_Fd_Ver_Tumorstatus_f_sonst",
-						text: "Kommentar",
-						type: "string",
-						required: false,
-					},
-				],
-			},
-			{
-				linkId: "6_1_3_Fd_Sys_Freitext_f",
-				text: "Angabe sonstiger Informationen, Einrichtung der Behandlung und zum Arzt",
-				type: "text",
-				required: false,
-				enableWhen: [
-					{
-						question: "6_1_Fd_Ver_ins_nein",
-						operator: "=",
-						answerCoding: { code: "missingProgression" },
-					},
-				],
-			},
-			{
-				linkId: "6_2_Fd",
-				text: "Verlaufsdatum",
-				type: "group",
-				enableWhen: [
-					{
-						question: "6_1_Fd_Ver_ins_nein",
-						operator: "=",
-						answerCoding: { code: "incorrectInformation" },
-					},
-				],
-				item: [
-					{
-						linkId: "6_2_Fd_Ver_Datum_k",
-						text: "Ist das Verlaufsdatum richtig datiert?",
-						type: "choice",
+						linkId: "6_1_Fd_Ver_datum_choice",
+						text: "Stimmt das Datum der Verlaufsmeldung?",
 						required: true,
+						type: "choice",
 						answerOption: [
 							{ valueCoding: { code: "yes", display: "Ja" } },
-							{ valueCoding: { code: "no", display: "Nein" } },
+							{ valueCoding: { code: "no", display: "Nein, die Information stimmt nicht" } },
+							{ valueCoding: { code: "noMissing", display: "Nein, es fehlt etwas" } },
 							{ valueCoding: { code: "unknown", display: "Ich weiß nicht" } },
-							{ valueCoding: { code: "na", display: "Keine Angabe" } },
+							{ valueCoding: { code: "na", display: "Hierzu möchte ich keine Angabe machen" } },
 						],
 					},
 					{
-						linkId: "6_2_1_Fd_Ver_Datum_Angabe_k",
-						text: "Wenn nein, dann Angabe des Datums",
-						type: "date",
-						extension: [
-							{
-								url: "http://phellowseven.com/fhir/StructureDefinition/date-precision-mode",
-								valueCode: "auto",
-							},
-						],
+						linkId: "6_1_Fd_Ver_datum_text",
+						text: "Welche Information beim Datum der Verlaufsmeldung stimmt nicht bzw. fehlt? Seien Sie bitte möglichst präzise.",
+						type: "text",
+						required: true,
+						enableBehavior: "any",
 						enableWhen: [
 							{
-								question: "6_2_Fd_Ver_Datum_k",
+								question: "6_1_Fd_Ver_datum_choice",
 								operator: "=",
 								answerCoding: { code: "no" },
 							},
+							{
+								question: "6_1_Fd_Ver_datum_choice",
+								operator: "=",
+								answerCoding: { code: "noMissing" },
+							},
 						],
-					},
-					{
-						linkId: "6_2_2_Fd_Ver_Datum_Angabe_k_u",
-						text: "Wenn nein, aber unbekannt",
-						type: "boolean",
-						required: false,
-					},
-					{
-						linkId: "6_2_3_Fd_Ver_Datum_Angabe_k_kA",
-						text: "keine Angabe",
-						type: "boolean",
-						required: false,
-					},
-					{
-						linkId: "6_2_4_Fd_Ver_Datum_Angabe_k_sonst",
-						text: "Kommentar",
-						type: "string",
-						required: false,
 					},
 				],
 			},
 			{
-				linkId: "6_3_Fd",
-				text: "Gesamtbeurteilung Tumorstatus",
+				linkId: "6_2_Fd_Ver_target",
 				type: "group",
+				enableBehavior: "any",
 				enableWhen: [
 					{
-						question: "6_1_Fd_Ver_ins_nein",
+						question: "6_Fd_Ver_ins",
 						operator: "=",
-						answerCoding: { code: "incorrectInformation" },
+						answerCoding: { code: "correctButIncomplete" },
+					},
+					{
+						question: "6_Fd_Ver_ins",
+						operator: "=",
+						answerCoding: { code: "incorrectButComplete" },
+					},
+					{
+						question: "6_Fd_Ver_ins",
+						operator: "=",
+						answerCoding: { code: "incorrectAndIncomplete" },
 					},
 				],
 				item: [
 					{
-						linkId: "6_3_Fd_Ver_Tumorstatus_k",
-						text: "Ist die Angabe zur Gesamtbeurteilung des Tumorstatus korrekt?",
-						type: "choice",
+						linkId: "6_2_Fd_Ver_target_choice",
+						text: "Ist die Angabe zur Gesamtbeurteilung korrekt?",
 						required: true,
+						type: "choice",
 						answerOption: [
 							{ valueCoding: { code: "yes", display: "Ja" } },
-							{ valueCoding: { code: "no", display: "Nein" } },
+							{ valueCoding: { code: "no", display: "Nein, die Information stimmt nicht" } },
+							{ valueCoding: { code: "noMissing", display: "Nein, es fehlt etwas" } },
 							{ valueCoding: { code: "unknown", display: "Ich weiß nicht" } },
-							{ valueCoding: { code: "na", display: "Keine Angabe" } },
+							{ valueCoding: { code: "na", display: "Hierzu möchte ich keine Angabe machen" } },
 						],
 					},
 					{
-						linkId: "6_3_1_Fd_Ver_Tumorstatus_Angabe_k",
-						text: "Wenn nein, dann Angabe zur Gesamtbeurteilung",
-						type: "choice",
-						answerOption: [
-							{ valueCoding: { code: "CR", display: "Vollremission (complete remission, CR)" } },
-							{ valueCoding: { code: "PR", display: "Teilremission (partial remission, PR)" } },
-							{
-								valueCoding: {
-									code: "NC",
-									display: "keine aenderung (no change, NC) = stable disease",
-								},
-							},
-							{ valueCoding: { code: "PD", display: "Progression" } },
-							{ valueCoding: { code: "SD", display: "divergentes Geschehen" } },
-							{
-								valueCoding: {
-									code: "MR",
-									display:
-										"klinische Besserung des Zustandes, Teilremissionkriterien jedoch nicht erfuellt (minimal response, MR)",
-								},
-							},
-							{
-								valueCoding: {
-									code: "CRr",
-									display: "Vollremission mit residualen Auffaelligkeiten (CRr)",
-								},
-							},
-							{ valueCoding: { code: "Rec", display: "Rezidiv" } },
-							{ valueCoding: { code: "Unk", display: "Beurteilung unmoeglich" } },
-						],
+						linkId: "6_2_Fd_Ver_target_text",
+						text: "Welche Information zur Gesamtbeurteilung stimmt nicht bzw. fehlt? Seien Sie bitte möglichst präzise.",
+						type: "text",
+						required: true,
+						enableBehavior: "any",
 						enableWhen: [
 							{
-								question: "6_3_Fd_Ver_Tumorstatus_k",
+								question: "6_2_Fd_Ver_target_choice",
 								operator: "=",
 								answerCoding: { code: "no" },
 							},
+							{
+								question: "6_2_Fd_Ver_target_choice",
+								operator: "=",
+								answerCoding: { code: "noMissing" },
+							},
 						],
-					},
-					{
-						linkId: "6_3_2_Fd_Ver_Tumorstatus_Angabe_k_u",
-						text: "Wenn nein, aber unbekannt",
-						type: "boolean",
-						required: false,
-					},
-					{
-						linkId: "6_3_3_Fd_Ver_Tumorstatus_Angabe_k_kA",
-						text: "keine Angabe",
-						type: "boolean",
-						required: false,
-					},
-					{
-						linkId: "6_3_4_Fd_Ver_Tumorstatus_Angabe_k_sonst",
-						text: "Kommentar",
-						type: "string",
-						required: false,
 					},
 				],
 			},
 			{
-				linkId: "6_4_Fd_Ver_Freitext_k",
+				linkId: "6_3_Fd_Ver_Freitext_k",
 				text: "Angabe sonstiger Informationen",
 				type: "text",
 				required: false,
@@ -332,10 +203,15 @@
 	};
 </script>
 
-<IDGLayout {showFeedback} {cancelFeedback} questionnaire={progressionFeedback}>
+<IDGLayout
+	{showFeedback}
+	{cancelFeedback}
+	questionnaire={progressionFeedback}
+	onCurrentItemChange={handleCurrentItemChange}
+>
 	{#snippet children()}
 		{#if observation}
-			<Progression {showFeedback} progression={observation} />
+			<Progression {showFeedback} progression={observation} highlightLinkId={currentItemLinkId} />
 		{:else}
 			<p class="text-muted-foreground">Keine Verlaufsinformationen verfügbar.</p>
 		{/if}

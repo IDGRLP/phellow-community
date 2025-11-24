@@ -10,14 +10,28 @@
 		questionnaire?: Questionnaire;
 		children: Snippet;
 		feedback?: Snippet;
+		onCurrentItemChange?: (itemLinkId?: string) => void;
 	}
 
-	let { showFeedback, cancelFeedback, questionnaire, children, feedback }: Props = $props();
+	let {
+		showFeedback,
+		cancelFeedback,
+		questionnaire,
+		children,
+		feedback,
+		onCurrentItemChange,
+	}: Props = $props();
 
 	function onSubmit(response: QuestionnaireResponse): void {
-		if (import.meta.env.APP_ENV === "development") {
+		onCurrentItemChange?.(undefined);
+		if (import.meta.env.DEV) {
 			return;
 		}
+		cancelFeedback?.();
+	}
+
+	function onCancelFeedback(): void {
+		onCurrentItemChange?.(undefined);
 		cancelFeedback?.();
 	}
 </script>
@@ -33,9 +47,9 @@
 			{#if feedback}
 				{@render feedback()}
 			{:else if questionnaire}
-				<QuestionnaireForm resource={questionnaire} {onSubmit} />
+				<QuestionnaireForm resource={questionnaire} {onSubmit} {onCurrentItemChange} />
 			{/if}
-			<Button variant="destructive" onclick={cancelFeedback}>Feedback Abbrechen</Button>
+			<Button variant="destructive" onclick={onCancelFeedback}>Feedback Abbrechen</Button>
 		</div>
 	{/if}
 </div>

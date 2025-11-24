@@ -3,6 +3,7 @@
 	import type { QuestionnaireItem } from "fhir/r4";
 	import QuestionComponent from "./QuestionComponent.svelte";
 	import type { QuestionnaireAnswer } from "$lib/stores/questionnaireStore.svelte";
+	import { fade, slide } from "svelte/transition";
 
 	interface Props {
 		parentItem: QuestionnaireItem;
@@ -28,24 +29,34 @@
 	<div class="space-y-4">
 		{#if items.length === 0}
 			{#if isItemEnabled(parentItem.linkId)}
-				<QuestionComponent
-					item={parentItem}
-					answer={answers.get(parentItem.linkId)}
-					onAnswer={(value) => onAnswer(parentItem.linkId, value)}
-					{isItemEnabled}
-					globalError={errors.get(parentItem.linkId)}
-				/>
+				<div
+					out:slide={{ duration: 100, axis: "y" }}
+					in:slide={{ duration: 100, delay: 150, axis: "y" }}
+				>
+					<QuestionComponent
+						item={parentItem}
+						answer={answers.get(parentItem.linkId)}
+						onAnswer={(value) => onAnswer(parentItem.linkId, value)}
+						{isItemEnabled}
+						globalError={errors.get(parentItem.linkId)}
+					/>
+				</div>
 			{/if}
 		{:else}
 			{#each items as item (item.linkId)}
 				{#if isItemEnabled(item.linkId)}
-					<QuestionComponent
-						{item}
-						answer={answers.get(item.linkId)}
-						onAnswer={(value) => onAnswer(item.linkId, value)}
-						{isItemEnabled}
-						globalError={errors.get(item.linkId)}
-					/>
+					<div
+						out:slide={{ duration: 100, axis: "y" }}
+						in:slide={{ duration: 100, delay: 150, axis: "y" }}
+					>
+						<QuestionComponent
+							{item}
+							answer={answers.get(item.linkId)}
+							onAnswer={(value) => onAnswer(item.linkId, value)}
+							{isItemEnabled}
+							globalError={errors.get(item.linkId)}
+						/>
+					</div>
 				{/if}
 			{/each}
 		{/if}

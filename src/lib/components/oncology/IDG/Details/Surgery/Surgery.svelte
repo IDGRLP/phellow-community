@@ -8,9 +8,10 @@
 		class?: string;
 		procedure: Procedure;
 		showFeedback: boolean;
+		highlightLinkId?: string;
 	}
 
-	let { class: classes, procedure, showFeedback }: Props = $props();
+	let { class: classes, procedure, showFeedback, highlightLinkId }: Props = $props();
 
 	// Helper function to format date
 	function formatDate(dateString?: string) {
@@ -36,7 +37,14 @@
 
 <div class="flex flex-row items-baseline justify-start gap-2">
 	<h3 class="font-xl mt-0">Operation</h3>
-	<div class="text-muted-foreground">{performedDate}</div>
+	<div
+		class={[
+			"text-muted-foreground",
+			highlightLinkId === "3_1_Fd_OP_datum" ? "ring-ring ring-2" : undefined,
+		]}
+	>
+		{performedDate}
+	</div>
 </div>
 
 <div
@@ -48,5 +56,6 @@
 		coding={residualstatusCoding}
 		noDataText="Kein Residualstatus vorhanden"
 		codingDisplay={residualstatusCoding && parseResidualstatus(residualstatusCoding)}
+		highlight={highlightLinkId === "3_2_Fd_OP_residual"}
 	/>
 </div>

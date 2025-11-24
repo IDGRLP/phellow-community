@@ -12,9 +12,20 @@
 		class?: string;
 		fernmetastasen: Observation[];
 		showFeedback: boolean;
+		highlightLinkId?: string;
 	}
 
-	let { fernmetastasen, class: classes, showFeedback }: Props = $props();
+	let { fernmetastasen, class: classes, showFeedback, highlightLinkId }: Props = $props();
+
+	let highlight = $derived(highlightLinkId === "0_1_Fd_Diag_Fernmetastasen");
+
+	let element: HTMLElement | null = null;
+
+	$effect(() => {
+		if (highlight && element) {
+			element.scrollIntoView({ behavior: "smooth", block: "center" });
+		}
+	});
 
 	let sortedFernmetastasen = $derived(
 		[...fernmetastasen].sort((a, b) => {
@@ -84,6 +95,7 @@
 
 <div
 	class={["grid grid-cols-1 gap-8", showFeedback ? "md:grid-cols-1" : "md:grid-cols-3", classes]}
+	bind:this={element}
 >
 	{#each sortedFernmetastasen as metastase}
 		{@const coding = metastase.valueCodeableConcept?.coding?.find(
@@ -93,7 +105,12 @@
 		)}
 		{@const dateString = metastase.effectiveDateTime && formatDate(metastase.effectiveDateTime)}
 		{#if coding?.code}
-			<MetastasenInformation code={coding?.code} display={locationMap[coding?.code]} {dateString} />
+			<MetastasenInformation
+				code={coding?.code}
+				display={locationMap[coding?.code]}
+				{dateString}
+				highlight={highlightLinkId === "0_1_Fd_Diag_Fernmetastasen"}
+			/>
 		{/if}
 	{/each}
 </div>
