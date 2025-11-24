@@ -8,9 +8,10 @@
 		class?: string;
 		progression: Observation;
 		showFeedback: boolean;
+		highlightLinkId?: string;
 	}
 
-	let { class: classes, progression, showFeedback }: Props = $props();
+	let { class: classes, progression, showFeedback, highlightLinkId }: Props = $props();
 
 	let gesamtbeurteilung = $derived(getGesamtbeurteilungCoding(progression));
 
@@ -19,7 +20,14 @@
 
 <div class="flex flex-row items-baseline justify-start gap-2">
 	<h3 class="font-xl mt-0">Verlauf</h3>
-	<div class="text-muted-foreground">{progressionDate}</div>
+	<div
+		class={[
+			"text-muted-foreground",
+			highlightLinkId === "6_1_Fd_Ver_datum" ? "ring-ring ring-2" : undefined,
+		]}
+	>
+		{progressionDate}
+	</div>
 </div>
 
 <div
@@ -30,5 +38,6 @@
 		coding={gesamtbeurteilung}
 		noDataText="Keine Gesamtbeurteilung vorhanden"
 		codingDisplay={gesamtbeurteilung && parseGesamtbeurteilung(gesamtbeurteilung)}
+		highlight={highlightLinkId === "6_2_Fd_Ver_target"}
 	/>
 </div>

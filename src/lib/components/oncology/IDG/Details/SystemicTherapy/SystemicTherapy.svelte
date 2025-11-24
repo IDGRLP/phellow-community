@@ -13,9 +13,10 @@
 		class?: string;
 		procedure: Procedure;
 		showFeedback: boolean;
+		highlightLinkId?: string;
 	}
 
-	let { class: classes, procedure, showFeedback }: Props = $props();
+	let { class: classes, procedure, showFeedback, highlightLinkId }: Props = $props();
 
 	// Get data for display
 	const treatmentPeriod = $derived(getTreatmentPeriod(procedure));
@@ -39,7 +40,12 @@
 <div class="flex flex-row items-baseline justify-start gap-2">
 	<h3 class="font-xl mt-0">Systemische Therapie</h3>
 	{#if treatmentDateString}
-		<span class="text-muted-foreground">({treatmentDateString})</span>
+		<span
+			class={[
+				"text-muted-foreground",
+				highlightLinkId === "5_1_Fd_Sys_datum" ? "ring-ring ring-2" : undefined,
+			]}>({treatmentDateString})</span
+		>
 	{/if}
 </div>
 
@@ -52,6 +58,7 @@
 		coding={treatmentType}
 		noDataText="Kein Therapietyp vorhanden"
 		codingDisplay={treatmentType && parseTreatmentType(treatmentType)}
+		highlight={highlightLinkId === "5_2_Fd_Sys_type"}
 	/>
 
 	<!-- Treatment End Reason -->
@@ -61,6 +68,7 @@
 			coding={treatmentEndReason}
 			noDataText="Kein Grund für das Ende der Behandlung vorhanden"
 			codingDisplay={treatmentEndReason && parseTreatmentEndReason(treatmentEndReason)}
+			highlight={highlightLinkId === "5_3_Fd_Sys_Ende"}
 		/>
 	{/if}
 </div>

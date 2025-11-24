@@ -96,7 +96,7 @@ const lateralityMap: Record<string, string> = {
 };
 
 type TargetArea = {
-	target?: string;
+	target?: Coding;
 	laterality?: string;
 };
 
@@ -115,11 +115,14 @@ function getTargetAreas(radiationTherapy: Procedure): TargetArea[] | undefined {
 	let extractedAreas: TargetArea[] = [];
 
 	for (const targetArea of targetAreas) {
-		let targetCode = targetArea.valueCodeableConcept?.coding?.[0]?.code;
+		const targetCoding = targetArea.valueCodeableConcept?.coding?.[0];
+		let targetCode = targetCoding?.code;
 		if (targetCode && targetCode.endsWith(".")) {
 			targetCode = targetCode.slice(0, -1);
 		}
-		const target = targetCode ? bestrahlungZielgebiet[targetCode] : undefined;
+		const target: Coding | undefined = targetCode
+			? { code: targetCode, display: bestrahlungZielgebiet[targetCode] }
+			: undefined;
 
 		// Get laterality
 		const lateralityExt = radiationExt.extension.find(

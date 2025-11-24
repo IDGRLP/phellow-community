@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Coding } from "fhir/r4";
+	import type { Snippet } from "svelte";
 
 	interface Props {
 		heading: string;
@@ -7,9 +8,10 @@
 		codingDisplay?: string;
 		noDataText: string;
 		highlight?: boolean;
+		children?: Snippet;
 	}
 
-	let { heading, coding, codingDisplay, noDataText, highlight }: Props = $props();
+	let { heading, coding, codingDisplay, noDataText, highlight, children }: Props = $props();
 
 	let element: HTMLElement | null = null;
 
@@ -39,6 +41,7 @@
 		<div class="text-muted-foreground mt-1">
 			{codingDisplay ?? (coding.display || coding.code)}
 		</div>
+		{@render children?.()}
 	{:else}
 		<h3 class="my-0 font-medium">{heading}</h3>
 		<p class="text-muted-foreground mt-1">{noDataText}</p>

@@ -23,7 +23,6 @@
 
 	function handleCurrentItemChange(itemLinkId?: string): void {
 		currentItemLinkId = itemLinkId;
-		console.log("Current Item LinkId:", itemLinkId);
 	}
 
 	let histologyObservations = $derived(
