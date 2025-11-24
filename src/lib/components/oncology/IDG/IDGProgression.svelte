@@ -33,7 +33,7 @@
 					{ valueCoding: { code: "yes", display: "Ja" } },
 					{ valueCoding: { code: "no", display: "Nein" } },
 					{ valueCoding: { code: "unknown", display: "Ich weiß nicht" } },
-					{ valueCoding: { code: "na", display: "Keine Angabe" } },
+					{ valueCoding: { code: "na", display: "Hierzu möchte ich keine Angabe machen" } },
 				],
 			},
 			{
@@ -54,7 +54,7 @@
 					{ valueCoding: { code: "missingInformation", display: "Fehlende Angabe/n" } },
 					{ valueCoding: { code: "incorrectInformation", display: "Fehlerhafte Angabe/n" } },
 					{ valueCoding: { code: "unknown", display: "Weiß nicht" } },
-					{ valueCoding: { code: "na", display: "Keine Angabe" } },
+					{ valueCoding: { code: "na", display: "Hierzu möchte ich keine Angabe machen" } },
 				],
 			},
 			{
@@ -88,7 +88,7 @@
 					},
 					{
 						linkId: "6_1_1_2_Fd_Ver_Datum_f_kA",
-						text: "keine Angabe",
+						text: "Hierzu möchte ich keine Angabe machen",
 						type: "boolean",
 						required: false,
 					},
@@ -152,7 +152,7 @@
 					},
 					{
 						linkId: "6_1_2_2_Fd_Ver_Tumorstatus_f_kA",
-						text: "keine Angabe",
+						text: "Hierzu möchte ich keine Angabe machen",
 						type: "boolean",
 						required: false,
 					},
@@ -198,7 +198,7 @@
 							{ valueCoding: { code: "yes", display: "Ja" } },
 							{ valueCoding: { code: "no", display: "Nein" } },
 							{ valueCoding: { code: "unknown", display: "Ich weiß nicht" } },
-							{ valueCoding: { code: "na", display: "Keine Angabe" } },
+							{ valueCoding: { code: "na", display: "Hierzu möchte ich keine Angabe machen" } },
 						],
 					},
 					{
@@ -227,7 +227,7 @@
 					},
 					{
 						linkId: "6_2_3_Fd_Ver_Datum_Angabe_k_kA",
-						text: "keine Angabe",
+						text: "Hierzu möchte ich keine Angabe machen",
 						type: "boolean",
 						required: false,
 					},
@@ -260,7 +260,7 @@
 							{ valueCoding: { code: "yes", display: "Ja" } },
 							{ valueCoding: { code: "no", display: "Nein" } },
 							{ valueCoding: { code: "unknown", display: "Ich weiß nicht" } },
-							{ valueCoding: { code: "na", display: "Keine Angabe" } },
+							{ valueCoding: { code: "na", display: "Hierzu möchte ich keine Angabe machen" } },
 						],
 					},
 					{
@@ -310,7 +310,7 @@
 					},
 					{
 						linkId: "6_3_3_Fd_Ver_Tumorstatus_Angabe_k_kA",
-						text: "keine Angabe",
+						text: "Hierzu möchte ich keine Angabe machen",
 						type: "boolean",
 						required: false,
 					},

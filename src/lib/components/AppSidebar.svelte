@@ -25,8 +25,7 @@
 	import UserIcon from "@lucide/svelte/icons/user";
 	import FlaskConical from "@lucide/svelte/icons/flask-conical";
 
-	import PhellowCommunityText from "./logo/phellow_community_text.svelte";
-	import PhellowCommunityTextLight from "./logo/phellow_community_text_light.svelte";
+	import inkappLogo from "./logo/inkapp.png";
 	import { route } from "$lib/ROUTES";
 	import { getLocale, locales, localizeHref, setLocale } from "$lib/paraglide/runtime";
 	import { goto } from "$app/navigation";
@@ -98,9 +97,13 @@
 <Sidebar.Root variant="floating" class="">
 	<Sidebar.Header aria-hidden>
 		{#if mode.current === "dark"}
-			<PhellowCommunityTextLight />
+			<img
+				src={inkappLogo}
+				alt="inkapp logo"
+				class="mb-2 w-auto rounded-sm bg-white object-contain"
+			/>
 		{:else}
-			<PhellowCommunityText />
+			<img src={inkappLogo} alt="inkapp logo" class="mb-2 w-auto object-contain" />
 		{/if}
 	</Sidebar.Header>
 	<Sidebar.Content>

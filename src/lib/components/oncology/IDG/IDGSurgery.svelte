@@ -95,7 +95,7 @@
 								"Ich weiß nicht, ob die anzeigten Informationen korrekt sind und ob noch Informationen fehlen (Richtigkeit und Vollständigkeit unklar)",
 						},
 					},
-					{ valueCoding: { code: "na", display: "Keine Angabe" } },
+					{ valueCoding: { code: "na", display: "Hierzu möchte ich keine Angabe machen" } },
 				],
 			},
 			{
@@ -130,7 +130,7 @@
 							{ valueCoding: { code: "no", display: "Nein, die Information stimmt nicht" } },
 							{ valueCoding: { code: "noMissing", display: "Nein, es fehlt etwas" } },
 							{ valueCoding: { code: "unknown", display: "Ich weiß nicht" } },
-							{ valueCoding: { code: "na", display: "Keine Angabe" } },
+							{ valueCoding: { code: "na", display: "Hierzu möchte ich keine Angabe machen" } },
 						],
 					},
 					{
@@ -186,7 +186,7 @@
 							{ valueCoding: { code: "no", display: "Nein, die Information stimmt nicht" } },
 							{ valueCoding: { code: "noMissing", display: "Nein, es fehlt etwas" } },
 							{ valueCoding: { code: "unknown", display: "Ich weiß nicht" } },
-							{ valueCoding: { code: "na", display: "Keine Angabe" } },
+							{ valueCoding: { code: "na", display: "Hierzu möchte ich keine Angabe machen" } },
 						],
 					},
 					{
