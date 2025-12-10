@@ -5,10 +5,11 @@
 			code?: string;
 			display?: string;
 		};
+		text?: string;
 		highlight?: boolean;
 	}
 
-	let { dateString, coding, highlight }: Props = $props();
+	let { dateString, coding, text, highlight }: Props = $props();
 </script>
 
 <div
@@ -30,6 +31,8 @@
 				{coding?.code}
 			</span>
 		</div>
-		<div class="text-muted-foreground">{coding?.display || coding?.code || "Unbekannt"}</div>
+		<div class="text-muted-foreground">
+			{text ?? coding?.display ?? coding?.code ?? "Unbekannt"}
+		</div>
 	</div>
 </div>

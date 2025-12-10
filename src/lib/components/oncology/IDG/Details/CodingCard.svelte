@@ -6,12 +6,13 @@
 		heading: string;
 		coding: Coding | undefined;
 		codingDisplay?: string;
+		text?: string;
 		noDataText: string;
 		highlight?: boolean;
 		children?: Snippet;
 	}
 
-	let { heading, coding, codingDisplay, noDataText, highlight, children }: Props = $props();
+	let { heading, coding, codingDisplay, text, noDataText, highlight, children }: Props = $props();
 
 	let element: HTMLElement | null = null;
 
@@ -39,7 +40,7 @@
 			</span>
 		</div>
 		<div class="text-muted-foreground mt-1">
-			{codingDisplay ?? (coding.display || coding.code)}
+			{codingDisplay ?? text ?? (coding.display || coding.code)}
 		</div>
 		{@render children?.()}
 	{:else}

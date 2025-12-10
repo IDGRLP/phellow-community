@@ -20,6 +20,21 @@
 			| undefined
 	);
 
+	let bestrahlungen = $derived(
+		bundle.entry
+			?.filter(
+				(entry) =>
+					entry.resource?.meta?.profile?.includes(
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-strahlentherapie-bestrahlung-strahlentherapie"
+					) && entry.resource?.resourceType === "Procedure"
+			)
+			.map((entry) => entry.resource as Procedure)
+			.filter(
+				(bestrahlung) =>
+					bestrahlung.partOf?.some((part) => part.reference === `Procedure/${procedureId}`) ?? false
+			)
+	);
+
 	function handleCurrentItemChange(itemLinkId?: string): void {
 		currentItemLinkId = itemLinkId;
 	}
@@ -268,7 +283,12 @@
 >
 	{#snippet children()}
 		{#if procedure}
-			<Radiation radiationTherapy={procedure} {showFeedback} highlightLinkId={currentItemLinkId} />
+			<Radiation
+				radiationTherapy={procedure}
+				{bestrahlungen}
+				{showFeedback}
+				highlightLinkId={currentItemLinkId}
+			/>
 		{:else}
 			<p class="text-muted-foreground">Keine Strahlentherapieinformationen verfügbar.</p>
 		{/if}

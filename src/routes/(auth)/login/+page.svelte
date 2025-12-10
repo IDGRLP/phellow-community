@@ -8,6 +8,8 @@
 	import { Button } from "$ui/button";
 	import { route } from "$lib/ROUTES";
 	import { headPageTitle } from "$lib/utils";
+	import inkappLogo from "$lib/components/logo/inkapp.png";
+
 	const action = route("login /login");
 </script>
 
@@ -18,10 +20,14 @@
 <div class="bg-background flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
 	<div class="sm:mx-auto sm:w-full sm:max-w-sm">
 		<div class="flex justify-center">
-			{#if mode.current === "light"}
-				<LogoLight class="" />
+			{#if mode.current === "dark"}
+				<img
+					src={inkappLogo}
+					alt="inkapp logo"
+					class="mb-4 w-auto rounded-sm bg-white object-contain"
+				/>
 			{:else}
-				<LogoDark class="" />
+				<img src={inkappLogo} alt="inkapp logo" class="mb-2 w-auto object-contain" />
 			{/if}
 		</div>
 	</div>

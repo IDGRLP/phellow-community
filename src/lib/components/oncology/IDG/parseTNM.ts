@@ -1,7 +1,7 @@
 import type { TNMPrefix, TNMStaging } from "$lib/types/oncology_types";
 import type { Bundle, Observation } from "fhir/r4";
 
-type TNMCategory = "t" | "n" | "m";
+type TNMCategory = "t" | "n" | "m" | "l" | "v" | "pn" | "s";
 
 interface TNMCategoryData {
 	value?: string;
@@ -41,19 +41,24 @@ function findTNMCategoryObservation(
 	category: TNMCategory
 ): Observation | undefined {
 	const profileUrl = `https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-tnm-kategorie-${category}`;
+	const profileUrlNew = `https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-tnm-${category}-kategorie`;
 
-	return members.find((m) => m.meta?.profile?.some((profile) => profile === profileUrl));
+	return members.find((m) =>
+		m.meta?.profile?.some((profile) => profile === profileUrl || profile === profileUrlNew)
+	);
 }
 
 /**
  * Extracts TNM category value from observation
  */
 function extractTNMCategoryValue(observation: Observation): string | undefined {
-	return observation.valueCodeableConcept?.coding?.find(
-		(c) =>
-			c.system ===
-			"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-tnm-kategorie"
-	)?.code;
+	return (
+		observation.valueCodeableConcept?.coding?.find(
+			(c) =>
+				c.system ===
+				"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-tnm-kategorie"
+		)?.code ?? observation.valueCodeableConcept?.text
+	);
 }
 
 /**
@@ -141,6 +146,10 @@ export function parseStageGroupObservation(
 	const tData = extractTNMCategoryData(members, "t");
 	const nData = extractTNMCategoryData(members, "n");
 	const mData = extractTNMCategoryData(members, "m");
+	const vData = extractTNMCategoryData(members, "v");
+	const lData = extractTNMCategoryData(members, "l");
+	const pnData = extractTNMCategoryData(members, "pn");
+	const sData = extractTNMCategoryData(members, "s");
 
 	// Build prefix object with individual category prefixes taking precedence over global prefix
 	const prefixObject: { t?: TNMPrefix; n?: TNMPrefix; m?: TNMPrefix } = {};
@@ -162,6 +171,10 @@ export function parseStageGroupObservation(
 		t: tData.value,
 		n: nData.value,
 		m: mData.value,
+		v: vData.value,
+		l: lData.value,
+		pn: pnData.value,
+		s: sData.value,
 		prefix: prefixObject,
 		...(version && { version }),
 	};

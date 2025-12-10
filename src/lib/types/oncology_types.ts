@@ -15,10 +15,10 @@ export type TNMStaging = {
 	t?: string; // Pattern: is.*|[01234X].*
 	n?: string; // Pattern: [0123X].*
 	m?: string; // Pattern: [01X].*
-	l?: "LX" | "L0" | "L1";
-	v?: "VX" | "V0" | "V1" | "V2";
-	pn?: "PnX" | "Pn0" | "Pn1";
-	s?: "SX" | "S0" | "S1" | "S2" | "S3";
+	l?: string; // Pattern: "LX" | "L0" | "L1";
+	v?: string; // Pattern: "VX" | "V0" | "V1" | "V2";
+	pn?: string; // Pattern: "PnX" | "Pn0" | "Pn1";
+	s?: string; // Pattern: "SX" | "S0" | "S1" | "S2" | "S3";
 	uiccStage?: string;
 	mSymbol?: string | number; // Pattern for string: m(,is)?|is|[2-9](,is)?|[1-9][0-9]{1,2}(,is)?
 };

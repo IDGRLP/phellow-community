@@ -62,7 +62,11 @@ export function parseFHIRBundle(bundle: Bundle): Event[] {
 						resourceId: resource.id!,
 					});
 				} else if (
-					resource.meta?.profile?.some((p) => p.includes("mii-pr-onko-strahlentherapie"))
+					resource.meta?.profile?.some(
+						(p) =>
+							p.endsWith("mii-pr-onko-strahlentherapie-neu") ||
+							p.endsWith("mii-pr-onko-strahlentherapie")
+					)
 				) {
 					const startDate = resource.performedDateTime
 						? new Date(resource.performedDateTime)
