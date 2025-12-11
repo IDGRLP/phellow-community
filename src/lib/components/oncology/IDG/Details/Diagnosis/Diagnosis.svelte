@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Coding, Condition } from "fhir/r4";
+	import type { Bundle, Condition } from "fhir/r4";
 	import { parseSeitenlokalisation } from "./helper";
 	import CodingCard from "../CodingCard.svelte";
 
@@ -18,6 +18,10 @@
 		);
 	});
 
+	const icdCodeText = $derived.by(() => {
+		return condition.code?.text;
+	});
+
 	const morphologyCoding = $derived.by(() => {
 		return condition.code?.coding?.find(
 			(coding) => coding.system === "http://terminology.hl7.org/CodeSystem/icd-o-3"
@@ -29,11 +33,14 @@
 			(coding) => coding.system === "http://terminology.hl7.org/CodeSystem/icd-o-3"
 		);
 	});
+
 	const seitenlokalisation = $derived.by(() => {
 		return condition.bodySite?.[0].coding?.find(
 			(coding) =>
 				coding.system ===
-				"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-seitenlokalisation"
+					"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-seitenlokalisation" ||
+				coding.system ===
+					"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-primaertumor-seitenlokalisation"
 		);
 	});
 
@@ -64,6 +71,7 @@
 	<CodingCard
 		heading="ICD-10"
 		coding={icdCoding}
+		text={icdCodeText}
 		noDataText="Keine ICD-10-Kodierung vorhanden"
 		highlight={highlightLinkId === "0_1_Fd_Diag_ICD"}
 	/>

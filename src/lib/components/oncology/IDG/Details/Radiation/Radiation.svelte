@@ -3,6 +3,7 @@
 
 	import {
 		getTargetAreas,
+		getTargetAreasV2026,
 		getTreatmentEndReasonCoding,
 		getTreatmentPeriod,
 		parseTreatmentEndReason,
@@ -12,11 +13,18 @@
 	interface Props {
 		class?: string;
 		radiationTherapy: Procedure;
+		bestrahlungen?: Procedure[];
 		showFeedback: boolean;
 		highlightLinkId?: string;
 	}
 
-	let { class: classes, radiationTherapy, showFeedback, highlightLinkId }: Props = $props();
+	let {
+		class: classes,
+		radiationTherapy,
+		bestrahlungen,
+		showFeedback,
+		highlightLinkId,
+	}: Props = $props();
 
 	const treatmentPeriod = $derived(getTreatmentPeriod(radiationTherapy));
 	let treatmentDateString = $derived.by(() => {
@@ -32,7 +40,9 @@
 	});
 	let treatmentEndReason = $derived(getTreatmentEndReasonCoding(radiationTherapy));
 
-	const targetAreas = $derived(getTargetAreas(radiationTherapy));
+	const targetAreas = $derived(
+		getTargetAreas(radiationTherapy) ?? getTargetAreasV2026(bestrahlungen ?? [])
+	);
 </script>
 
 <div class="flex flex-row items-baseline justify-start gap-2">

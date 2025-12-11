@@ -27,11 +27,8 @@
 
 	let { events, bundle }: Props = $props();
 
-	let compactView = $state(false);
-	let showLegend = $state(true);
-	let filterEmptyDates = $state(true);
+	let filterEmptyDates = $state(false);
 	let selectedEvent: Event | undefined = $state(undefined);
-	let stickyTitle = $state(false);
 	let showJson = $state(false);
 	let showFeedback = $state(false);
 	function cancelFeedback() {
@@ -89,78 +86,31 @@
 </script>
 
 <div class="flex w-full flex-col items-center">
-	<div class="mb-4 flex flex-row gap-6">
-		<div class="flex items-center justify-center space-x-2">
-			<Checkbox id="compact" name="compact" bind:checked={compactView}></Checkbox>
-			<Label
-				id="compact-label"
-				for="compact"
-				class="text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-			>
-				Kompakte Ansicht
-			</Label>
-		</div>
-		<div class="flex items-center justify-center space-x-2">
-			<Checkbox id="legend" name="legend" bind:checked={showLegend}></Checkbox>
-			<Label
-				id="legend-label"
-				for="legend"
-				class="text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-			>
-				Datum-Legende anzeigen
-			</Label>
-		</div>
-		<div class="flex items-center justify-center space-x-2">
-			<Checkbox id="filterEmptyDates" name="filterEmptyDates" bind:checked={filterEmptyDates}
-			></Checkbox>
-			<Label
-				id="filterEmptyDates-label"
-				for="filterEmptyDates"
-				class="text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-			>
-				"Leeres" Datum filtern
-			</Label>
-		</div>
-		<div class="flex items-center justify-center space-x-2">
-			<Checkbox id="stickyTitle" name="stickyTitle" bind:checked={stickyTitle}></Checkbox>
-			<Label
-				id="stickyTitle-label"
-				for="stickyTitle"
-				class="text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-			>
-				Sticky Title
-			</Label>
-		</div>
-	</div>
 	<div
-		style="--columns: {lanes.length}; --rows: {totalDuration}; --rowGap: {compactView
-			? 0 + 'px'
-			: 1 + 'px'}"
-		class={["timeline-grid", showLegend ? "with-legend" : "without-legend"]}
+		style="--columns: {lanes.length}; --rows: {totalDuration}; --rowGap: 1px;"
+		class={["timeline-grid", "with-legend"]}
 	>
-		{#if showLegend}
+		<div
+			class="bg-foreground h-full w-0.5"
+			style="grid-column: 2/span 1;grid-row-start: {differenceInCalendarDays(
+				firstOfMonthDates[0],
+				minDate
+			)}; grid-row-end: {totalDuration + 2}; justify-self: center;"
+		></div>
+		{#each firstOfMonthDates as monthDate}
+			{@const rowStart = differenceInCalendarDays(monthDate, minDate) + 1}
 			<div
-				class="bg-foreground h-full w-0.5"
-				style="grid-column: 2/span 1;grid-row-start: {differenceInCalendarDays(
-					firstOfMonthDates[0],
-					minDate
-				)}; grid-row-end: {totalDuration + 2}; justify-self: center;"
+				style="grid-column: 1/span 1;grid-row-start: {rowStart}; grid-row-end: {rowStart +
+					1}; justify-self: end;"
+			>
+				<p>{formatLegendDate(monthDate)}</p>
+			</div>
+			<div
+				class="bg-primary size-3 rounded-full"
+				style="grid-column: 2/span 1;grid-row-start: {rowStart}; grid-row-end: {rowStart +
+					1}; justify-self: center; align-self: center;"
 			></div>
-			{#each firstOfMonthDates as monthDate}
-				{@const rowStart = differenceInCalendarDays(monthDate, minDate) + 1}
-				<div
-					style="grid-column: 1/span 1;grid-row-start: {rowStart}; grid-row-end: {rowStart +
-						1}; justify-self: end;"
-				>
-					<p>{formatLegendDate(monthDate)}</p>
-				</div>
-				<div
-					class="bg-primary size-3 rounded-full"
-					style="grid-column: 2/span 1;grid-row-start: {rowStart}; grid-row-end: {rowStart +
-						1}; justify-self: center; align-self: center;"
-				></div>
-			{/each}
-		{/if}
+		{/each}
 
 		{#each lanes as lane}
 			{#each lane as event}
@@ -168,7 +118,7 @@
 				{@const rowEnd = event.endDate
 					? differenceInCalendarDays(event.endDate, minDate)
 					: rowStart + 1}
-				{@const laneIndex = (event.lane ?? 0) + (showLegend ? 3 : 1)}
+				{@const laneIndex = (event.lane ?? 0) + 3}
 
 				{#if event.endDate}
 					<TimelineBar
@@ -177,7 +127,6 @@
 						{rowStart}
 						{rowEnd}
 						onclick={() => (selectedEvent = event)}
-						{stickyTitle}
 					/>
 				{:else}
 					<TimelineSpot

@@ -88,6 +88,6 @@ export const actions: Actions = {
 			console.error(error);
 		}
 
-		redirect(302, "/");
+		redirect(302, "/module/oncology");
 	},
 };

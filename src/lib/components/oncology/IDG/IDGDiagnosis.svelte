@@ -1,5 +1,7 @@
 <script lang="ts">
 	import Diagnosis from "./Details/Diagnosis/Diagnosis.svelte";
+	import ProstataPSA from "./Details/Diagnosis/ProstataPSA.svelte";
+	import Tumorgroesse from "./Details/Diagnosis/Tumorgroesse.svelte";
 	import Fernmetastasen from "./Details/Fernmetastasen/Fernmetastasen.svelte";
 	import Histology from "./Details/Histology/Histology.svelte";
 	import IDGLayout from "./IDGLayout.svelte";
@@ -35,7 +37,9 @@
 					entry.resource?.meta?.profile?.some(
 						(value) =>
 							value ===
-							"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-histologie"
+								"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-histologie" ||
+							value ===
+								"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-histologie-icdo3"
 					)
 			)
 			.map((e) => e.resource as Observation)
@@ -54,6 +58,28 @@
 					)
 			)
 			.map((e) => e.resource as Observation)
+			.filter((observation) => observation.focus?.some((f) => f.reference?.includes(conditionId)))
+	);
+
+	let tumorGroesse = $derived(
+		bundle.entry
+			?.filter((entry) =>
+				entry.resource?.meta?.profile?.includes(
+					"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-tumorgroesse"
+				)
+			)
+			?.map((e) => e.resource as Observation)
+			.filter((observation) => observation.focus?.some((f) => f.reference?.includes(conditionId)))
+	);
+
+	let psaValues = $derived(
+		bundle.entry
+			?.filter((entry) =>
+				entry.resource?.meta?.profile?.includes(
+					"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-prostate-psa"
+				)
+			)
+			?.map((e) => e.resource as Observation)
 			.filter((observation) => observation.focus?.some((f) => f.reference?.includes(conditionId)))
 	);
 
@@ -474,7 +500,19 @@
 	{#snippet children()}
 		{#if condition}
 			<Diagnosis {showFeedback} {condition} highlightLinkId={currentItemLinkId} />
-			<!-- <TnmDisplay {staging} /> -->
+
+			{#if tumorGroesse && tumorGroesse.length > 0}
+				<Tumorgroesse
+					{showFeedback}
+					observations={tumorGroesse}
+					highlightLinkId={currentItemLinkId}
+				/>
+			{/if}
+
+			{#if psaValues && psaValues.length > 0}
+				<ProstataPSA {showFeedback} observations={psaValues} highlightLinkId={currentItemLinkId} />
+			{/if}
+
 			{#if histologyObservations && histologyObservations.length > 0}
 				<Histology
 					{showFeedback}
@@ -487,6 +525,7 @@
 					<p class="text-muted-foreground">Keine Histologieinformationen verfügbar.</p>
 				</div>
 			{/if}
+
 			{#if fernmetastasenObservations && fernmetastasenObservations.length > 0}
 				<Fernmetastasen
 					{showFeedback}

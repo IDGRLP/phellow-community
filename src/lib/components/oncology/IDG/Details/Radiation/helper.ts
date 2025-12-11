@@ -138,6 +138,51 @@ function getTargetAreas(radiationTherapy: Procedure): TargetArea[] | undefined {
 	return extractedAreas;
 }
 
+function getTargetAreasV2026(bestrahlungen: Procedure[]): TargetArea[] | undefined {
+	if (bestrahlungen.length === 0) return undefined;
+
+	let extractedAreas: TargetArea[] = [];
+
+	for (const bestrahlung of bestrahlungen) {
+		const targetCoding = bestrahlung.bodySite
+			?.find((site) =>
+				site.coding?.some(
+					(coding) =>
+						coding.system ===
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-strahlentherapie-zielgebiet"
+				)
+			)
+			?.coding?.find(
+				(coding) =>
+					coding.system ===
+					"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-strahlentherapie-zielgebiet"
+			);
+		let targetCodeOriginal = targetCoding?.code; // Example: "5.4.+"
+		let targetCode = targetCodeOriginal;
+		if (targetCode) {
+			const lastDotIndex = targetCode.lastIndexOf(".");
+			if (lastDotIndex !== -1) {
+				targetCode = targetCode.slice(0, lastDotIndex);
+			}
+		}
+		const target: Coding | undefined = targetCode
+			? { code: targetCodeOriginal, display: bestrahlungZielgebiet[targetCode] }
+			: undefined;
+
+		// Get laterality
+		const lateralityExt = bestrahlung.bodySite?.[0].extension?.find(
+			(ext) => ext.url === "Zielgebiet_Lateralitaet"
+		);
+		const lateralityCode = lateralityExt?.valueCodeableConcept?.coding?.[0]?.code;
+
+		const laterality = lateralityCode ? lateralityMap[lateralityCode] : undefined;
+
+		extractedAreas.push({ target, laterality });
+	}
+
+	return extractedAreas;
+}
+
 // Helper function to format date
 function formatDate(dateString?: string) {
 	if (!dateString) return undefined;
@@ -174,6 +219,7 @@ export {
 	bestrahlungZielgebiet,
 	formatDate,
 	getTargetAreas,
+	getTargetAreasV2026,
 	getTreatmentEndReasonCoding,
 	getTreatmentPeriod,
 	parseTreatmentEndReason,

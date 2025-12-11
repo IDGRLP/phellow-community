@@ -53,30 +53,35 @@
 		icon: typeof House;
 	}[] = [
 		{
-			title: m.dashboard_title(),
-			url: localizeHref(route("/dashboard")),
-			icon: House,
+			title: m.module_oncology(),
+			url: localizeHref(route("/module/oncology")),
+			icon: Shell,
 		},
-		{
-			title: m.documents_title(),
-			url: localizeHref(route("/documents")),
-			icon: File,
-		},
-		{
-			title: m.appointments_title(),
-			url: localizeHref(route("/appointments")),
-			icon: Calendar,
-		},
-		{
-			title: m.tasks_title(),
-			url: localizeHref(route("/tasks")),
-			icon: ListTodo,
-		},
-		{
-			title: m.structured_title(),
-			url: localizeHref(route("/labs")),
-			icon: FlaskConical,
-		},
+		// {
+		// 	title: m.dashboard_title(),
+		// 	url: localizeHref(route("/dashboard")),
+		// 	icon: House,
+		// },
+		// {
+		// 	title: m.documents_title(),
+		// 	url: localizeHref(route("/documents")),
+		// 	icon: File,
+		// },
+		// {
+		// 	title: m.appointments_title(),
+		// 	url: localizeHref(route("/appointments")),
+		// 	icon: Calendar,
+		// },
+		// {
+		// 	title: m.tasks_title(),
+		// 	url: localizeHref(route("/tasks")),
+		// 	icon: ListTodo,
+		// },
+		// {
+		// 	title: m.structured_title(),
+		// 	url: localizeHref(route("/labs")),
+		// 	icon: FlaskConical,
+		// },
 	];
 
 	const moduleItems: {
@@ -84,13 +89,13 @@
 		url: string;
 		icon: typeof House;
 	}[] = [
-		scopes.includes("module_onco")
-			? {
-					title: m.module_oncology(),
-					url: localizeHref(route("/module/oncology")),
-					icon: Shell,
-				}
-			: null,
+		// scopes.includes("module_onco")
+		// 	? {
+		// 			title: m.module_oncology(),
+		// 			url: localizeHref(route("/module/oncology")),
+		// 			icon: Shell,
+		// 		}
+		// 	: null,
 	].filter((item) => item !== null);
 </script>
 
