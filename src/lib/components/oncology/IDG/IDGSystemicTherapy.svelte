@@ -1,7 +1,8 @@
 <script lang="ts">
-	import type { Bundle, Procedure, Questionnaire } from "fhir/r4";
+	import type { Bundle, MedicationStatement, Procedure, Questionnaire } from "fhir/r4";
 	import SystemicTherapy from "./Details/SystemicTherapy/SystemicTherapy.svelte";
 	import IDGLayout from "./IDGLayout.svelte";
+	import Medication from "./Details/SystemicTherapy/Medication.svelte";
 
 	interface Props {
 		procedureId: string;
@@ -19,6 +20,24 @@
 			| Procedure
 			| undefined
 	);
+
+	let medications = $derived(
+		bundle.entry
+			?.filter(
+				(entry) =>
+					entry.resource?.meta?.profile?.includes(
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-systemische-therapie-medikation"
+					) && entry.resource?.resourceType === "MedicationStatement"
+			)
+			.map((entry) => entry.resource as MedicationStatement)
+			.filter(
+				(medication) =>
+					medication.derivedFrom?.some((part) => part.reference === `Procedure/${procedureId}`) ??
+					false
+			)
+	);
+
+	$inspect("medications", medications);
 
 	function handleCurrentItemChange(itemLinkId?: string): void {
 		currentItemLinkId = itemLinkId;
@@ -271,6 +290,10 @@
 			<SystemicTherapy {procedure} {showFeedback} highlightLinkId={currentItemLinkId} />
 		{:else}
 			<p class="text-muted-foreground">Keine Systemische Therapieinformationen verfügbar.</p>
+		{/if}
+
+		{#if medications && medications.length > 0}
+			<Medication {medications} {showFeedback} highlightLinkId={currentItemLinkId} />
 		{/if}
 	{/snippet}
 </IDGLayout>
