@@ -70,14 +70,14 @@
 						valueCoding: {
 							code: "incorrectButComplete",
 							display:
-								"Nein, die angezeigten Informationen sind fehlerhaft, aber an sich vollständig (falsch, aber vollständig)",
+								"Nein, die angezeigten Informationen sind (teilweise) fehlerhaft, aber an sich vollständig (falsch, aber vollständig)",
 						},
 					},
 					{
 						valueCoding: {
 							code: "incorrectAndIncomplete",
 							display:
-								"Nein, die angezeigten Informationen sind fehlerhaft und unvollständig (falsch und unvollständig)",
+								"Nein, die angezeigten Informationen sind (teilweise) fehlerhaft und unvollständig (falsch und unvollständig)",
 						},
 					},
 					{

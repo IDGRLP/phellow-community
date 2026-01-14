@@ -113,14 +113,14 @@
 						valueCoding: {
 							code: "incorrectButComplete",
 							display:
-								"Nein, die angezeigten Informationen sind fehlerhaft, aber an sich vollständig (falsch, aber vollständig)",
+								"Nein, die angezeigten Informationen sind (teilweise) fehlerhaft, aber an sich vollständig (falsch, aber vollständig)",
 						},
 					},
 					{
 						valueCoding: {
 							code: "incorrectAndIncomplete",
 							display:
-								"Nein, die angezeigten Informationen sind fehlerhaft und unvollständig (falsch und unvollständig)",
+								"Nein, die angezeigten Informationen sind (teilweise) fehlerhaft und unvollständig (falsch und unvollständig)",
 						},
 					},
 					{
@@ -138,6 +138,62 @@
 						},
 					},
 					{ valueCoding: { code: "na", display: "Hierzu möchte ich keine Angabe machen" } },
+				],
+			},
+			{
+				linkId: "0_0_Fd_Diag_datum",
+				type: "group",
+				enableBehavior: "any",
+				enableWhen: [
+					{
+						question: "0_Fd_Diag_ins",
+						operator: "=",
+						answerCoding: { code: "correctButIncomplete" },
+					},
+					{
+						question: "0_Fd_Diag_ins",
+						operator: "=",
+						answerCoding: { code: "incorrectButComplete" },
+					},
+					{
+						question: "0_Fd_Diag_ins",
+						operator: "=",
+						answerCoding: { code: "incorrectAndIncomplete" },
+					},
+				],
+				item: [
+					{
+						linkId: "0_0_Fd_Diag_datum_choice",
+						text: "Stimmt das Diagnosedatum?",
+						required: true,
+						type: "choice",
+						answerOption: [
+							{ valueCoding: { code: "yes", display: "Ja" } },
+							{ valueCoding: { code: "no", display: "Nein, die Information stimmt nicht" } },
+							{ valueCoding: { code: "noMissing", display: "Nein, es fehlt etwas" } },
+							{ valueCoding: { code: "unknown", display: "Ich weiß nicht" } },
+							{ valueCoding: { code: "na", display: "Hierzu möchte ich keine Angabe machen" } },
+						],
+					},
+					{
+						linkId: "0_0_Fd_Diag_datum_text",
+						text: "Welche Information beim Diagnosedatum stimmt nicht bzw. fehlt? Seien Sie bitte möglichst präzise.",
+						type: "text",
+						required: true,
+						enableBehavior: "any",
+						enableWhen: [
+							{
+								question: "0_0_Fd_Diag_datum_choice",
+								operator: "=",
+								answerCoding: { code: "no" },
+							},
+							{
+								question: "0_0_Fd_Diag_datum_choice",
+								operator: "=",
+								answerCoding: { code: "noMissing" },
+							},
+						],
+					},
 				],
 			},
 			{
