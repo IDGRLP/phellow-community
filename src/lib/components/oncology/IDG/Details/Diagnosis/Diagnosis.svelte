@@ -61,7 +61,14 @@
 
 <div class="flex flex-row items-baseline justify-start gap-2">
 	<h3 class="font-xl mt-0">Diagnose</h3>
-	<div class="text-muted-foreground">{diagnosisDate}</div>
+	<div
+		class={[
+			"text-muted-foreground",
+			highlightLinkId === "0_0_Fd_Diag_datum" ? "ring-ring ring-2" : undefined,
+		]}
+	>
+		{diagnosisDate}
+	</div>
 </div>
 
 <div

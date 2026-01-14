@@ -10,7 +10,7 @@ services:
   db:
     container_name: inkapp-db-local
     image: postgres:17
-    restart: always
+    restart: unless-stopped
     ports:
       - "5432:5432"
     environment:
@@ -22,7 +22,10 @@ services:
       - ./samples/db-init:/docker-entrypoint-initdb.d:ro
     healthcheck:
       test:
-        ["CMD-SHELL", "pg_isready -d ${POSTGRES_DB:-phellow_local} -U ${POSTGRES_USER:-phellow}"]
+        [
+          "CMD-SHELL",
+          "pg_isready -d ${POSTGRES_DB:-phellow_local} -U ${POSTGRES_USER:-phellow}",
+        ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -56,7 +59,13 @@ services:
       IDP_BASE_URL: ${IDP_BASE_URL:-http://localhost:8080}
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/.well-known/openid_configuration"]
+      test:
+        [
+          "CMD",
+          "curl",
+          "-f",
+          "http://localhost:8080/.well-known/openid_configuration",
+        ]
       interval: 10s
       timeout: 5s
       retries: 3
