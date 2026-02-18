@@ -37,6 +37,7 @@ storybook-static
 
 # SpecKit
 .specify
+specs/
 
 # Coding Agents
 .claude

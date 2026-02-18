@@ -27,7 +27,7 @@
 
 	let { events, bundle }: Props = $props();
 
-	let filterEmptyDates = $state(false);
+	let filterEmptyDates = $state(true);
 	let selectedEvent: Event | undefined = $state(undefined);
 	let showJson = $state(false);
 	let showFeedback = $state(false);
