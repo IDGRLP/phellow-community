@@ -11,6 +11,8 @@
 	import Timeline from "$components/oncology/Timeline/Timeline.svelte";
 	import { Button } from "$components/ui/button";
 	import { page } from "$app/state";
+	import { pushState } from "$app/navigation";
+	import type { Event } from "$components/oncology/Timeline/timelineHelper";
 
 	let { data }: { data: PageData } = $props();
 
@@ -25,6 +27,23 @@
 		const currentFile = page.url.searchParams.get("file");
 		if (!currentFile) return file === "InKaPP_Lunge_C34.json";
 		return currentFile === file;
+	}
+
+	// Derive from page.state (reactive on back/forward) with URL fallback (page refresh)
+	let selectedEvent = $derived.by(() => {
+		const eventId = page.state.eventId ?? page.url.searchParams.get("event");
+		if (!eventId) return undefined;
+		return data.events.find((e) => e.resourceId === eventId);
+	});
+
+	function handleSelectEvent(event: Event | undefined) {
+		const url = new URL(page.url);
+		if (event) {
+			url.searchParams.set("event", event.resourceId);
+		} else {
+			url.searchParams.delete("event");
+		}
+		pushState(url, { eventId: event?.resourceId });
 	}
 </script>
 
@@ -48,6 +67,6 @@
 				>
 			{/each}
 		</div>
-		<Timeline events={data.events} bundle={data.bundle} />
+		<Timeline events={data.events} bundle={data.bundle} {selectedEvent} onSelectEvent={handleSelectEvent} />
 	{/snippet}
 </AppLayout>

@@ -23,26 +23,20 @@
 	interface Props {
 		events: Event[];
 		bundle: Bundle;
+		selectedEvent: Event | undefined;
+		onSelectEvent: (event: Event | undefined) => void;
 	}
 
-	let { events, bundle }: Props = $props();
+	let { events, bundle, selectedEvent, onSelectEvent }: Props = $props();
 
 	let filterEmptyDates = $state(true);
-	let selectedEvent: Event | undefined = $state(undefined);
 	let showJson = $state(false);
 	let showFeedback = $state(false);
 	function cancelFeedback() {
 		showFeedback = false;
 	}
 
-	let showDrawer = $state(false);
-	$effect(() => {
-		if (selectedEvent) {
-			showDrawer = true;
-		} else {
-			showDrawer = false;
-		}
-	});
+	let showDrawer = $derived(!!selectedEvent);
 
 	// Sort events by start date
 	let sortedEvents = $derived([...events].sort((a, b) => compareAsc(a.startDate, b.startDate)));
@@ -126,7 +120,7 @@
 						lane={laneIndex}
 						{rowStart}
 						{rowEnd}
-						onclick={() => (selectedEvent = event)}
+						onclick={() => onSelectEvent(event)}
 					/>
 				{:else}
 					<TimelineSpot
@@ -134,7 +128,7 @@
 						lane={laneIndex}
 						{rowStart}
 						{rowEnd}
-						onclick={() => (selectedEvent = event)}
+						onclick={() => onSelectEvent(event)}
 					/>
 				{/if}
 			{/each}
@@ -142,7 +136,7 @@
 	</div>
 </div>
 
-<Drawer.Root bind:open={showDrawer} onClose={() => (showFeedback = false)}>
+<Drawer.Root open={showDrawer} onOpenChange={(open) => { if (!open) { showFeedback = false; onSelectEvent(undefined); } }} >
 	<Drawer.Portal>
 		<Drawer.Overlay class="bg-black/40" />
 		{#if selectedEvent}

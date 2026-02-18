@@ -37,8 +37,6 @@
 			)
 	);
 
-	$inspect("medications", medications);
-
 	function handleCurrentItemChange(itemLinkId?: string): void {
 		currentItemLinkId = itemLinkId;
 	}

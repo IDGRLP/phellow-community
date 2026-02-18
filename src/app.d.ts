@@ -14,7 +14,9 @@ declare global {
 			paraglide: ParaglideLocals<AvailableLanguageTag>;
 		}
 		// interface PageData {}
-		// interface PageState {}
+		interface PageState {
+			eventId?: string;
+		}
 		// interface Platform {}
 	}
 }
