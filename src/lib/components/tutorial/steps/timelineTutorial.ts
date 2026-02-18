@@ -5,6 +5,12 @@ export const timelineTutorial: TutorialSequence = {
 	prerequisiteUrl: "/module/oncology?file=InKaPP_Lunge_C34.json",
 	steps: [
 		{
+			id: "notice-demo-data",
+			titleKey: "tutorial_notice_demo_data_title",
+			descriptionKey: "tutorial_notice_demo_data_description",
+			placement: "bottom",
+		},
+		{
 			id: "timeline-legend",
 			targetSelector: '[data-tutorial="timeline-legend"]',
 			titleKey: "tutorial_step_legend_title",

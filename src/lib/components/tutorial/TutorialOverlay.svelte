@@ -12,6 +12,12 @@
 			return;
 		}
 
+		if (!step.targetSelector) {
+			// No target — full dim, no cutout
+			clipPath = "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)";
+			return;
+		}
+
 		const el = document.querySelector(step.targetSelector);
 		if (!el) {
 			clipPath = "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)";

@@ -1,6 +1,7 @@
 export interface TutorialStep {
 	id: string;
-	targetSelector: string;
+	/** CSS selector for the highlighted element. Omit or leave empty for a centered notice (no highlight). */
+	targetSelector?: string;
 	titleKey: string;
 	descriptionKey: string;
 	placement: "top" | "bottom" | "left" | "right";

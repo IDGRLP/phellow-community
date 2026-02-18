@@ -18,7 +18,15 @@
 		if (tutorialStore.currentStepIndex !== 0) return;
 
 		const step = tutorialStore.currentStep;
-		const el = document.querySelector(step.targetSelector);
+
+		// Notice steps (no targetSelector) don't need element detection
+		if (!step.targetSelector) {
+			loadError = false;
+			return;
+		}
+
+		const selector = step.targetSelector;
+		const el = document.querySelector(selector);
 		if (el) {
 			loadError = false;
 			return;
@@ -26,7 +34,7 @@
 
 		// Element not found yet — wait up to 5 seconds
 		const observer = new MutationObserver(() => {
-			if (document.querySelector(step.targetSelector)) {
+			if (document.querySelector(selector)) {
 				observer.disconnect();
 				clearTimeout(loadTimeout);
 				loadError = false;
@@ -37,7 +45,7 @@
 
 		loadTimeout = setTimeout(() => {
 			observer.disconnect();
-			if (!document.querySelector(step.targetSelector)) {
+			if (!document.querySelector(selector)) {
 				loadError = true;
 				tutorialStore.cancel();
 			}

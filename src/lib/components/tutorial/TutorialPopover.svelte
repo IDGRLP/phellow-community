@@ -5,12 +5,19 @@
 	import * as m from "$lib/paraglide/messages";
 	import { Button } from "$ui/button";
 	import X from "@lucide/svelte/icons/x";
+	import TriangleAlert from "@lucide/svelte/icons/triangle-alert";
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	type MessageFn = (...args: any[]) => string;
 	const messages = m as unknown as Record<string, MessageFn>;
 
 	let customAnchor = $state<{ getBoundingClientRect: () => DOMRect } | null>(null);
+
+	function centerAnchor() {
+		return {
+			getBoundingClientRect: () => new DOMRect(window.innerWidth / 2, window.innerHeight / 3, 0, 0),
+		};
+	}
 
 	$effect(() => {
 		if (!tutorialStore.active || !tutorialStore.currentStep) {
@@ -24,11 +31,21 @@
 		function updateAnchor() {
 			const step = tutorialStore.currentStep;
 			if (!step) return;
+
+			// Steps with no targetSelector render as a centered notice
+			if (!step.targetSelector) {
+				customAnchor = centerAnchor();
+				return;
+			}
+
 			const el = document.querySelector(step.targetSelector);
-			if (!el) return;
-			customAnchor = {
-				getBoundingClientRect: () => el.getBoundingClientRect(),
-			};
+			if (el) {
+				customAnchor = {
+					getBoundingClientRect: () => el.getBoundingClientRect(),
+				};
+			} else {
+				customAnchor = centerAnchor();
+			}
 		}
 
 		const timeout = setTimeout(updateAnchor, 60);
@@ -46,6 +63,8 @@
 		if (!step) return "";
 		return messages[step.descriptionKey]?.() ?? step.descriptionKey;
 	}
+
+	let isNoticeStep = $derived(!tutorialStore.currentStep?.targetSelector);
 </script>
 
 {#if tutorialStore.active && tutorialStore.currentStep && customAnchor}
@@ -55,8 +74,9 @@
 			side={tutorialStore.currentStep.placement}
 			sideOffset={12}
 			class={cn(
-				"bg-popover text-popover-foreground z-[70] w-80 rounded-md border p-4 shadow-md outline-hidden",
-				"data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95"
+				"bg-popover text-popover-foreground z-[70] rounded-md border p-4 shadow-md outline-hidden",
+				"data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95",
+				isNoticeStep ? "w-96 border-yellow-500/50 p-6" : "w-80"
 			)}
 		>
 			<div class="relative flex flex-col gap-3">
@@ -68,10 +88,22 @@
 					<span class="sr-only">{m.tutorial_nav_cancel()}</span>
 				</button>
 
-				<div class="pr-6">
-					<h4 class="text-sm font-semibold">{getTitle()}</h4>
-					<p class="text-muted-foreground text-sm">{getDescription()}</p>
-				</div>
+				{#if isNoticeStep}
+					<div class="flex items-start gap-3 pr-6">
+						<TriangleAlert class="mt-0.5 size-6 shrink-0 text-yellow-500" />
+						<div>
+							<h4 class="text-base font-bold">{getTitle()}</h4>
+							<p class="text-muted-foreground mt-1 text-sm leading-relaxed">
+								{getDescription()}
+							</p>
+						</div>
+					</div>
+				{:else}
+					<div class="pr-6">
+						<h4 class="text-sm font-semibold">{getTitle()}</h4>
+						<p class="text-muted-foreground text-sm">{getDescription()}</p>
+					</div>
+				{/if}
 
 				<p class="text-muted-foreground text-xs">
 					{m.tutorial_progress({

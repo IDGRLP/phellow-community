@@ -207,6 +207,8 @@
 	"tutorial_nav_cancel": "Cancel",
 	"tutorial_nav_finish": "Finish",
 	"tutorial_progress": "Step {current} of {total}",
+	"tutorial_notice_demo_data_title": "Notice: Sample Data",
+	"tutorial_notice_demo_data_description": "This tutorial uses a sample dataset for demonstration purposes. The data shown is fictitious and is not related to your personal health data.",
 	"tutorial_error_load_failed": "The tutorial could not be started. The required elements were not found.",
 	"tutorial_step_diagnosis_header_title": "Diagnosis Overview",
 	"tutorial_step_diagnosis_header_description": "The header shows the name of the diagnosis and the date it was documented.",

@@ -207,6 +207,8 @@
 	"tutorial_nav_cancel": "Abbrechen",
 	"tutorial_nav_finish": "Fertig",
 	"tutorial_progress": "Schritt {current} von {total}",
+	"tutorial_notice_demo_data_title": "Hinweis: Beispieldaten",
+	"tutorial_notice_demo_data_description": "Dieses Tutorial verwendet einen Beispieldatensatz zur Veranschaulichung. Die angezeigten Daten sind fiktiv und haben keinen Bezug zu Ihren persönlichen Gesundheitsdaten.",
 	"tutorial_error_load_failed": "Das Tutorial konnte nicht gestartet werden. Die benötigten Elemente wurden nicht gefunden.",
 	"tutorial_step_diagnosis_header_title": "Diagnoseübersicht",
 	"tutorial_step_diagnosis_header_description": "Die Kopfzeile zeigt den Namen der Diagnose und das Datum, an dem sie dokumentiert wurde.",

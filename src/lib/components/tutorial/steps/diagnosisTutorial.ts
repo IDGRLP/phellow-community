@@ -22,6 +22,12 @@ export const diagnosisTutorial: TutorialSequence = {
 	},
 	steps: [
 		{
+			id: "notice-demo-data",
+			titleKey: "tutorial_notice_demo_data_title",
+			descriptionKey: "tutorial_notice_demo_data_description",
+			placement: "bottom",
+		},
+		{
 			id: "diagnosis-header",
 			targetSelector: '[data-tutorial="diagnosis-header"]',
 			titleKey: "tutorial_step_diagnosis_header_title",
