@@ -24,6 +24,11 @@
 	import CircleHelp from "@lucide/svelte/icons/circle-help";
 	import { tutorialStore } from "$lib/stores/tutorialStore.svelte";
 	import { diagnosisTutorial } from "$components/tutorial/steps/diagnosisTutorial";
+	import { surgeryTutorial } from "$components/tutorial/steps/surgeryTutorial";
+	import { radiationTutorial } from "$components/tutorial/steps/radiationTutorial";
+	import { systemicTherapyTutorial } from "$components/tutorial/steps/systemicTherapyTutorial";
+	import { progressionTutorial } from "$components/tutorial/steps/progressionTutorial";
+	import { tnmTutorial } from "$components/tutorial/steps/tnmTutorial";
 	import { cn } from "$lib/utils";
 
 	interface Props {
@@ -262,6 +267,20 @@
 							{bundle}
 						/>
 					{:else if selectedEvent.type === "surgery"}
+						<div class="-mb-6 flex justify-end">
+							<Button
+								variant="ghost"
+								class={cn("hover:cursor-pointer hover:ring")}
+								size="sm"
+								onclick={() => {
+									onSelectEvent(undefined);
+									tutorialStore.activate(surgeryTutorial);
+								}}
+							>
+								<CircleHelp class="size-4" />
+								{m.tutorial_surgery_button_label()}
+							</Button>
+						</div>
 						<IdgSurgery
 							{showFeedback}
 							{cancelFeedback}
@@ -269,6 +288,20 @@
 							{bundle}
 						/>
 					{:else if selectedEvent.type === "radiation"}
+						<div class="-mb-6 flex justify-end">
+							<Button
+								variant="ghost"
+								class={cn("hover:cursor-pointer hover:ring")}
+								size="sm"
+								onclick={() => {
+									onSelectEvent(undefined);
+									tutorialStore.activate(radiationTutorial);
+								}}
+							>
+								<CircleHelp class="size-4" />
+								{m.tutorial_radiation_button_label()}
+							</Button>
+						</div>
 						<IdgRadiation
 							{showFeedback}
 							{cancelFeedback}
@@ -276,6 +309,20 @@
 							{bundle}
 						/>
 					{:else if selectedEvent.type === "systemicTherapy"}
+						<div class="-mb-6 flex justify-end">
+							<Button
+								variant="ghost"
+								class={cn("hover:cursor-pointer hover:ring")}
+								size="sm"
+								onclick={() => {
+									onSelectEvent(undefined);
+									tutorialStore.activate(systemicTherapyTutorial);
+								}}
+							>
+								<CircleHelp class="size-4" />
+								{m.tutorial_systemic_therapy_button_label()}
+							</Button>
+						</div>
 						<IdgSystemicTherapy
 							{showFeedback}
 							{cancelFeedback}
@@ -283,6 +330,20 @@
 							{bundle}
 						/>
 					{:else if selectedEvent.type === "progression"}
+						<div class="-mb-6 flex justify-end">
+							<Button
+								variant="ghost"
+								class={cn("hover:cursor-pointer hover:ring")}
+								size="sm"
+								onclick={() => {
+									onSelectEvent(undefined);
+									tutorialStore.activate(progressionTutorial);
+								}}
+							>
+								<CircleHelp class="size-4" />
+								{m.tutorial_progression_button_label()}
+							</Button>
+						</div>
 						<IdgProgression
 							{showFeedback}
 							{cancelFeedback}
@@ -290,6 +351,20 @@
 							{bundle}
 						/>
 					{:else if selectedEvent.type === "tnm"}
+						<div class="-mb-6 flex justify-end">
+							<Button
+								variant="ghost"
+								class={cn("hover:cursor-pointer hover:ring")}
+								size="sm"
+								onclick={() => {
+									onSelectEvent(undefined);
+									tutorialStore.activate(tnmTutorial);
+								}}
+							>
+								<CircleHelp class="size-4" />
+								{m.tutorial_tnm_button_label()}
+							</Button>
+						</div>
 						<IdgTNMDisplay
 							{showFeedback}
 							{cancelFeedback}

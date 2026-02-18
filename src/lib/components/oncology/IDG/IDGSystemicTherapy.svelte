@@ -291,7 +291,9 @@
 		{/if}
 
 		{#if medications && medications.length > 0}
-			<Medication {medications} {showFeedback} highlightLinkId={currentItemLinkId} />
+			<div data-tutorial="systemic-medication">
+				<Medication {medications} {showFeedback} highlightLinkId={currentItemLinkId} />
+			</div>
 		{/if}
 	{/snippet}
 </IDGLayout>

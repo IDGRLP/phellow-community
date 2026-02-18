@@ -18,7 +18,7 @@
 	let progressionDate = $derived(formatDate(progression.effectiveDateTime));
 </script>
 
-<div class="flex flex-row items-baseline justify-start gap-2">
+<div data-tutorial="progression-header" class="flex flex-row items-baseline justify-start gap-2">
 	<h3 class="font-xl mt-0">Verlauf</h3>
 	<div
 		class={[
@@ -33,11 +33,13 @@
 <div
 	class={["grid grid-cols-1 gap-8", showFeedback ? "md:grid-cols-1" : "md:grid-cols-2", classes]}
 >
-	<CodingCard
-		heading="Gesamtbeurteilung"
-		coding={gesamtbeurteilung}
-		noDataText="Keine Gesamtbeurteilung vorhanden"
-		codingDisplay={gesamtbeurteilung && parseGesamtbeurteilung(gesamtbeurteilung)}
-		highlight={highlightLinkId === "6_2_Fd_Ver_target"}
-	/>
+	<div data-tutorial="progression-assessment">
+		<CodingCard
+			heading="Gesamtbeurteilung"
+			coding={gesamtbeurteilung}
+			noDataText="Keine Gesamtbeurteilung vorhanden"
+			codingDisplay={gesamtbeurteilung && parseGesamtbeurteilung(gesamtbeurteilung)}
+			highlight={highlightLinkId === "6_2_Fd_Ver_target"}
+		/>
+	</div>
 </div>
