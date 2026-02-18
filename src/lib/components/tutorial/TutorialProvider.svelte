@@ -69,15 +69,15 @@
 {#if tutorialStore.active}
 	<TutorialOverlay />
 	<!-- Interaction-blocking layer: captures all pointer events on app elements -->
-	<div class="fixed inset-0 z-[55]"></div>
-	<div class="pointer-events-auto z-[60]">
+	<div class="fixed inset-0 z-[65]"></div>
+	<div class="pointer-events-auto z-[70]">
 		<TutorialPopover />
 	</div>
 {/if}
 
 {#if loadError}
 	<div
-		class="bg-destructive text-destructive-foreground fixed bottom-4 left-1/2 z-[70] -translate-x-1/2 rounded-md px-4 py-2 shadow-lg"
+		class="bg-destructive text-destructive-foreground fixed bottom-4 left-1/2 z-[80] -translate-x-1/2 rounded-md px-4 py-2 shadow-lg"
 	>
 		{m.tutorial_error_load_failed()}
 	</div>

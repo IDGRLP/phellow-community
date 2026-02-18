@@ -558,11 +558,13 @@
 			<Diagnosis {showFeedback} {condition} highlightLinkId={currentItemLinkId} />
 
 			{#if tumorGroesse && tumorGroesse.length > 0}
-				<Tumorgroesse
-					{showFeedback}
-					observations={tumorGroesse}
-					highlightLinkId={currentItemLinkId}
-				/>
+				<div data-tutorial="diagnosis-tumor-size">
+					<Tumorgroesse
+						{showFeedback}
+						observations={tumorGroesse}
+						highlightLinkId={currentItemLinkId}
+					/>
+				</div>
 			{/if}
 
 			{#if psaValues && psaValues.length > 0}
@@ -570,26 +572,30 @@
 			{/if}
 
 			{#if histologyObservations && histologyObservations.length > 0}
-				<Histology
-					{showFeedback}
-					observations={histologyObservations}
-					highlightLinkId={currentItemLinkId}
-				/>
+				<div data-tutorial="diagnosis-histology">
+					<Histology
+						{showFeedback}
+						observations={histologyObservations}
+						highlightLinkId={currentItemLinkId}
+					/>
+				</div>
 			{:else}
-				<div>
+				<div data-tutorial="diagnosis-histology">
 					<h3 class="font-xl my-0">Histologie</h3>
 					<p class="text-muted-foreground">Keine Histologieinformationen verfügbar.</p>
 				</div>
 			{/if}
 
 			{#if fernmetastasenObservations && fernmetastasenObservations.length > 0}
-				<Fernmetastasen
-					{showFeedback}
-					fernmetastasen={fernmetastasenObservations}
-					highlightLinkId={currentItemLinkId}
-				/>
+				<div data-tutorial="diagnosis-metastases">
+					<Fernmetastasen
+						{showFeedback}
+						fernmetastasen={fernmetastasenObservations}
+						highlightLinkId={currentItemLinkId}
+					/>
+				</div>
 			{:else}
-				<div>
+				<div data-tutorial="diagnosis-metastases">
 					<h3 class="font-xl my-0">Fernmetastasen</h3>
 					<p class="text-muted-foreground">Keine Fernmetastaseninformationen verfügbar.</p>
 				</div>

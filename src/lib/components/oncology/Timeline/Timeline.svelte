@@ -20,6 +20,12 @@
 	import IdgTNMDisplay from "../IDG/IDGTNMDisplay.svelte";
 	import type { Bundle } from "fhir/r4";
 
+	import * as m from "$lib/paraglide/messages";
+	import CircleHelp from "@lucide/svelte/icons/circle-help";
+	import { tutorialStore } from "$lib/stores/tutorialStore.svelte";
+	import { diagnosisTutorial } from "$components/tutorial/steps/diagnosisTutorial";
+	import { cn } from "$lib/utils";
+
 	interface Props {
 		events: Event[];
 		bundle: Bundle;
@@ -235,6 +241,20 @@
 					</Drawer.Header>
 
 					{#if selectedEvent.type === "diagnosis"}
+						<div class="-mb-6 flex justify-end">
+							<Button
+								variant="ghost"
+								class={cn("hover:cursor-pointer hover:ring")}
+								size="sm"
+								onclick={() => {
+									onSelectEvent(undefined);
+									tutorialStore.activate(diagnosisTutorial);
+								}}
+							>
+								<CircleHelp class="size-4" />
+								{m.tutorial_diagnosis_button_label()}
+							</Button>
+						</div>
 						<IdgDiagnosis
 							{showFeedback}
 							{cancelFeedback}

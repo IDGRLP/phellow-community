@@ -64,7 +64,7 @@
 
 {#if tutorialStore.active}
 	<div
-		class="fixed inset-0 z-50 bg-black/50 transition-[clip-path] duration-300"
+		class="fixed inset-0 z-[60] bg-black/50 transition-[clip-path] duration-300"
 		style="clip-path: {clipPath};"
 	></div>
 {/if}

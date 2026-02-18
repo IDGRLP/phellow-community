@@ -207,5 +207,20 @@
 	"tutorial_nav_cancel": "Cancel",
 	"tutorial_nav_finish": "Finish",
 	"tutorial_progress": "Step {current} of {total}",
-	"tutorial_error_load_failed": "The tutorial could not be started. The required elements were not found."
+	"tutorial_error_load_failed": "The tutorial could not be started. The required elements were not found.",
+	"tutorial_step_diagnosis_header_title": "Diagnosis Overview",
+	"tutorial_step_diagnosis_header_description": "The header shows the name of the diagnosis and the date it was documented.",
+	"tutorial_step_diagnosis_icd10_title": "ICD-10 Code",
+	"tutorial_step_diagnosis_icd10_description": "The ICD-10 code is the international classification of the disease. It describes the type and location of the tumor using a standardized system.",
+	"tutorial_step_diagnosis_laterality_title": "Laterality",
+	"tutorial_step_diagnosis_laterality_description": "The laterality indicates on which side of the body the tumor was found — left, right, bilateral, or not applicable.",
+	"tutorial_step_diagnosis_morphology_title": "Morphology",
+	"tutorial_step_diagnosis_morphology_description": "Morphology describes the tissue type and behavior of the tumor. It provides information about the cell type and degree of differentiation.",
+	"tutorial_step_diagnosis_topography_title": "Topography",
+	"tutorial_step_diagnosis_topography_description": "Topography indicates the exact site of origin of the tumor in the body, based on the ICD-O-3 classification.",
+	"tutorial_step_diagnosis_histology_title": "Histology",
+	"tutorial_step_diagnosis_histology_description": "Histological findings are based on the microscopic examination of tissue samples. They provide detailed information about the tumor type.",
+	"tutorial_step_diagnosis_metastases_title": "Distant Metastases",
+	"tutorial_step_diagnosis_metastases_description": "Distant metastases are deposits of the tumor in distant organs. The overview shows which organs are affected and when the metastases were detected.",
+	"tutorial_diagnosis_button_label": "Start diagnosis tutorial"
 }

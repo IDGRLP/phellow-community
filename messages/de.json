@@ -207,5 +207,20 @@
 	"tutorial_nav_cancel": "Abbrechen",
 	"tutorial_nav_finish": "Fertig",
 	"tutorial_progress": "Schritt {current} von {total}",
-	"tutorial_error_load_failed": "Das Tutorial konnte nicht gestartet werden. Die benötigten Elemente wurden nicht gefunden."
+	"tutorial_error_load_failed": "Das Tutorial konnte nicht gestartet werden. Die benötigten Elemente wurden nicht gefunden.",
+	"tutorial_step_diagnosis_header_title": "Diagnoseübersicht",
+	"tutorial_step_diagnosis_header_description": "Die Kopfzeile zeigt den Namen der Diagnose und das Datum, an dem sie dokumentiert wurde.",
+	"tutorial_step_diagnosis_icd10_title": "ICD-10 Kodierung",
+	"tutorial_step_diagnosis_icd10_description": "Der ICD-10 Code ist die internationale Klassifikation der Krankheit. Er beschreibt die Art und Lokalisation des Tumors nach einem standardisierten System.",
+	"tutorial_step_diagnosis_laterality_title": "Seitenlokalisation",
+	"tutorial_step_diagnosis_laterality_description": "Die Seitenlokalisation gibt an, auf welcher Körperseite der Tumor gefunden wurde — links, rechts, beidseitig oder nicht zutreffend.",
+	"tutorial_step_diagnosis_morphology_title": "Morphologie",
+	"tutorial_step_diagnosis_morphology_description": "Die Morphologie beschreibt die Gewebeart und das Verhalten des Tumors. Sie gibt Auskunft über den Zelltyp und den Differenzierungsgrad.",
+	"tutorial_step_diagnosis_topography_title": "Topographie",
+	"tutorial_step_diagnosis_topography_description": "Die Topographie gibt den genauen Ursprungsort des Tumors im Körper an, basierend auf der ICD-O-3 Klassifikation.",
+	"tutorial_step_diagnosis_histology_title": "Histologie",
+	"tutorial_step_diagnosis_histology_description": "Histologische Befunde basieren auf der mikroskopischen Untersuchung von Gewebeproben. Sie liefern detaillierte Informationen über den Tumortyp.",
+	"tutorial_step_diagnosis_metastases_title": "Fernmetastasen",
+	"tutorial_step_diagnosis_metastases_description": "Fernmetastasen sind Absiedlungen des Tumors in entfernten Organen. Die Übersicht zeigt, welche Organe betroffen sind und wann die Metastasen festgestellt wurden.",
+	"tutorial_diagnosis_button_label": "Diagnose-Tutorial starten"
 }

@@ -37,6 +37,10 @@ export function createTutorialStore() {
 			await goto(seq.prerequisiteUrl);
 		}
 
+		if (seq.setup) {
+			await seq.setup();
+		}
+
 		active = true;
 		currentStepIndex = 0;
 	}

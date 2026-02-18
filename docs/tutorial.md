@@ -40,11 +40,12 @@ A single step in a tutorial. Defined as static configuration in a `steps/*.ts` f
 
 An ordered collection of steps forming a complete tutorial.
 
-| Field             | Type             | Description                                     |
-| ----------------- | ---------------- | ----------------------------------------------- |
-| `id`              | `string`         | Unique sequence identifier                      |
-| `steps`           | `TutorialStep[]` | Ordered array of steps                          |
-| `prerequisiteUrl` | `string`         | URL to navigate to before starting the tutorial |
+| Field             | Type                          | Description                                                            |
+| ----------------- | ----------------------------- | ---------------------------------------------------------------------- |
+| `id`              | `string`                      | Unique sequence identifier                                             |
+| `steps`           | `TutorialStep[]`              | Ordered array of steps                                                 |
+| `prerequisiteUrl` | `string`                      | URL to navigate to before starting the tutorial                        |
+| `setup`           | `() => Promise<void> \| void` | Optional. Runs after navigation but before step 0 (e.g. open a drawer) |
 
 ### TutorialStore
 
@@ -145,10 +146,47 @@ To add a step to the timeline tutorial:
 
 Step order in the array determines the order shown to the user.
 
+## Using the `setup` Hook
+
+Some tutorials need UI state beyond just a URL — for example, opening a drawer or selecting a
+specific element. The optional `setup` function runs after navigation but before the first step
+starts.
+
+Example: the diagnosis tutorial opens the diagnosis drawer programmatically:
+
+```ts
+import type { TutorialSequence } from "$lib/types/tutorial";
+
+function waitFor(ms: number): Promise<void> {
+	return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+export const diagnosisTutorial: TutorialSequence = {
+	id: "diagnosis-detail",
+	prerequisiteUrl: "/module/oncology?file=InKaPP_Lunge_C34.json",
+	async setup() {
+		await waitFor(300); // wait for timeline to render
+		const el = document.querySelector('[data-tutorial="timeline-event-diagnosis"]');
+		if (el instanceof HTMLElement) el.click(); // open the drawer
+		await waitFor(500); // wait for drawer content to render
+	},
+	steps: [
+		/* ... */
+	],
+};
+```
+
+## Existing Tutorials
+
+| Tutorial  | File                                   | Trigger location                    |
+| --------- | -------------------------------------- | ----------------------------------- |
+| Timeline  | `steps/timelineTutorial.ts` (9 steps)  | Help button on oncology page header |
+| Diagnosis | `steps/diagnosisTutorial.ts` (7 steps) | Help button in diagnosis drawer     |
+
 ## Behavior Details
 
 - **Prerequisite navigation**: When activated, the tutorial navigates to `prerequisiteUrl` if the
-  user is not already there, then starts once the page loads.
+  user is not already there, then runs the optional `setup()` hook, then starts the first step.
 - **State restoration**: On completion or cancellation, the user is navigated back to the URL they
   were on before the tutorial started.
 - **Interaction blocking**: A transparent layer blocks all pointer events on app elements during the

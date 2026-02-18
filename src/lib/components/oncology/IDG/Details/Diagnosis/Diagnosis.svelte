@@ -59,7 +59,7 @@
 	const diagnosisDate = formatDate(condition.recordedDate);
 </script>
 
-<div class="flex flex-row items-baseline justify-start gap-2">
+<div class="flex flex-row items-baseline justify-start gap-2" data-tutorial="diagnosis-header">
 	<h3 class="font-xl mt-0">Diagnose</h3>
 	<div
 		class={[
@@ -75,36 +75,44 @@
 	class={["grid grid-cols-1 gap-8", showFeedback ? "md:grid-cols-1" : "md:grid-cols-3", classes]}
 >
 	<!-- ICD-10 Kodierung -->
-	<CodingCard
-		heading="ICD-10"
-		coding={icdCoding}
-		text={icdCodeText}
-		noDataText="Keine ICD-10-Kodierung vorhanden"
-		highlight={highlightLinkId === "0_1_Fd_Diag_ICD"}
-	/>
+	<div data-tutorial="diagnosis-icd10">
+		<CodingCard
+			heading="ICD-10"
+			coding={icdCoding}
+			text={icdCodeText}
+			noDataText="Keine ICD-10-Kodierung vorhanden"
+			highlight={highlightLinkId === "0_1_Fd_Diag_ICD"}
+		/>
+	</div>
 
 	<!-- Seitenlokalisation -->
-	<CodingCard
-		heading="Seitenlokalisation"
-		coding={seitenlokalisation}
-		noDataText="Keine Seitenlokalisation vorhanden"
-		codingDisplay={seitenlokalisation && parseSeitenlokalisation(seitenlokalisation)}
-		highlight={highlightLinkId === "0_1_Fd_Diag_Seitenlokalisation"}
-	/>
+	<div data-tutorial="diagnosis-laterality">
+		<CodingCard
+			heading="Seitenlokalisation"
+			coding={seitenlokalisation}
+			noDataText="Keine Seitenlokalisation vorhanden"
+			codingDisplay={seitenlokalisation && parseSeitenlokalisation(seitenlokalisation)}
+			highlight={highlightLinkId === "0_1_Fd_Diag_Seitenlokalisation"}
+		/>
+	</div>
 
 	<!-- Morphologie -->
-	<CodingCard
-		heading="Morphologie"
-		coding={morphologyCoding}
-		noDataText="Keine Morphologie-Kodierung vorhanden"
-		highlight={highlightLinkId === "0_1_Fd_Diag_Morphologie"}
-	/>
+	<div data-tutorial="diagnosis-morphology">
+		<CodingCard
+			heading="Morphologie"
+			coding={morphologyCoding}
+			noDataText="Keine Morphologie-Kodierung vorhanden"
+			highlight={highlightLinkId === "0_1_Fd_Diag_Morphologie"}
+		/>
+	</div>
 
 	<!-- Topographie -->
-	<CodingCard
-		heading="Topographie"
-		coding={topographyCoding}
-		noDataText="Keine Topographie-Kodierung vorhanden"
-		highlight={highlightLinkId === "0_1_Fd_Diag_Topographie"}
-	/>
+	<div data-tutorial="diagnosis-topography">
+		<CodingCard
+			heading="Topographie"
+			coding={topographyCoding}
+			noDataText="Keine Topographie-Kodierung vorhanden"
+			highlight={highlightLinkId === "0_1_Fd_Diag_Topographie"}
+		/>
+	</div>
 </div>

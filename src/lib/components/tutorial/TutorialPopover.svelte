@@ -55,7 +55,7 @@
 			side={tutorialStore.currentStep.placement}
 			sideOffset={12}
 			class={cn(
-				"bg-popover text-popover-foreground z-[60] w-80 rounded-md border p-4 shadow-md outline-hidden",
+				"bg-popover text-popover-foreground z-[70] w-80 rounded-md border p-4 shadow-md outline-hidden",
 				"data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95"
 			)}
 		>

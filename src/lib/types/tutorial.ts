@@ -11,6 +11,8 @@ export interface TutorialSequence {
 	id: string;
 	steps: TutorialStep[];
 	prerequisiteUrl: string;
+	/** Runs after navigation but before the first step. Use to set up UI state (e.g. open a drawer). */
+	setup?: () => Promise<void> | void;
 }
 
 export interface TutorialState {
