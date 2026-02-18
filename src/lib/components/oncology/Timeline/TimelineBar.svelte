@@ -14,9 +14,28 @@
 		rowEnd: number;
 		onclick?: () => void;
 		stickyTitle?: boolean;
+		tutorialEventType?: string;
+		tutorialBar?: boolean;
 	}
 
-	let { event, lane, rowStart, rowEnd, onclick, stickyTitle = false }: Props = $props();
+	let {
+		event,
+		lane,
+		rowStart,
+		rowEnd,
+		onclick,
+		stickyTitle = false,
+		tutorialEventType,
+		tutorialBar,
+	}: Props = $props();
+
+	const eventTypeMap: Record<string, string> = {
+		systemicTherapy: "systemic-therapy",
+	};
+	function tutorialEventAttr(type?: string): string | undefined {
+		if (!type) return undefined;
+		return `timeline-event-${eventTypeMap[type] ?? type}`;
+	}
 
 	let Icon = $derived(getEventIcon(event.type));
 </script>
@@ -24,6 +43,8 @@
 <button
 	class={["flex cursor-pointer flex-col rounded-lg p-2 hover:shadow-md", getEventColor(event.type)]}
 	style="grid-column: {lane}/span 1;grid-row-start: {rowStart}; grid-row-end: {rowEnd};"
+	data-tutorial-bar={tutorialBar ? "timeline-bar-first" : undefined}
+	data-tutorial={tutorialEventAttr(tutorialEventType)}
 	{onclick}
 >
 	<div

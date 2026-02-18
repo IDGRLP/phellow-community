@@ -19,6 +19,7 @@
 	import AppSidebar from "$components/AppSidebar.svelte";
 	import ScrollToTop from "$components/ScrollToTop.svelte";
 	import Breadcrumb from "$components/Breadcrumb.svelte";
+	import TutorialProvider from "$components/tutorial/TutorialProvider.svelte";
 
 	interface Props {
 		data: LayoutData;
@@ -71,4 +72,5 @@
 			</ScrollToTop>
 		</main>
 	</Sidebar.Provider>
+	<TutorialProvider />
 </div>

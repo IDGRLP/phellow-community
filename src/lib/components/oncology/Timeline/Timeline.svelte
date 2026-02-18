@@ -42,6 +42,39 @@
 	let sortedEvents = $derived([...events].sort((a, b) => compareAsc(a.startDate, b.startDate)));
 	// Compute the lanes to handle overlapping events
 	let lanes = $derived(computeLanes(sortedEvents));
+
+	// Track which event types and visual types have been attributed for tutorial targeting
+	let attributedTypes = $derived.by(() => {
+		const types = new Set<string>();
+		let firstSpot = false;
+		let firstBar = false;
+		const attrs = new Map<
+			string,
+			{ tutorialEventType?: string; tutorialSpot?: boolean; tutorialBar?: boolean }
+		>();
+
+		for (const lane of lanes) {
+			for (const event of lane) {
+				const a: { tutorialEventType?: string; tutorialSpot?: boolean; tutorialBar?: boolean } = {};
+				if (!types.has(event.type)) {
+					types.add(event.type);
+					a.tutorialEventType = event.type;
+				}
+				if (event.endDate && !firstBar) {
+					firstBar = true;
+					a.tutorialBar = true;
+				}
+				if (!event.endDate && !firstSpot) {
+					firstSpot = true;
+					a.tutorialSpot = true;
+				}
+				if (a.tutorialEventType || a.tutorialSpot || a.tutorialBar) {
+					attrs.set(event.resourceId, a);
+				}
+			}
+		}
+		return attrs;
+	});
 	// Get the min and max dates for scaling
 	let minDate = $derived(sortedEvents.length > 0 ? sortedEvents[0].startDate : new Date());
 	let maxDate = $derived(
@@ -81,6 +114,7 @@
 
 <div class="flex w-full flex-col items-center">
 	<div
+		data-tutorial="timeline-legend"
 		style="--columns: {lanes.length}; --rows: {totalDuration}; --rowGap: 1px;"
 		class={["timeline-grid", "with-legend"]}
 	>
@@ -114,6 +148,8 @@
 					: rowStart + 1}
 				{@const laneIndex = (event.lane ?? 0) + 3}
 
+				{@const tutorialAttrs = attributedTypes.get(event.resourceId)}
+
 				{#if event.endDate}
 					<TimelineBar
 						{event}
@@ -121,6 +157,8 @@
 						{rowStart}
 						{rowEnd}
 						onclick={() => onSelectEvent(event)}
+						tutorialEventType={tutorialAttrs?.tutorialEventType}
+						tutorialBar={tutorialAttrs?.tutorialBar}
 					/>
 				{:else}
 					<TimelineSpot
@@ -129,6 +167,8 @@
 						{rowStart}
 						{rowEnd}
 						onclick={() => onSelectEvent(event)}
+						tutorialEventType={tutorialAttrs?.tutorialEventType}
+						tutorialSpot={tutorialAttrs?.tutorialSpot}
 					/>
 				{/if}
 			{/each}
@@ -136,7 +176,15 @@
 	</div>
 </div>
 
-<Drawer.Root open={showDrawer} onOpenChange={(open) => { if (!open) { showFeedback = false; onSelectEvent(undefined); } }} >
+<Drawer.Root
+	open={showDrawer}
+	onOpenChange={(open) => {
+		if (!open) {
+			showFeedback = false;
+			onSelectEvent(undefined);
+		}
+	}}
+>
 	<Drawer.Portal>
 		<Drawer.Overlay class="bg-black/40" />
 		{#if selectedEvent}
