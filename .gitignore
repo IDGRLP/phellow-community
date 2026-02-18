@@ -34,3 +34,9 @@ src/lib/paraglide
 storybook-static
 
 !.env.schema
+
+# SpecKit
+.specify
+
+# Coding Agents
+.claude
