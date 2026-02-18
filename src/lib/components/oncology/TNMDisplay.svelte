@@ -83,7 +83,7 @@
 </script>
 
 <div>
-	<div class="flex flex-row items-baseline justify-start gap-2">
+	<div data-tutorial="tnm-header" class="flex flex-row items-baseline justify-start gap-2">
 		<h3 class="font-xl mt-0">
 			{type === "clinical"
 				? "Klinische "
@@ -125,6 +125,7 @@
 <div class="space-y-4">
 	<!-- TNM Formula -->
 	<div
+		data-tutorial="tnm-formula"
 		class={[
 			"bg-muted m-0.5 rounded-md p-3",
 			highlightLinkId === "7_2_Fd_TNM_classification" ? "ring-ring ring-2" : undefined,

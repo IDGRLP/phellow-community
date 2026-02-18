@@ -35,7 +35,7 @@
 	});
 </script>
 
-<div class="flex flex-row items-baseline justify-start gap-2">
+<div data-tutorial="surgery-header" class="flex flex-row items-baseline justify-start gap-2">
 	<h3 class="font-xl mt-0">Operation</h3>
 	<div
 		class={[
@@ -50,12 +50,14 @@
 <div
 	class={["grid grid-cols-1 gap-8", showFeedback ? "md:grid-cols-1" : "md:grid-cols-2", classes]}
 >
-	<!-- Residualstatus -->
-	<CodingCard
-		heading="Residualstatus"
-		coding={residualstatusCoding}
-		noDataText="Kein Residualstatus vorhanden"
-		codingDisplay={residualstatusCoding && parseResidualstatus(residualstatusCoding)}
-		highlight={highlightLinkId === "3_2_Fd_OP_residual"}
-	/>
+	<div data-tutorial="surgery-residual">
+		<!-- Residualstatus -->
+		<CodingCard
+			heading="Residualstatus"
+			coding={residualstatusCoding}
+			noDataText="Kein Residualstatus vorhanden"
+			codingDisplay={residualstatusCoding && parseResidualstatus(residualstatusCoding)}
+			highlight={highlightLinkId === "3_2_Fd_OP_residual"}
+		/>
+	</div>
 </div>

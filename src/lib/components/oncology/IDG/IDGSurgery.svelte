@@ -286,13 +286,15 @@
 		{#if procedure}
 			<Surgery {procedure} {showFeedback} highlightLinkId={currentItemLinkId} />
 			{#if histologyObservations && histologyObservations.length > 0}
-				<Histology
-					showFeedback={false}
-					observations={histologyObservations}
-					highlightLinkId={currentItemLinkId}
-				/>
+				<div data-tutorial="surgery-histology">
+					<Histology
+						showFeedback={false}
+						observations={histologyObservations}
+						highlightLinkId={currentItemLinkId}
+					/>
+				</div>
 			{:else}
-				<div class="m-0.5">
+				<div data-tutorial="surgery-histology" class="m-0.5">
 					<h3 class="font-xl my-0">Histologie</h3>
 					<p
 						class={[

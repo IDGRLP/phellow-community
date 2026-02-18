@@ -13,6 +13,10 @@
 	import { page } from "$app/state";
 	import { pushState } from "$app/navigation";
 	import type { Event } from "$components/oncology/Timeline/timelineHelper";
+	import { tutorialStore } from "$lib/stores/tutorialStore.svelte";
+	import { timelineTutorial } from "$components/tutorial/steps/timelineTutorial";
+	import CircleHelp from "@lucide/svelte/icons/circle-help";
+	import { cn } from "$lib/utils";
 
 	let { data }: { data: PageData } = $props();
 
@@ -54,7 +58,7 @@
 			Daten können Fehler enthalten. Für verlässliche und individuelle Informationen wenden Sie sich
 			bitte an Ihre behandelnde Fachperson.
 		</p>
-		<div class="flex flex-row gap-4">
+		<div class="flex flex-row flex-wrap items-center gap-4">
 			{#each availableSampleFiles as item (item.file)}
 				<Button
 					href="/module/oncology?file={item.file}"
@@ -66,7 +70,20 @@
 					]}>{item.title}</Button
 				>
 			{/each}
+			<Button
+				variant="ghost"
+				class={cn("hover:cursor-pointer hover:ring")}
+				onclick={() => tutorialStore.activate(timelineTutorial)}
+			>
+				<CircleHelp class="size-5" />
+				{m.tutorial_button_label()}
+			</Button>
 		</div>
-		<Timeline events={data.events} bundle={data.bundle} {selectedEvent} onSelectEvent={handleSelectEvent} />
+		<Timeline
+			events={data.events}
+			bundle={data.bundle}
+			{selectedEvent}
+			onSelectEvent={handleSelectEvent}
+		/>
 	{/snippet}
 </AppLayout>

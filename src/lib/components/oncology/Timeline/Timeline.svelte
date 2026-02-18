@@ -20,6 +20,17 @@
 	import IdgTNMDisplay from "../IDG/IDGTNMDisplay.svelte";
 	import type { Bundle } from "fhir/r4";
 
+	import * as m from "$lib/paraglide/messages";
+	import CircleHelp from "@lucide/svelte/icons/circle-help";
+	import { tutorialStore } from "$lib/stores/tutorialStore.svelte";
+	import { diagnosisTutorial } from "$components/tutorial/steps/diagnosisTutorial";
+	import { surgeryTutorial } from "$components/tutorial/steps/surgeryTutorial";
+	import { radiationTutorial } from "$components/tutorial/steps/radiationTutorial";
+	import { systemicTherapyTutorial } from "$components/tutorial/steps/systemicTherapyTutorial";
+	import { progressionTutorial } from "$components/tutorial/steps/progressionTutorial";
+	import { tnmTutorial } from "$components/tutorial/steps/tnmTutorial";
+	import { cn } from "$lib/utils";
+
 	interface Props {
 		events: Event[];
 		bundle: Bundle;
@@ -42,6 +53,39 @@
 	let sortedEvents = $derived([...events].sort((a, b) => compareAsc(a.startDate, b.startDate)));
 	// Compute the lanes to handle overlapping events
 	let lanes = $derived(computeLanes(sortedEvents));
+
+	// Track which event types and visual types have been attributed for tutorial targeting
+	let attributedTypes = $derived.by(() => {
+		const types = new Set<string>();
+		let firstSpot = false;
+		let firstBar = false;
+		const attrs = new Map<
+			string,
+			{ tutorialEventType?: string; tutorialSpot?: boolean; tutorialBar?: boolean }
+		>();
+
+		for (const lane of lanes) {
+			for (const event of lane) {
+				const a: { tutorialEventType?: string; tutorialSpot?: boolean; tutorialBar?: boolean } = {};
+				if (!types.has(event.type)) {
+					types.add(event.type);
+					a.tutorialEventType = event.type;
+				}
+				if (event.endDate && !firstBar) {
+					firstBar = true;
+					a.tutorialBar = true;
+				}
+				if (!event.endDate && !firstSpot) {
+					firstSpot = true;
+					a.tutorialSpot = true;
+				}
+				if (a.tutorialEventType || a.tutorialSpot || a.tutorialBar) {
+					attrs.set(event.resourceId, a);
+				}
+			}
+		}
+		return attrs;
+	});
 	// Get the min and max dates for scaling
 	let minDate = $derived(sortedEvents.length > 0 ? sortedEvents[0].startDate : new Date());
 	let maxDate = $derived(
@@ -81,6 +125,7 @@
 
 <div class="flex w-full flex-col items-center">
 	<div
+		data-tutorial="timeline-legend"
 		style="--columns: {lanes.length}; --rows: {totalDuration}; --rowGap: 1px;"
 		class={["timeline-grid", "with-legend"]}
 	>
@@ -114,6 +159,8 @@
 					: rowStart + 1}
 				{@const laneIndex = (event.lane ?? 0) + 3}
 
+				{@const tutorialAttrs = attributedTypes.get(event.resourceId)}
+
 				{#if event.endDate}
 					<TimelineBar
 						{event}
@@ -121,6 +168,8 @@
 						{rowStart}
 						{rowEnd}
 						onclick={() => onSelectEvent(event)}
+						tutorialEventType={tutorialAttrs?.tutorialEventType}
+						tutorialBar={tutorialAttrs?.tutorialBar}
 					/>
 				{:else}
 					<TimelineSpot
@@ -129,6 +178,8 @@
 						{rowStart}
 						{rowEnd}
 						onclick={() => onSelectEvent(event)}
+						tutorialEventType={tutorialAttrs?.tutorialEventType}
+						tutorialSpot={tutorialAttrs?.tutorialSpot}
 					/>
 				{/if}
 			{/each}
@@ -136,7 +187,15 @@
 	</div>
 </div>
 
-<Drawer.Root open={showDrawer} onOpenChange={(open) => { if (!open) { showFeedback = false; onSelectEvent(undefined); } }} >
+<Drawer.Root
+	open={showDrawer}
+	onOpenChange={(open) => {
+		if (!open) {
+			showFeedback = false;
+			onSelectEvent(undefined);
+		}
+	}}
+>
 	<Drawer.Portal>
 		<Drawer.Overlay class="bg-black/40" />
 		{#if selectedEvent}
@@ -187,6 +246,20 @@
 					</Drawer.Header>
 
 					{#if selectedEvent.type === "diagnosis"}
+						<div class="-mb-6 flex justify-end">
+							<Button
+								variant="ghost"
+								class={cn("hover:cursor-pointer hover:ring")}
+								size="sm"
+								onclick={() => {
+									onSelectEvent(undefined);
+									tutorialStore.activate(diagnosisTutorial);
+								}}
+							>
+								<CircleHelp class="size-4" />
+								{m.tutorial_diagnosis_button_label()}
+							</Button>
+						</div>
 						<IdgDiagnosis
 							{showFeedback}
 							{cancelFeedback}
@@ -194,6 +267,20 @@
 							{bundle}
 						/>
 					{:else if selectedEvent.type === "surgery"}
+						<div class="-mb-6 flex justify-end">
+							<Button
+								variant="ghost"
+								class={cn("hover:cursor-pointer hover:ring")}
+								size="sm"
+								onclick={() => {
+									onSelectEvent(undefined);
+									tutorialStore.activate(surgeryTutorial);
+								}}
+							>
+								<CircleHelp class="size-4" />
+								{m.tutorial_surgery_button_label()}
+							</Button>
+						</div>
 						<IdgSurgery
 							{showFeedback}
 							{cancelFeedback}
@@ -201,6 +288,20 @@
 							{bundle}
 						/>
 					{:else if selectedEvent.type === "radiation"}
+						<div class="-mb-6 flex justify-end">
+							<Button
+								variant="ghost"
+								class={cn("hover:cursor-pointer hover:ring")}
+								size="sm"
+								onclick={() => {
+									onSelectEvent(undefined);
+									tutorialStore.activate(radiationTutorial);
+								}}
+							>
+								<CircleHelp class="size-4" />
+								{m.tutorial_radiation_button_label()}
+							</Button>
+						</div>
 						<IdgRadiation
 							{showFeedback}
 							{cancelFeedback}
@@ -208,6 +309,20 @@
 							{bundle}
 						/>
 					{:else if selectedEvent.type === "systemicTherapy"}
+						<div class="-mb-6 flex justify-end">
+							<Button
+								variant="ghost"
+								class={cn("hover:cursor-pointer hover:ring")}
+								size="sm"
+								onclick={() => {
+									onSelectEvent(undefined);
+									tutorialStore.activate(systemicTherapyTutorial);
+								}}
+							>
+								<CircleHelp class="size-4" />
+								{m.tutorial_systemic_therapy_button_label()}
+							</Button>
+						</div>
 						<IdgSystemicTherapy
 							{showFeedback}
 							{cancelFeedback}
@@ -215,6 +330,20 @@
 							{bundle}
 						/>
 					{:else if selectedEvent.type === "progression"}
+						<div class="-mb-6 flex justify-end">
+							<Button
+								variant="ghost"
+								class={cn("hover:cursor-pointer hover:ring")}
+								size="sm"
+								onclick={() => {
+									onSelectEvent(undefined);
+									tutorialStore.activate(progressionTutorial);
+								}}
+							>
+								<CircleHelp class="size-4" />
+								{m.tutorial_progression_button_label()}
+							</Button>
+						</div>
 						<IdgProgression
 							{showFeedback}
 							{cancelFeedback}
@@ -222,6 +351,20 @@
 							{bundle}
 						/>
 					{:else if selectedEvent.type === "tnm"}
+						<div class="-mb-6 flex justify-end">
+							<Button
+								variant="ghost"
+								class={cn("hover:cursor-pointer hover:ring")}
+								size="sm"
+								onclick={() => {
+									onSelectEvent(undefined);
+									tutorialStore.activate(tnmTutorial);
+								}}
+							>
+								<CircleHelp class="size-4" />
+								{m.tutorial_tnm_button_label()}
+							</Button>
+						</div>
 						<IdgTNMDisplay
 							{showFeedback}
 							{cancelFeedback}
