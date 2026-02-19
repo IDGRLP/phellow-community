@@ -1,4 +1,7 @@
 <script lang="ts">
+	import * as Tooltip from "$lib/components/ui/tooltip/index.js";
+	import * as m from "$lib/paraglide/messages";
+
 	interface Props {
 		dateString?: string;
 		coding?: {
@@ -22,15 +25,28 @@
 		<h3 class="mt-0 mb-2 font-medium">Gewebe-Probe</h3>
 		<div title="Entnahmedatum" class="text-muted-foreground">{dateString || "Unbekannt"}</div>
 	</div>
-	<div>
-		<div class="flex items-center justify-start gap-2">
-			<h4 class="font-normal">Histologischer Befund</h4>
-			<span class="bg-muted text-foreground inline-block rounded px-2 py-1 text-sm font-medium">
-				{coding?.code}
-			</span>
+	{#if coding?.code}
+		<div>
+			<div class="flex items-center justify-start gap-2">
+				<h4 class="font-normal">Histologischer Befund</h4>
+			</div>
+			<div class="text-muted-foreground">
+				<span>
+					{text ?? coding?.display ?? coding?.code ?? "Unbekannt"}
+				</span>
+				<Tooltip.Root delayDuration={300}>
+					<Tooltip.Trigger class="cursor-help">
+						<span
+							class="bg-muted text-foreground inline-block rounded px-2 py-1 text-sm font-medium"
+						>
+							{coding?.code}
+						</span>
+					</Tooltip.Trigger>
+					<Tooltip.Content>
+						<p>{m.oncology_coding_tooltip()}</p>
+					</Tooltip.Content>
+				</Tooltip.Root>
+			</div>
 		</div>
-		<div class="text-muted-foreground">
-			{text ?? coding?.display ?? coding?.code ?? "Unbekannt"}
-		</div>
-	</div>
+	{/if}
 </div>

@@ -257,5 +257,6 @@
 	"tutorial_step_tnm_header_title": "Übersicht TNM-Klassifikation",
 	"tutorial_step_tnm_header_description": "Die Kopfzeile zeigt die Art der TNM-Klassifikation (klinisch oder pathologisch) und das Dokumentationsdatum.",
 	"tutorial_step_tnm_formula_title": "TNM-Formel",
-	"tutorial_step_tnm_formula_description": "Die TNM-Formel fasst das Tumorstaging zusammen: T beschreibt die Tumorgröße, N den Lymphknotenbefall, M die Fernmetastasen und das UICC-Stadium gibt eine Gesamtklassifikation an."
+	"tutorial_step_tnm_formula_description": "Die TNM-Formel fasst das Tumorstaging zusammen: T beschreibt die Tumorgröße, N den Lymphknotenbefall, M die Fernmetastasen und das UICC-Stadium gibt eine Gesamtklassifikation an.",
+	"oncology_coding_tooltip": "Dies ist ein medizinischer Code, der diese Information in verschiedenen Gesundheitssystemen eindeutig identifiziert, damit alle Beteiligten sicher sein können, von der gleichen Sache zu reden."
 }

@@ -211,7 +211,7 @@
 						<div class="flex flex-row items-end justify-between">
 							<Drawer.Title>
 								<div class="flex flex-row gap-4">
-									<div class="flex items-center justify-center space-x-2">
+									<!-- <div class="flex items-center justify-center space-x-2">
 										<Checkbox id="showJson" name="showJson" bind:checked={showJson}></Checkbox>
 										<Label
 											id="showJson-label"
@@ -220,7 +220,7 @@
 										>
 											JSON anzeigen
 										</Label>
-									</div>
+									</div> -->
 									{#if !showFeedback}
 										<Button
 											onclick={() => (showFeedback = true)}
