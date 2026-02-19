@@ -119,7 +119,7 @@
 						<Drawer.Overlay class="bg-black/40" />
 						<Drawer.Content
 							showDefaultOverlay={false}
-							class="border-b-none border-border bg-card fixed right-0 bottom-0 left-0 -mx-px flex max-h-[97%] flex-col rounded-t-[10px] border"
+							class="border-b-none border-border bg-card fixed right-0 bottom-0 left-0 -mx-px flex max-h-[97%] flex-col rounded-t-[0.625rem] border"
 						>
 							<div class="mx-auto flex w-full flex-col overflow-y-auto p-4 pt-0 select-text">
 								<Drawer.Header>

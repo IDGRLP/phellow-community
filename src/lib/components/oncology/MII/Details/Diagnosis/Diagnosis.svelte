@@ -171,7 +171,7 @@
 	);
 </script>
 
-<h3 class="font-xl mt-0">Diagnosedetails</h3>
+<h3 class="mt-0 text-xl">Diagnosedetails</h3>
 
 <div class="flex items-start gap-2">
 	<Calendar class="mt-0.5 shrink-0" size={16} />

@@ -1,5 +1,12 @@
+import { getLocale } from "$lib/paraglide/runtime";
 import type { Icon as IconType } from "@lucide/svelte";
 import { format } from "date-fns";
+import { de, enUS } from "date-fns/locale";
+
+const localeMap: Record<string, typeof de> = { de, en: enUS };
+function currentLocale() {
+	return localeMap[getLocale()] ?? de;
+}
 
 import Progression from "@lucide/svelte/icons/chart-gantt";
 import Diagnosis from "@lucide/svelte/icons/file-search";
@@ -27,11 +34,11 @@ export interface Event {
 // Get a color based on event type
 export function getEventColor(type: EventType): string {
 	const colors: Record<string, string> = {
-		surgery: "bg-[#A48CA2]",
+		surgery: "bg-[#8A6F87]",
 		radiation: "bg-[#D4B866]",
-		progression: "bg-[#5A9E9F]",
+		progression: "bg-[#3D7F80]",
 		systemicTherapy: "bg-[#9CAF88]",
-		diagnosis: "bg-[#708090]",
+		diagnosis: "bg-[#506070]",
 		tnm: "bg-[#B0C4DE]",
 	};
 
@@ -59,14 +66,15 @@ export function getEventIcon(type: EventType): typeof IconType | null {
 
 // Format date ranges
 export function formatLegendDate(date: Date): string {
-	return format(date, "MMM yyyy");
+	return format(date, "MMM yyyy", { locale: currentLocale() });
 }
 export function formatDateRange(start: Date, end: Date | null | undefined = undefined): string {
+	const locale = currentLocale();
 	if (!end || start.getTime() === end.getTime()) {
-		return format(start, "dd. MMM yyyy");
+		return format(start, "dd. MMM yyyy", { locale });
 	}
 
-	return `${format(start, "dd. MMM yyyy")} - ${format(end, "dd. MMM yyyy")}`;
+	return `${format(start, "dd. MMM yyyy", { locale })} - ${format(end, "dd. MMM yyyy", { locale })}`;
 }
 
 // Algorithm to compute lanes for events to avoid overlapping

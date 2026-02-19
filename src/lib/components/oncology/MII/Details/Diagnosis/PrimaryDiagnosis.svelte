@@ -29,9 +29,7 @@
 		<div>
 			<div class="flex items-center justify-start gap-2">
 				<h3 class="mt-0 font-medium">ICD-10</h3>
-				<span
-					class="bg-muted text-muted-foreground inline-block rounded px-2 py-1 text-xs font-medium"
-				>
+				<span class="bg-muted text-foreground inline-block rounded px-2 py-1 text-sm font-medium">
 					{icd.code}
 				</span>
 			</div>
@@ -48,9 +46,7 @@
 		<div>
 			<div class="flex items-center justify-start gap-2">
 				<h3 class="mt-0 font-medium">Morphologie</h3>
-				<span
-					class="bg-muted text-muted-foreground inline-block rounded px-2 py-1 text-xs font-medium"
-				>
+				<span class="bg-muted text-foreground inline-block rounded px-2 py-1 text-sm font-medium">
 					{morphology.code}
 				</span>
 			</div>
@@ -62,9 +58,7 @@
 		<div>
 			<div class="flex items-center justify-start gap-2">
 				<h3 class="mt-0 font-medium">Topographie</h3>
-				<span
-					class="bg-muted text-muted-foreground inline-block rounded px-2 py-1 text-xs font-medium"
-				>
+				<span class="bg-muted text-foreground inline-block rounded px-2 py-1 text-sm font-medium">
 					{bodySite.code}
 				</span>
 			</div>

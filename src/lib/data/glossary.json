@@ -1,0 +1,166 @@
+[
+	{
+		"term": "Adjuvante Therapie",
+		"definition": "Ergänzende Behandlung nach der operativen Entfernung eines Tumors, um verbliebene Krebszellen zu zerstören und das Rückfallrisiko zu senken.",
+		"alternativeTerms": ["Ergänzungstherapie"],
+		"keywords": ["nach OP", "Nachbehandlung", "Rezidivprophylaxe"],
+		"parentCategory": "Therapie"
+	},
+	{
+		"term": "Biopsie",
+		"definition": "Entnahme einer Gewebeprobe aus dem Körper zur mikroskopischen Untersuchung, um festzustellen, ob eine Erkrankung wie Krebs vorliegt.",
+		"alternativeTerms": ["Gewebeentnahme", "Gewebeprobe"],
+		"keywords": ["Histologie", "Stanzbiopsie", "Probeentnahme"],
+		"parentCategory": "Diagnostik"
+	},
+	{
+		"term": "Bestrahlung",
+		"definition": "Behandlung mit hochenergetischen Strahlen, die Krebszellen abtöten oder deren Wachstum hemmen sollen.",
+		"alternativeTerms": ["Strahlentherapie", "Radiotherapie"],
+		"keywords": ["Radiatio", "Linearbeschleuniger", "Bestrahlungsplanung"],
+		"parentCategory": "Therapie"
+	},
+	{
+		"term": "Chemotherapie",
+		"definition": "Behandlung von Krebserkrankungen mit Medikamenten, die das Wachstum von Krebszellen hemmen oder diese abtöten.",
+		"alternativeTerms": ["Chemo", "Zytostatische Therapie"],
+		"keywords": ["Zytostatika", "Medikamentöse Therapie", "Infusion"],
+		"parentCategory": "Therapie"
+	},
+	{
+		"term": "CT",
+		"definition": "Bildgebendes Verfahren, das mithilfe von Röntgenstrahlen detaillierte Querschnittsbilder des Körpers erzeugt, um Tumoren und Metastasen sichtbar zu machen.",
+		"alternativeTerms": ["Computertomographie", "Computertomografie"],
+		"keywords": ["Schnittbildgebung", "Röntgen", "Kontrastmittel"],
+		"parentCategory": "Diagnostik"
+	},
+	{
+		"term": "Fatigue",
+		"definition": "Schwere, anhaltende Erschöpfung, die häufig als Nebenwirkung von Krebserkrankungen oder deren Behandlung auftritt und sich durch Ruhe nicht ausreichend bessert.",
+		"keywords": ["Erschöpfung", "Müdigkeit", "Tumormüdigkeit"],
+		"parentCategory": "Nebenwirkungen"
+	},
+	{
+		"term": "Hormontherapie",
+		"definition": "Behandlung, die das Wachstum hormonabhängiger Tumoren hemmt, indem sie die körpereigene Hormonproduktion beeinflusst oder Hormonrezeptoren blockiert.",
+		"alternativeTerms": ["Antihormonelle Therapie", "Endokrine Therapie"],
+		"keywords": ["Tamoxifen", "Aromatasehemmer", "Hormonrezeptor"],
+		"parentCategory": "Therapie"
+	},
+	{
+		"term": "Immuntherapie",
+		"definition": "Behandlungsansatz, der das körpereigene Immunsystem aktiviert oder stärkt, damit es Krebszellen gezielt erkennen und bekämpfen kann.",
+		"alternativeTerms": ["Immun-Checkpoint-Therapie"],
+		"keywords": ["Checkpoint-Inhibitor", "PD-1", "Immunonkologie"],
+		"parentCategory": "Therapie"
+	},
+	{
+		"term": "Karzinom",
+		"definition": "Bösartiger Tumor, der von Deck- oder Drüsengewebe (Epithelgewebe) ausgeht. Karzinome sind die häufigste Form von Krebs.",
+		"alternativeTerms": ["Krebsgeschwulst"],
+		"keywords": ["Malignom", "Epithelialer Tumor", "Krebsart"],
+		"parentCategory": "Tumorarten"
+	},
+	{
+		"term": "Leukämie",
+		"definition": "Krebserkrankung des blutbildenden Systems, bei der sich weiße Blutkörperchen unkontrolliert vermehren.",
+		"alternativeTerms": ["Blutkrebs"],
+		"keywords": ["Hämatologisch", "Knochenmark", "Blutzellen"],
+		"parentCategory": "Tumorarten"
+	},
+	{
+		"term": "Lymphom",
+		"definition": "Krebserkrankung, die vom lymphatischen System ausgeht. Man unterscheidet Hodgkin- und Non-Hodgkin-Lymphome.",
+		"alternativeTerms": ["Lymphdrüsenkrebs"],
+		"keywords": ["Hodgkin", "Non-Hodgkin", "Lymphknoten"],
+		"parentCategory": "Tumorarten"
+	},
+	{
+		"term": "Metastase",
+		"definition": "Tochtergeschwulst, die entsteht, wenn Krebszellen sich vom Ursprungstumor lösen und über Blut oder Lymphe in andere Körperregionen gelangen.",
+		"alternativeTerms": ["Tochtergeschwulst", "Filiae"],
+		"keywords": ["Fernmetastase", "Streuung", "Metastasierung"],
+		"parentCategory": "Tumorarten"
+	},
+	{
+		"term": "MRT",
+		"definition": "Bildgebendes Verfahren, das mittels starker Magnetfelder und Radiowellen detaillierte Bilder des Körperinneren erzeugt, ohne Röntgenstrahlung zu verwenden.",
+		"alternativeTerms": ["Magnetresonanztomographie", "Kernspintomographie"],
+		"keywords": ["Kernspintomografie", "Magnetfeld", "Bildgebung"],
+		"parentCategory": "Diagnostik"
+	},
+	{
+		"term": "Neoadjuvante Therapie",
+		"definition": "Behandlung, die vor einer Operation durchgeführt wird, um den Tumor zu verkleinern und so die Operationsbedingungen zu verbessern.",
+		"alternativeTerms": ["Vorbehandlung"],
+		"keywords": ["Präoperativ", "Tumorverkleinerung", "Downstaging"],
+		"parentCategory": "Therapie"
+	},
+	{
+		"term": "Onkologie",
+		"definition": "Medizinisches Fachgebiet, das sich mit der Erkennung, Behandlung und Nachsorge von Krebserkrankungen befasst.",
+		"keywords": ["Krebsmedizin", "Tumorforschung", "Hämatoonkologie"],
+		"parentCategory": "Diagnostik"
+	},
+	{
+		"term": "Palliativmedizin",
+		"definition": "Medizinischer Ansatz, der die Lebensqualität von Patienten mit einer schweren, fortschreitenden Erkrankung verbessert, indem Schmerzen und belastende Symptome gelindert werden.",
+		"alternativeTerms": ["Palliativversorgung", "Palliative Care"],
+		"keywords": ["Schmerztherapie", "Lebensqualität", "Symptomkontrolle"],
+		"parentCategory": "Supportive Maßnahmen"
+	},
+	{
+		"term": "PET-CT",
+		"definition": "Kombiniertes bildgebendes Verfahren, das die Positronen-Emissions-Tomographie mit der Computertomographie verbindet, um Stoffwechselaktivität und Lage von Tumoren gleichzeitig darzustellen.",
+		"alternativeTerms": ["Positronen-Emissions-Tomographie"],
+		"keywords": ["Nuklearmedizin", "FDG", "Stoffwechsel"],
+		"parentCategory": "Diagnostik"
+	},
+	{
+		"term": "Rehabilitation",
+		"definition": "Maßnahmen zur Wiederherstellung der körperlichen und seelischen Gesundheit nach einer Krebsbehandlung, um die Rückkehr in den Alltag zu erleichtern.",
+		"alternativeTerms": ["Reha", "Anschlussheilbehandlung"],
+		"keywords": ["AHB", "Nachsorge", "Wiedereingliederung"],
+		"parentCategory": "Supportive Maßnahmen"
+	},
+	{
+		"term": "Sarkom",
+		"definition": "Seltene Krebsform, die im Binde-, Stütz- oder Weichteilgewebe entsteht, z. B. in Knochen, Muskeln oder Fettgewebe.",
+		"keywords": ["Weichteiltumor", "Knochentumor", "Mesenchymal"],
+		"parentCategory": "Tumorarten"
+	},
+	{
+		"term": "Staging",
+		"definition": "Untersuchungsverfahren zur Bestimmung der Ausbreitung einer Krebserkrankung im Körper. Das Ergebnis wird häufig in Stadien (I–IV) angegeben.",
+		"alternativeTerms": ["Stadieneinteilung"],
+		"keywords": ["TNM", "Tumorstadium", "Ausbreitungsdiagnostik"],
+		"parentCategory": "Diagnostik"
+	},
+	{
+		"term": "Tumor",
+		"definition": "Unkontrollierte Gewebevermehrung, die gutartig (benigne) oder bösartig (maligne) sein kann. Im Zusammenhang mit Krebs ist meist ein bösartiger Tumor gemeint.",
+		"alternativeTerms": ["Geschwulst", "Neoplasie"],
+		"keywords": ["Neoplasma", "Wucherung", "Gewebeveränderung"],
+		"parentCategory": "Tumorarten"
+	},
+	{
+		"term": "Tumormarker",
+		"definition": "Stoffe im Blut oder anderen Körperflüssigkeiten, deren erhöhte Konzentration auf eine Krebserkrankung hinweisen kann. Sie dienen vor allem der Verlaufskontrolle.",
+		"keywords": ["PSA", "CEA", "CA 125", "Laborwert"],
+		"parentCategory": "Diagnostik"
+	},
+	{
+		"term": "Übelkeit",
+		"definition": "Häufige Nebenwirkung von Chemotherapie und Bestrahlung, die mit Brechreiz einhergehen kann und durch Antiemetika behandelt wird.",
+		"alternativeTerms": ["Nausea"],
+		"keywords": ["Erbrechen", "Antiemetika", "Emesis"],
+		"parentCategory": "Nebenwirkungen"
+	},
+	{
+		"term": "Zielgerichtete Therapie",
+		"definition": "Moderne Krebsbehandlung, die gezielt bestimmte Moleküle oder Signalwege in Krebszellen angreift, um deren Wachstum zu stoppen, mit weniger Schaden an gesunden Zellen.",
+		"alternativeTerms": ["Targeted Therapy", "Molekulare Therapie"],
+		"keywords": ["Tyrosinkinasehemmer", "Antikörper", "Signaltransduktion"],
+		"parentCategory": "Therapie"
+	}
+]

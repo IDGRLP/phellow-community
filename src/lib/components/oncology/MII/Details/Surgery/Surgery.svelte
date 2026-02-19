@@ -166,7 +166,7 @@
 	const outcome = getOutcome();
 </script>
 
-<h3 class="font-xl mt-0">Operation</h3>
+<h3 class="mt-0 text-xl">Operation</h3>
 
 <div class={["grid grid-cols-1 gap-8 md:grid-cols-2", classes]}>
 	<!-- Surgery Details Section -->

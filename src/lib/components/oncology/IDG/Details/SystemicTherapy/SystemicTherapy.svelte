@@ -37,8 +37,8 @@
 	let treatmentType = $derived(getTreatmentTypeCoding(procedure));
 </script>
 
-<div class="flex flex-row items-baseline justify-start gap-2">
-	<h3 class="font-xl mt-0">Systemische Therapie</h3>
+<div data-tutorial="systemic-header" class="flex flex-row items-baseline justify-start gap-2">
+	<h3 class="mt-0 text-xl">Systemische Therapie</h3>
 	{#if treatmentDateString}
 		<span
 			class={[
@@ -52,23 +52,27 @@
 <div
 	class={["grid grid-cols-1 gap-8", showFeedback ? "md:grid-cols-1" : "md:grid-cols-2", classes]}
 >
-	<!-- Therapietyp -->
-	<CodingCard
-		heading="Therapietyp"
-		coding={treatmentType}
-		noDataText="Kein Therapietyp vorhanden"
-		codingDisplay={treatmentType && parseTreatmentType(treatmentType)}
-		highlight={highlightLinkId === "5_2_Fd_Sys_type"}
-	/>
+	<div data-tutorial="systemic-type">
+		<!-- Therapietyp -->
+		<CodingCard
+			heading="Therapietyp"
+			coding={treatmentType}
+			noDataText="Kein Therapietyp vorhanden"
+			codingDisplay={treatmentType && parseTreatmentType(treatmentType)}
+			highlight={highlightLinkId === "5_2_Fd_Sys_type"}
+		/>
+	</div>
 
 	<!-- Treatment End Reason -->
 	{#if treatmentEndReason}
-		<CodingCard
-			heading="Grund für das Ende der Behandlung"
-			coding={treatmentEndReason}
-			noDataText="Kein Grund für das Ende der Behandlung vorhanden"
-			codingDisplay={treatmentEndReason && parseTreatmentEndReason(treatmentEndReason)}
-			highlight={highlightLinkId === "5_3_Fd_Sys_Ende"}
-		/>
+		<div data-tutorial="systemic-end">
+			<CodingCard
+				heading="Grund für das Ende der Behandlung"
+				coding={treatmentEndReason}
+				noDataText="Kein Grund für das Ende der Behandlung vorhanden"
+				codingDisplay={treatmentEndReason && parseTreatmentEndReason(treatmentEndReason)}
+				highlight={highlightLinkId === "5_3_Fd_Sys_Ende"}
+			/>
+		</div>
 	{/if}
 </div>

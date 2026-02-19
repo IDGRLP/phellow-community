@@ -11,6 +11,12 @@
 	import Timeline from "$components/oncology/Timeline/Timeline.svelte";
 	import { Button } from "$components/ui/button";
 	import { page } from "$app/state";
+	import { pushState } from "$app/navigation";
+	import type { Event } from "$components/oncology/Timeline/timelineHelper";
+	import { tutorialStore } from "$lib/stores/tutorialStore.svelte";
+	import { timelineTutorial } from "$components/tutorial/steps/timelineTutorial";
+	import CircleHelp from "@lucide/svelte/icons/circle-help";
+	import { cn } from "$lib/utils";
 
 	let { data }: { data: PageData } = $props();
 
@@ -26,6 +32,23 @@
 		if (!currentFile) return file === "InKaPP_Lunge_C34.json";
 		return currentFile === file;
 	}
+
+	// Derive from page.state (reactive on back/forward) with URL fallback (page refresh)
+	let selectedEvent = $derived.by(() => {
+		const eventId = page.state.eventId ?? page.url.searchParams.get("event");
+		if (!eventId) return undefined;
+		return data.events.find((e) => e.resourceId === eventId);
+	});
+
+	function handleSelectEvent(event: Event | undefined) {
+		const url = new URL(page.url);
+		if (event) {
+			url.searchParams.set("event", event.resourceId);
+		} else {
+			url.searchParams.delete("event");
+		}
+		pushState(url, { eventId: event?.resourceId });
+	}
 </script>
 
 <AppLayout title={getPageTitle()}>
@@ -35,19 +58,33 @@
 			Daten können Fehler enthalten. Für verlässliche und individuelle Informationen wenden Sie sich
 			bitte an Ihre behandelnde Fachperson.
 		</p>
-		<div class="flex flex-row gap-4">
+		<div class="flex flex-row flex-wrap items-center gap-4">
 			{#each availableSampleFiles as item (item.file)}
 				<Button
 					href="/module/oncology?file={item.file}"
 					variant="secondary"
 					class={[
+						"h-11",
 						buttonIsActive(item.file)
-							? "bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground"
-							: "hover:ring-1",
+							? "bg-primary text-primary-foreground border-primary ring-primary hover:bg-primary/90 border shadow-md ring-2"
+							: "border border-transparent hover:ring-1",
 					]}>{item.title}</Button
 				>
 			{/each}
+			<Button
+				variant="ghost"
+				class={cn("hover:border-border h-11 cursor-pointer border border-transparent hover:ring")}
+				onclick={() => tutorialStore.activate(timelineTutorial)}
+			>
+				<CircleHelp class="size-5" />
+				{m.tutorial_button_label()}
+			</Button>
 		</div>
-		<Timeline events={data.events} bundle={data.bundle} />
+		<Timeline
+			events={data.events}
+			bundle={data.bundle}
+			{selectedEvent}
+			onSelectEvent={handleSelectEvent}
+		/>
 	{/snippet}
 </AppLayout>

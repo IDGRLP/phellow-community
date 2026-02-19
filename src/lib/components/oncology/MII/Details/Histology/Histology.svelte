@@ -349,7 +349,7 @@
 	const lymphNodeInfo = getLymphNodeInfo();
 </script>
 
-<h3 class="font-xl mt-0">Histologie</h3>
+<h3 class="mt-0 text-xl">Histologie</h3>
 
 <div class={["grid grid-cols-1 gap-8 md:grid-cols-2", classes]}>
 	<!-- Specimen & Diagnostic Report Section -->

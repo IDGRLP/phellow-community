@@ -38,6 +38,13 @@ export const init: ServerInit = async () => {
 	await connectOAuth2Client();
 };
 
+const ALLOWED_APP_ROUTES = [
+	"/(app)",
+	"/(app)/module/oncology",
+	"/(app)/account",
+	"/(app)/gloassary",
+];
+
 const authHandle: Handle = async ({ event, resolve }) => {
 	if (dev) {
 		hooksLogger.trace({ route: event.route.id }, "handling auth");
@@ -75,6 +82,11 @@ const authHandle: Handle = async ({ event, resolve }) => {
 
 		const symmetricEncryptionKey = event.cookies.get(sessionEncryptionKeyName)!;
 		event.locals.encryptionKey = await parseCryptoKeyFromJsonWebKeyString(symmetricEncryptionKey);
+		// Route allowlist: redirect restricted (app) routes to root
+		if (event.route.id?.includes("(app)") && !ALLOWED_APP_ROUTES.includes(event.route.id)) {
+			return redirect(302, "/");
+		}
+
 		event.locals.validAccessToken = async () => {
 			hooksLogger.trace("Checking if access token is valid");
 			const { accessToken, refreshToken, idToken, wasRefreshed } =

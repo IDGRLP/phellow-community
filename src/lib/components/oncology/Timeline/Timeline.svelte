@@ -20,34 +20,72 @@
 	import IdgTNMDisplay from "../IDG/IDGTNMDisplay.svelte";
 	import type { Bundle } from "fhir/r4";
 
+	import * as m from "$lib/paraglide/messages";
+	import CircleHelp from "@lucide/svelte/icons/circle-help";
+	import { tutorialStore } from "$lib/stores/tutorialStore.svelte";
+	import { diagnosisTutorial } from "$components/tutorial/steps/diagnosisTutorial";
+	import { surgeryTutorial } from "$components/tutorial/steps/surgeryTutorial";
+	import { radiationTutorial } from "$components/tutorial/steps/radiationTutorial";
+	import { systemicTherapyTutorial } from "$components/tutorial/steps/systemicTherapyTutorial";
+	import { progressionTutorial } from "$components/tutorial/steps/progressionTutorial";
+	import { tnmTutorial } from "$components/tutorial/steps/tnmTutorial";
+	import { cn } from "$lib/utils";
+
 	interface Props {
 		events: Event[];
 		bundle: Bundle;
+		selectedEvent: Event | undefined;
+		onSelectEvent: (event: Event | undefined) => void;
 	}
 
-	let { events, bundle }: Props = $props();
+	let { events, bundle, selectedEvent, onSelectEvent }: Props = $props();
 
-	let filterEmptyDates = $state(false);
-	let selectedEvent: Event | undefined = $state(undefined);
+	let filterEmptyDates = $state(true);
 	let showJson = $state(false);
 	let showFeedback = $state(false);
 	function cancelFeedback() {
 		showFeedback = false;
 	}
 
-	let showDrawer = $state(false);
-	$effect(() => {
-		if (selectedEvent) {
-			showDrawer = true;
-		} else {
-			showDrawer = false;
-		}
-	});
+	let showDrawer = $derived(!!selectedEvent);
 
 	// Sort events by start date
 	let sortedEvents = $derived([...events].sort((a, b) => compareAsc(a.startDate, b.startDate)));
 	// Compute the lanes to handle overlapping events
 	let lanes = $derived(computeLanes(sortedEvents));
+
+	// Track which event types and visual types have been attributed for tutorial targeting
+	let attributedTypes = $derived.by(() => {
+		const types = new Set<string>();
+		let firstSpot = false;
+		let firstBar = false;
+		const attrs = new Map<
+			string,
+			{ tutorialEventType?: string; tutorialSpot?: boolean; tutorialBar?: boolean }
+		>();
+
+		for (const lane of lanes) {
+			for (const event of lane) {
+				const a: { tutorialEventType?: string; tutorialSpot?: boolean; tutorialBar?: boolean } = {};
+				if (!types.has(event.type)) {
+					types.add(event.type);
+					a.tutorialEventType = event.type;
+				}
+				if (event.endDate && !firstBar) {
+					firstBar = true;
+					a.tutorialBar = true;
+				}
+				if (!event.endDate && !firstSpot) {
+					firstSpot = true;
+					a.tutorialSpot = true;
+				}
+				if (a.tutorialEventType || a.tutorialSpot || a.tutorialBar) {
+					attrs.set(event.resourceId, a);
+				}
+			}
+		}
+		return attrs;
+	});
 	// Get the min and max dates for scaling
 	let minDate = $derived(sortedEvents.length > 0 ? sortedEvents[0].startDate : new Date());
 	let maxDate = $derived(
@@ -87,7 +125,8 @@
 
 <div class="flex w-full flex-col items-center">
 	<div
-		style="--columns: {lanes.length}; --rows: {totalDuration}; --rowGap: 1px;"
+		data-tutorial="timeline-legend"
+		style="--columns: {lanes.length}; --rows: {totalDuration}; --rowGap: 0.0625rem;"
 		class={["timeline-grid", "with-legend"]}
 	>
 		<div
@@ -120,13 +159,17 @@
 					: rowStart + 1}
 				{@const laneIndex = (event.lane ?? 0) + 3}
 
+				{@const tutorialAttrs = attributedTypes.get(event.resourceId)}
+
 				{#if event.endDate}
 					<TimelineBar
 						{event}
 						lane={laneIndex}
 						{rowStart}
 						{rowEnd}
-						onclick={() => (selectedEvent = event)}
+						onclick={() => onSelectEvent(event)}
+						tutorialEventType={tutorialAttrs?.tutorialEventType}
+						tutorialBar={tutorialAttrs?.tutorialBar}
 					/>
 				{:else}
 					<TimelineSpot
@@ -134,7 +177,9 @@
 						lane={laneIndex}
 						{rowStart}
 						{rowEnd}
-						onclick={() => (selectedEvent = event)}
+						onclick={() => onSelectEvent(event)}
+						tutorialEventType={tutorialAttrs?.tutorialEventType}
+						tutorialSpot={tutorialAttrs?.tutorialSpot}
 					/>
 				{/if}
 			{/each}
@@ -142,14 +187,22 @@
 	</div>
 </div>
 
-<Drawer.Root bind:open={showDrawer} onClose={() => (showFeedback = false)}>
+<Drawer.Root
+	open={showDrawer}
+	onOpenChange={(open) => {
+		if (!open) {
+			showFeedback = false;
+			onSelectEvent(undefined);
+		}
+	}}
+>
 	<Drawer.Portal>
 		<Drawer.Overlay class="bg-black/40" />
 		{#if selectedEvent}
 			{@const entry = bundle.entry?.find((e) => e.resource?.id === selectedEvent?.resourceId)}
 			<Drawer.Content
 				showDefaultOverlay={false}
-				class="border-b-none border-border fixed right-0 bottom-0 left-0 -mx-px flex h-full max-h-[95%] flex-col rounded-t-[10px] border"
+				class="border-b-none border-border fixed right-0 bottom-0 left-0 -mx-px flex h-full max-h-[95%] flex-col rounded-t-[0.625rem] border"
 			>
 				<div
 					class="mx-auto flex w-full flex-col gap-8 overflow-y-auto p-2 px-4 pt-0 select-text md:p-4 md:px-8"
@@ -158,7 +211,7 @@
 						<div class="flex flex-row items-end justify-between">
 							<Drawer.Title>
 								<div class="flex flex-row gap-4">
-									<div class="flex items-center justify-center space-x-2">
+									<!-- <div class="flex items-center justify-center space-x-2">
 										<Checkbox id="showJson" name="showJson" bind:checked={showJson}></Checkbox>
 										<Label
 											id="showJson-label"
@@ -167,7 +220,7 @@
 										>
 											JSON anzeigen
 										</Label>
-									</div>
+									</div> -->
 									{#if !showFeedback}
 										<Button
 											onclick={() => (showFeedback = true)}
@@ -178,7 +231,9 @@
 									{/if}
 								</div>
 							</Drawer.Title>
-							<Drawer.Close class={[buttonVariants({ variant: "outline" }), "fixed top-8 right-8"]}>
+							<Drawer.Close
+								class={[buttonVariants({ variant: "outline" }), "fixed top-8 right-8 size-11"]}
+							>
 								<X />
 							</Drawer.Close>
 						</div>
@@ -193,6 +248,22 @@
 					</Drawer.Header>
 
 					{#if selectedEvent.type === "diagnosis"}
+						<div class="-mb-6 flex justify-end">
+							<Button
+								variant="ghost"
+								class={cn(
+									"hover:border-border cursor-pointer border border-transparent hover:ring"
+								)}
+								size="sm"
+								onclick={() => {
+									onSelectEvent(undefined);
+									tutorialStore.activate(diagnosisTutorial);
+								}}
+							>
+								<CircleHelp class="size-4" />
+								{m.tutorial_diagnosis_button_label()}
+							</Button>
+						</div>
 						<IdgDiagnosis
 							{showFeedback}
 							{cancelFeedback}
@@ -200,6 +271,22 @@
 							{bundle}
 						/>
 					{:else if selectedEvent.type === "surgery"}
+						<div class="-mb-6 flex justify-end">
+							<Button
+								variant="ghost"
+								class={cn(
+									"hover:border-border cursor-pointer border border-transparent hover:ring"
+								)}
+								size="sm"
+								onclick={() => {
+									onSelectEvent(undefined);
+									tutorialStore.activate(surgeryTutorial);
+								}}
+							>
+								<CircleHelp class="size-4" />
+								{m.tutorial_surgery_button_label()}
+							</Button>
+						</div>
 						<IdgSurgery
 							{showFeedback}
 							{cancelFeedback}
@@ -207,6 +294,22 @@
 							{bundle}
 						/>
 					{:else if selectedEvent.type === "radiation"}
+						<div class="-mb-6 flex justify-end">
+							<Button
+								variant="ghost"
+								class={cn(
+									"hover:border-border cursor-pointer border border-transparent hover:ring"
+								)}
+								size="sm"
+								onclick={() => {
+									onSelectEvent(undefined);
+									tutorialStore.activate(radiationTutorial);
+								}}
+							>
+								<CircleHelp class="size-4" />
+								{m.tutorial_radiation_button_label()}
+							</Button>
+						</div>
 						<IdgRadiation
 							{showFeedback}
 							{cancelFeedback}
@@ -214,6 +317,22 @@
 							{bundle}
 						/>
 					{:else if selectedEvent.type === "systemicTherapy"}
+						<div class="-mb-6 flex justify-end">
+							<Button
+								variant="ghost"
+								class={cn(
+									"hover:border-border cursor-pointer border border-transparent hover:ring"
+								)}
+								size="sm"
+								onclick={() => {
+									onSelectEvent(undefined);
+									tutorialStore.activate(systemicTherapyTutorial);
+								}}
+							>
+								<CircleHelp class="size-4" />
+								{m.tutorial_systemic_therapy_button_label()}
+							</Button>
+						</div>
 						<IdgSystemicTherapy
 							{showFeedback}
 							{cancelFeedback}
@@ -221,6 +340,22 @@
 							{bundle}
 						/>
 					{:else if selectedEvent.type === "progression"}
+						<div class="-mb-6 flex justify-end">
+							<Button
+								variant="ghost"
+								class={cn(
+									"hover:border-border cursor-pointer border border-transparent hover:ring"
+								)}
+								size="sm"
+								onclick={() => {
+									onSelectEvent(undefined);
+									tutorialStore.activate(progressionTutorial);
+								}}
+							>
+								<CircleHelp class="size-4" />
+								{m.tutorial_progression_button_label()}
+							</Button>
+						</div>
 						<IdgProgression
 							{showFeedback}
 							{cancelFeedback}
@@ -228,6 +363,22 @@
 							{bundle}
 						/>
 					{:else if selectedEvent.type === "tnm"}
+						<div class="-mb-6 flex justify-end">
+							<Button
+								variant="ghost"
+								class={cn(
+									"hover:border-border cursor-pointer border border-transparent hover:ring"
+								)}
+								size="sm"
+								onclick={() => {
+									onSelectEvent(undefined);
+									tutorialStore.activate(tnmTutorial);
+								}}
+							>
+								<CircleHelp class="size-4" />
+								{m.tutorial_tnm_button_label()}
+							</Button>
+						</div>
 						<IdgTNMDisplay
 							{showFeedback}
 							{cancelFeedback}
@@ -248,16 +399,16 @@
 	.timeline-grid {
 		display: grid;
 		justify-content: center;
-		column-gap: 8px;
+		column-gap: 0.5rem;
 		row-gap: var(--rowGap);
 		grid-auto-rows: min-content;
 	}
 
 	.with-legend {
-		grid-template-columns: minmax(64px, 1fr) 24px repeat(var(--columns), minmax(64px, 2fr));
+		grid-template-columns: minmax(4rem, 1fr) 1.5rem repeat(var(--columns), minmax(4rem, 2fr));
 	}
 
 	.without-legend {
-		grid-template-columns: repeat(var(--columns), minmax(64px, 1fr));
+		grid-template-columns: repeat(var(--columns), minmax(4rem, 1fr));
 	}
 </style>
