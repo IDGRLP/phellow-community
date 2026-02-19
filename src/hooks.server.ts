@@ -38,7 +38,12 @@ export const init: ServerInit = async () => {
 	await connectOAuth2Client();
 };
 
-const ALLOWED_APP_ROUTES = ["/(app)", "/(app)/module/oncology", "/(app)/account"];
+const ALLOWED_APP_ROUTES = [
+	"/(app)",
+	"/(app)/module/oncology",
+	"/(app)/account",
+	"/(app)/gloassary",
+];
 
 const authHandle: Handle = async ({ event, resolve }) => {
 	if (dev) {

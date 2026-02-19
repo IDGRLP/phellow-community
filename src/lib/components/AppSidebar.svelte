@@ -11,19 +11,16 @@
 	import * as Sidebar from "$ui/sidebar";
 	import * as DropdownMenu from "$ui/dropdown-menu";
 
-	import Calendar from "@lucide/svelte/icons/calendar";
 	import ChevronUp from "@lucide/svelte/icons/chevron-up";
-	import File from "@lucide/svelte/icons/file";
 	import Globe from "@lucide/svelte/icons/globe";
 	import House from "@lucide/svelte/icons/house";
 	import Shell from "@lucide/svelte/icons/shell";
-	import ListTodo from "@lucide/svelte/icons/list-todo";
 	import Logout from "@lucide/svelte/icons/log-out";
 	import Moon from "@lucide/svelte/icons/moon";
 	import Sun from "@lucide/svelte/icons/sun";
 	import Check from "@lucide/svelte/icons/check";
 	import UserIcon from "@lucide/svelte/icons/user";
-	import FlaskConical from "@lucide/svelte/icons/flask-conical";
+	import BookSearch from "@lucide/svelte/icons/book-search";
 
 	import inkappLogo from "./logo/inkapp.png";
 	import { route } from "$lib/ROUTES";
@@ -56,6 +53,11 @@
 			title: m.module_oncology(),
 			url: localizeHref(route("/module/oncology")),
 			icon: Shell,
+		},
+		{
+			title: m.glossary_title(),
+			url: localizeHref(route("/glossary")),
+			icon: BookSearch,
 		},
 		// {
 		// 	title: m.dashboard_title(),
