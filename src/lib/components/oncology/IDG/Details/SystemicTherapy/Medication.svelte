@@ -21,7 +21,7 @@
 	});
 </script>
 
-<h3 class="font-xl mt-0">Medikamente</h3>
+<h3 class="mt-0 text-xl">Medikamente</h3>
 
 <div
 	class={[

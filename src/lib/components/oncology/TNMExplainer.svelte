@@ -142,7 +142,7 @@
 	<Drawer.Header>
 		<div class="flex flex-row items-end justify-between">
 			<Drawer.Title>Die TNM-Klassifikation erklärt</Drawer.Title>
-			<Drawer.Close class={buttonVariants({ variant: "outline" })}><X /></Drawer.Close>
+			<Drawer.Close class={[buttonVariants({ variant: "outline" }), "size-11"]}><X /></Drawer.Close>
 		</div>
 		<Drawer.Description class="space-y-2 text-justify">
 			<p>
@@ -153,8 +153,8 @@
 				<div
 					class={[
 						"px-1",
-						showColorForClassifications ? "text-[#4A8D8D]" : undefined,
-						hovered === "t" ? "rounded-sm bg-[#4A8D8D33]" : "",
+						showColorForClassifications ? "text-[#3A7070]" : undefined,
+						hovered === "t" ? "rounded-sm bg-[#3A707066]" : "",
 					]}
 				>
 					<b>T</b> steht für Tumor. Es beschreibt wie groß der Tumor ist und ob und wie er sich in angrenzende
@@ -166,7 +166,7 @@
 					class={[
 						"px-1",
 						showColorForClassifications ? "text-[#5B6C9D]" : undefined,
-						hovered === "n" ? "rounded-sm bg-[#5B6C9D33]" : "",
+						hovered === "n" ? "rounded-sm bg-[#5B6C9D66]" : "",
 					]}
 				>
 					<b>N</b> steht für Lymphknoten (englisch Node). Es beschreibt, ob der Tumor in den in seiner
@@ -177,8 +177,8 @@
 				<div
 					class={[
 						"px-1",
-						showColorForClassifications ? "text-[#6D8057]" : undefined,
-						hovered === "m" ? "rounded-sm bg-[#6D805733]" : "",
+						showColorForClassifications ? "text-[#5A6B47]" : undefined,
+						hovered === "m" ? "rounded-sm bg-[#5A6B4766]" : "",
 					]}
 				>
 					<b>M</b> steht für Metastasen. Es beschreibt, ob sich in vom Tumor entfernten Körperbereichen
@@ -189,8 +189,8 @@
 				<div
 					class={[
 						"px-1",
-						showColorForClassifications ? "text-[#B0A8B9]" : undefined,
-						hovered === "l" ? "rounded-sm bg-[#B0A8B933]" : "",
+						showColorForClassifications ? "text-[#6E6878]" : undefined,
+						hovered === "l" ? "rounded-sm bg-[#6E687866]" : "",
 					]}
 				>
 					<b>L</b> steht für Lymphgefäßinvasion. Es beschreibt, ob in Tumornähe gelegene Gefäße des Lymphsystems
@@ -201,8 +201,8 @@
 				<div
 					class={[
 						"px-1",
-						showColorForClassifications ? "text-[#9D7D6B]" : undefined,
-						hovered === "v" ? "rounded-sm bg-[#9D7D6B33]" : "",
+						showColorForClassifications ? "text-[#7D6050]" : undefined,
+						hovered === "v" ? "rounded-sm bg-[#7D605066]" : "",
 					]}
 				>
 					<b>V</b> beschreibt, ob es Krebszellen in den Wänden der den Tumor umgebenen Blutgefäße gibt.
@@ -213,8 +213,8 @@
 				<div
 					class={[
 						"px-1",
-						showColorForClassifications ? "text-[#7F8FA6]" : undefined,
-						hovered === "pn" ? "rounded-sm bg-[#7F8FA633]" : "",
+						showColorForClassifications ? "text-[#5E6E85]" : undefined,
+						hovered === "pn" ? "rounded-sm bg-[#5E6E8566]" : "",
 					]}
 				>
 					<b>Pn</b> steht für perineural. Die Nervenbahnen sind von einer Hülle umgeben – den sogenannten
@@ -226,8 +226,8 @@
 				<div
 					class={[
 						"px-1",
-						showColorForClassifications ? "text-[#A3B8AA]" : undefined,
-						hovered === "s" ? "rounded-sm bg-[#A3B8AA33]" : undefined,
+						showColorForClassifications ? "text-[#607060]" : undefined,
+						hovered === "s" ? "rounded-sm bg-[#60706066]" : undefined,
 					]}
 				>
 					<b>S</b> steht für Serumtumormarker.
@@ -254,7 +254,7 @@
 		>
 			<!-- T -->
 			{#if staging.t}
-				<div class="inline-flex text-[#4A8D8D]">
+				<div class="inline-flex text-[#3A7070]">
 					{#if staging.prefix?.t}
 						<span
 							onmouseenter={() => (hovered = "tPrefix")}
@@ -262,7 +262,7 @@
 							onfocus={() => (hovered = "tPrefix")}
 							onblur={() => (hovered = undefined)}
 							tabindex="0"
-							class="cursor-pointer rounded-sm border border-[#4A8D8D33] p-1 opacity-60 hover:bg-[#4A8D8D33] focus-visible:bg-[#4A8D8D33]"
+							class="focus-visible:ring-ring inline-flex min-h-[2.75rem] min-w-[2.75rem] cursor-pointer items-center justify-center rounded-sm border border-[#3A707066] p-2 opacity-60 hover:bg-[#3A707066] focus-visible:bg-[#3A707066] focus-visible:ring-2"
 							>{staging.prefix.t}</span
 						>
 					{/if}
@@ -272,7 +272,7 @@
 						onfocus={() => (hovered = "t")}
 						onblur={() => (hovered = undefined)}
 						tabindex="0"
-						class="cursor-pointer rounded-sm border border-[#4A8D8D33] p-1 hover:bg-[#4A8D8D33] focus-visible:bg-[#4A8D8D33]"
+						class="focus-visible:ring-ring inline-flex min-h-[2.75rem] min-w-[2.75rem] cursor-pointer items-center justify-center rounded-sm border border-[#3A707066] p-2 hover:bg-[#3A707066] focus-visible:bg-[#3A707066] focus-visible:ring-2"
 						>T{staging.t}</span
 					>
 				</div>
@@ -287,7 +287,7 @@
 							onfocus={() => (hovered = "nPrefix")}
 							onblur={() => (hovered = undefined)}
 							tabindex="0"
-							class="cursor-pointer rounded-sm border border-[#5B6C9D33] p-1 opacity-60 hover:bg-[#5B6C9D33] focus-visible:bg-[#5B6C9D33]"
+							class="focus-visible:ring-ring inline-flex min-h-[2.75rem] min-w-[2.75rem] cursor-pointer items-center justify-center rounded-sm border border-[#5B6C9D66] p-2 opacity-60 hover:bg-[#5B6C9D66] focus-visible:bg-[#5B6C9D66] focus-visible:ring-2"
 							>{staging.prefix.n}</span
 						>
 					{/if}
@@ -297,14 +297,14 @@
 						onfocus={() => (hovered = "n")}
 						onblur={() => (hovered = undefined)}
 						tabindex="0"
-						class="cursor-pointer rounded-sm border border-[#5B6C9D33] p-1 hover:bg-[#5B6C9D33] focus-visible:bg-[#5B6C9D33]"
+						class="focus-visible:ring-ring inline-flex min-h-[2.75rem] min-w-[2.75rem] cursor-pointer items-center justify-center rounded-sm border border-[#5B6C9D66] p-2 hover:bg-[#5B6C9D66] focus-visible:bg-[#5B6C9D66] focus-visible:ring-2"
 						>N{staging.n}</span
 					>
 				</div>
 			{/if}
 			<!-- M -->
 			{#if staging.m}
-				<div class="inline-flex text-[#6D8057]">
+				<div class="inline-flex text-[#5A6B47]">
 					{#if staging.prefix?.m}
 						<span
 							onmouseenter={() => (hovered = "mPrefix")}
@@ -312,7 +312,7 @@
 							onfocus={() => (hovered = "mPrefix")}
 							onblur={() => (hovered = undefined)}
 							tabindex="0"
-							class="cursor-pointer rounded-sm border border-[#6D805733] p-1 opacity-60 hover:bg-[#6D805733] focus-visible:bg-[#6D805733]"
+							class="focus-visible:ring-ring inline-flex min-h-[2.75rem] min-w-[2.75rem] cursor-pointer items-center justify-center rounded-sm border border-[#5A6B4766] p-2 opacity-60 hover:bg-[#5A6B4766] focus-visible:bg-[#5A6B4766] focus-visible:ring-2"
 							>{staging.prefix.m}</span
 						>
 					{/if}
@@ -322,63 +322,63 @@
 						onfocus={() => (hovered = "m")}
 						onblur={() => (hovered = undefined)}
 						tabindex="0"
-						class="cursor-pointer rounded-sm border border-[#6D805733] p-1 hover:bg-[#6D805733] focus-visible:bg-[#6D805733]"
+						class="focus-visible:ring-ring inline-flex min-h-[2.75rem] min-w-[2.75rem] cursor-pointer items-center justify-center rounded-sm border border-[#5A6B4766] p-2 hover:bg-[#5A6B4766] focus-visible:bg-[#5A6B4766] focus-visible:ring-2"
 						>M{staging.m}</span
 					>
 				</div>
 			{/if}
 			<!-- L -->
 			{#if staging.l}
-				<div class="inline-flex text-[#B0A8B9]">
+				<div class="inline-flex text-[#6E6878]">
 					<span
 						onmouseenter={() => (hovered = "l")}
 						onmouseleave={() => (hovered = undefined)}
 						onfocus={() => (hovered = "l")}
 						onblur={() => (hovered = undefined)}
 						tabindex="0"
-						class="cursor-pointer rounded-sm border border-[#B0A8B933] p-1 hover:bg-[#B0A8B933] focus-visible:bg-[#B0A8B933]"
+						class="focus-visible:ring-ring inline-flex min-h-[2.75rem] min-w-[2.75rem] cursor-pointer items-center justify-center rounded-sm border border-[#6E687866] p-2 hover:bg-[#6E687866] focus-visible:bg-[#6E687866] focus-visible:ring-2"
 						>{staging.l}</span
 					>
 				</div>
 			{/if}
 			<!-- V -->
 			{#if staging.v}
-				<div class="inline-flex text-[#9D7D6B]">
+				<div class="inline-flex text-[#7D6050]">
 					<span
 						onmouseenter={() => (hovered = "v")}
 						onmouseleave={() => (hovered = undefined)}
 						onfocus={() => (hovered = "v")}
 						onblur={() => (hovered = undefined)}
 						tabindex="0"
-						class="cursor-pointer rounded-sm border border-[#9D7D6B33] p-1 hover:bg-[#9D7D6B33] focus-visible:bg-[#9D7D6B33]"
+						class="focus-visible:ring-ring inline-flex min-h-[2.75rem] min-w-[2.75rem] cursor-pointer items-center justify-center rounded-sm border border-[#7D605066] p-2 hover:bg-[#7D605066] focus-visible:bg-[#7D605066] focus-visible:ring-2"
 						>{staging.v}</span
 					>
 				</div>
 			{/if}
 			<!-- Pn -->
 			{#if staging.pn}
-				<div class="inline-flex text-[#7F8FA6]">
+				<div class="inline-flex text-[#5E6E85]">
 					<span
 						onmouseenter={() => (hovered = "pn")}
 						onmouseleave={() => (hovered = undefined)}
 						onfocus={() => (hovered = "pn")}
 						onblur={() => (hovered = undefined)}
 						tabindex="0"
-						class="cursor-pointer rounded-sm border border-[#7F8FA633] p-1 hover:bg-[#7F8FA633] focus-visible:bg-[#7F8FA633]"
+						class="focus-visible:ring-ring inline-flex min-h-[2.75rem] min-w-[2.75rem] cursor-pointer items-center justify-center rounded-sm border border-[#5E6E8566] p-2 hover:bg-[#5E6E8566] focus-visible:bg-[#5E6E8566] focus-visible:ring-2"
 						>{staging.pn}</span
 					>
 				</div>
 			{/if}
 			<!-- S -->
 			{#if staging.s}
-				<div class="inline-flex text-[#A3B8AA]">
+				<div class="inline-flex text-[#607060]">
 					<span
 						onmouseenter={() => (hovered = "s")}
 						onmouseleave={() => (hovered = undefined)}
 						onfocus={() => (hovered = "s")}
 						onblur={() => (hovered = undefined)}
 						tabindex="0"
-						class="cursor-pointer rounded-sm border border-[#A3B8AA33] p-1 hover:bg-[#A3B8AA33] focus-visible:bg-[#A3B8AA33]"
+						class="focus-visible:ring-ring inline-flex min-h-[2.75rem] min-w-[2.75rem] cursor-pointer items-center justify-center rounded-sm border border-[#60706066] p-2 hover:bg-[#60706066] focus-visible:bg-[#60706066] focus-visible:ring-2"
 						>{staging.s}</span
 					>
 				</div>
@@ -388,12 +388,12 @@
 		<div class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-3">
 			<!-- T Description -->
 			{#if staging.t}
-				<div class="flex flex-col justify-end gap-4 p-4 text-[#4A8D8D]">
+				<div class="flex flex-col justify-end gap-4 p-4 text-[#3A7070]">
 					{#if staging.prefix?.t}
 						<div
 							class={[
 								"grid grid-cols-3",
-								hovered === "tPrefix" ? "rounded-sm bg-[#4A8D8D33] shadow-xs" : undefined,
+								hovered === "tPrefix" ? "rounded-sm bg-[#3A707066] shadow-xs" : undefined,
 							]}
 						>
 							<div
@@ -409,7 +409,7 @@
 					<div
 						class={[
 							"grid grid-cols-3",
-							hovered === "t" ? "rounded-sm bg-[#4A8D8D33] shadow-xs" : undefined,
+							hovered === "t" ? "rounded-sm bg-[#3A707066] shadow-xs" : undefined,
 						]}
 					>
 						<div
@@ -430,7 +430,7 @@
 						<div
 							class={[
 								"grid grid-cols-3",
-								hovered === "nPrefix" ? "rounded-sm bg-[#5B6C9D33] shadow-xs" : undefined,
+								hovered === "nPrefix" ? "rounded-sm bg-[#5B6C9D66] shadow-xs" : undefined,
 							]}
 						>
 							<div
@@ -446,7 +446,7 @@
 					<div
 						class={[
 							"grid grid-cols-3",
-							hovered === "n" ? "rounded-sm bg-[#5B6C9D33] shadow-xs" : undefined,
+							hovered === "n" ? "rounded-sm bg-[#5B6C9D66] shadow-xs" : undefined,
 						]}
 					>
 						<div
@@ -462,12 +462,12 @@
 			{/if}
 			<!-- M Description -->
 			{#if staging.m}
-				<div class="flex flex-col justify-end gap-4 p-4 text-[#6D8057]">
+				<div class="flex flex-col justify-end gap-4 p-4 text-[#5A6B47]">
 					{#if staging.prefix?.m}
 						<div
 							class={[
 								"grid grid-cols-3",
-								hovered === "mPrefix" ? "rounded-sm bg-[#6D805733] shadow-xs" : undefined,
+								hovered === "mPrefix" ? "rounded-sm bg-[#5A6B4766] shadow-xs" : undefined,
 							]}
 						>
 							<div
@@ -483,7 +483,7 @@
 					<div
 						class={[
 							"grid grid-cols-3",
-							hovered === "m" ? "rounded-sm bg-[#6D805733] shadow-xs" : undefined,
+							hovered === "m" ? "rounded-sm bg-[#5A6B4766] shadow-xs" : undefined,
 						]}
 					>
 						<div
@@ -499,11 +499,11 @@
 			{/if}
 			<!-- L Description -->
 			{#if staging.l}
-				<div class="flex flex-col justify-end gap-4 p-4 text-[#B0A8B9]">
+				<div class="flex flex-col justify-end gap-4 p-4 text-[#6E6878]">
 					<div
 						class={[
 							"grid grid-cols-3",
-							hovered === "l" ? "rounded-sm bg-[#B0A8B933] shadow-xs" : undefined,
+							hovered === "l" ? "rounded-sm bg-[#6E687866] shadow-xs" : undefined,
 						]}
 					>
 						<div
@@ -519,11 +519,11 @@
 			{/if}
 			<!-- V Description -->
 			{#if staging.v}
-				<div class="flex flex-col justify-end gap-4 p-4 text-[#9D7D6B]">
+				<div class="flex flex-col justify-end gap-4 p-4 text-[#7D6050]">
 					<div
 						class={[
 							"grid grid-cols-3",
-							hovered === "v" ? "rounded-sm bg-[#9D7D6B33] shadow-xs" : undefined,
+							hovered === "v" ? "rounded-sm bg-[#7D605066] shadow-xs" : undefined,
 						]}
 					>
 						<div
@@ -539,11 +539,11 @@
 			{/if}
 			<!-- Pn Description -->
 			{#if staging.pn}
-				<div class="flex flex-col justify-end gap-4 p-4 text-[#7F8FA6]">
+				<div class="flex flex-col justify-end gap-4 p-4 text-[#5E6E85]">
 					<div
 						class={[
 							"grid grid-cols-3",
-							hovered === "pn" ? "rounded-sm bg-[#7F8FA633] shadow-xs" : undefined,
+							hovered === "pn" ? "rounded-sm bg-[#5E6E8566] shadow-xs" : undefined,
 						]}
 					>
 						<div
@@ -559,11 +559,11 @@
 			{/if}
 			<!-- S Description -->
 			{#if staging.s}
-				<div class="flex flex-col justify-end gap-4 p-4 text-[#A3B8AA]">
+				<div class="flex flex-col justify-end gap-4 p-4 text-[#607060]">
 					<div
 						class={[
 							"grid grid-cols-3",
-							hovered === "s" ? "rounded-sm bg-[#A3B8AA33] shadow-xs" : undefined,
+							hovered === "s" ? "rounded-sm bg-[#60706066] shadow-xs" : undefined,
 						]}
 					>
 						<div

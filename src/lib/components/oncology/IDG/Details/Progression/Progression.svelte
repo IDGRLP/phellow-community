@@ -19,7 +19,7 @@
 </script>
 
 <div data-tutorial="progression-header" class="flex flex-row items-baseline justify-start gap-2">
-	<h3 class="font-xl mt-0">Verlauf</h3>
+	<h3 class="mt-0 text-xl">Verlauf</h3>
 	<div
 		class={[
 			"text-muted-foreground",

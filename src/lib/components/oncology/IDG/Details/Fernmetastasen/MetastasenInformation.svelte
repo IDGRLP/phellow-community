@@ -1,4 +1,7 @@
 <script lang="ts">
+	import * as Tooltip from "$lib/components/ui/tooltip/index.js";
+	import * as m from "$lib/paraglide/messages";
+
 	interface Props {
 		code: string;
 		display: string;
@@ -23,9 +26,20 @@
 	</div>
 	<div class="flex items-center justify-start gap-2">
 		<h4 class="font-normal">Lokalisation</h4>
-		<span class="bg-muted text-muted-foreground inline-block rounded px-2 py-1 text-xs font-medium">
-			{code}
-		</span>
 	</div>
-	<div class="text-muted-foreground">{display}</div>
+	<div class="text-muted-foreground">
+		<span>
+			{display}
+		</span>
+		<Tooltip.Root delayDuration={300}>
+			<Tooltip.Trigger class="cursor-help">
+				<span class="bg-muted text-foreground inline-block rounded px-2 py-1 text-sm font-medium">
+					{code}
+				</span>
+			</Tooltip.Trigger>
+			<Tooltip.Content>
+				<p>{m.oncology_coding_tooltip()}</p>
+			</Tooltip.Content>
+		</Tooltip.Root>
+	</div>
 </div>

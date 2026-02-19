@@ -257,5 +257,6 @@
 	"tutorial_step_tnm_header_title": "TNM Classification Overview",
 	"tutorial_step_tnm_header_description": "The header shows the type of TNM classification (clinical or pathological) and the date it was documented.",
 	"tutorial_step_tnm_formula_title": "TNM Formula",
-	"tutorial_step_tnm_formula_description": "The TNM formula summarizes the tumor staging: T describes the tumor size, N the lymph node involvement, M the distant metastases, and the UICC stage provides an overall classification."
+	"tutorial_step_tnm_formula_description": "The TNM formula summarizes the tumor staging: T describes the tumor size, N the lymph node involvement, M the distant metastases, and the UICC stage provides an overall classification.",
+	"oncology_coding_tooltip": "This is a medical code used to uniquely identify this information across different healthcare systems, ensuring everyone refers to the exact same context."
 }

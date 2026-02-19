@@ -167,7 +167,7 @@
 	const metastasisStatus = getComponentStatus("399608002");
 </script>
 
-<h3 class="font-xl mt-0">Verlauf</h3>
+<h3 class="mt-0 text-xl">Verlauf</h3>
 
 <div class={["grid grid-cols-1 gap-8 md:grid-cols-2", classes]}>
 	<!-- Overall Assessment Section -->

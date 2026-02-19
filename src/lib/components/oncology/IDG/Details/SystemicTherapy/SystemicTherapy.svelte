@@ -38,7 +38,7 @@
 </script>
 
 <div data-tutorial="systemic-header" class="flex flex-row items-baseline justify-start gap-2">
-	<h3 class="font-xl mt-0">Systemische Therapie</h3>
+	<h3 class="mt-0 text-xl">Systemische Therapie</h3>
 	{#if treatmentDateString}
 		<span
 			class={[

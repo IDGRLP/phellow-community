@@ -84,7 +84,7 @@
 
 <div>
 	<div data-tutorial="tnm-header" class="flex flex-row items-baseline justify-start gap-2">
-		<h3 class="font-xl mt-0">
+		<h3 class="mt-0 text-xl">
 			{type === "clinical"
 				? "Klinische "
 				: type === "pathological"
@@ -101,14 +101,19 @@
 		{/if}
 		<Drawer.NestedRoot>
 			<!-- snapPoints={[0.25, 0.5, 0.75, 1]} bind:activeSnapPoint -->
-			<Drawer.Trigger class={buttonVariants({ variant: "ghost", size: "sm" })}>
+			<Drawer.Trigger
+				class={[
+					buttonVariants({ variant: "ghost", size: "sm" }),
+					"hover:border-border cursor-pointer border border-transparent",
+				]}
+			>
 				<CircleHelp /> <span class="underline">Was bedeutet das?</span>
 			</Drawer.Trigger>
 			<Drawer.Portal>
 				<Drawer.Overlay class="bg-black/40" />
 				<Drawer.Content
 					showDefaultOverlay={false}
-					class="border-b-none border-border bg-card fixed right-0 bottom-0 left-0 -mx-px flex max-h-[97%] flex-col rounded-t-[10px] border"
+					class="border-b-none border-border bg-card fixed right-0 bottom-0 left-0 -mx-px flex max-h-[97%] flex-col rounded-t-[0.625rem] border"
 				>
 					<TnmExplainer {staging} bind:hovered />
 				</Drawer.Content>
@@ -131,7 +136,7 @@
 			highlightLinkId === "7_2_Fd_TNM_classification" ? "ring-ring ring-2" : undefined,
 		]}
 	>
-		<div class="font-mono text-lg">{formatTNM(staging)}</div>
+		<div class="font-mono text-xl">{formatTNM(staging)}</div>
 		{#if staging.uiccStage}
 			<div class="text-muted-foreground mt-1 text-sm">
 				UICC Stadium: {staging.uiccStage}

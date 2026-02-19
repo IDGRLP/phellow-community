@@ -36,7 +36,7 @@
 	}
 </script>
 
-<div class={["grid gap-4", showFeedback ? "h-[94%] grid-cols-2" : "grid-cols-1"]}>
+<div class={["grid gap-4", showFeedback ? "h-[94%] grid-cols-1 lg:grid-cols-2" : "grid-cols-1"]}>
 	<div class="flex flex-col gap-8 overflow-y-auto">
 		{@render children()}
 	</div>

@@ -112,7 +112,7 @@
 </script>
 
 <div class="flex flex-col items-baseline gap-2 md:flex-row md:gap-4">
-	<h3 class="font-xl mt-0">Fernmetastasen</h3>
+	<h3 class="mt-0 text-xl">Fernmetastasen</h3>
 	<Drawer.NestedRoot>
 		<!-- snapPoints={[0.25, 0.5, 0.75, 1]} bind:activeSnapPoint -->
 		<Drawer.Trigger class={buttonVariants({ variant: "ghost", size: "sm" })}>
@@ -122,7 +122,7 @@
 			<Drawer.Overlay class="bg-black/40" />
 			<Drawer.Content
 				showDefaultOverlay={false}
-				class="border-b-none border-border bg-card fixed right-0 bottom-0 left-0 -mx-px flex max-h-[97%] flex-col rounded-t-[10px] border"
+				class="border-b-none border-border bg-card fixed right-0 bottom-0 left-0 -mx-px flex max-h-[97%] flex-col rounded-t-[0.625rem] border"
 			>
 				<div class="mx-auto flex w-full flex-col overflow-y-auto p-4 pt-0 select-text">
 					<Drawer.Header>
