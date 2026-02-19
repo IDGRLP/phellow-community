@@ -25,7 +25,7 @@
 
 <div
 	class={[
-		"border-border bg-card m-0.5 flex flex-col gap-2 rounded-lg border p-4 shadow-xs",
+		"border-border bg-card m-1 flex flex-col gap-2 rounded-lg border p-4 shadow-xs",
 		highlight ? "ring-ring ring-2" : "",
 	]}
 	bind:this={element}
@@ -33,9 +33,7 @@
 	{#if coding}
 		<div class="flex items-center justify-start gap-2">
 			<h3 class="mt-0 font-medium">{heading}</h3>
-			<span
-				class="bg-muted text-muted-foreground inline-block rounded px-2 py-1 text-xs font-medium"
-			>
+			<span class="bg-muted text-foreground inline-block rounded px-2 py-1 text-sm font-medium">
 				{coding.code}
 			</span>
 		</div>

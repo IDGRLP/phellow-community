@@ -43,7 +43,7 @@
 	}
 </script>
 
-<h3 class="font-xl mt-0">PSA Werte</h3>
+<h3 class="mt-0 text-xl">PSA Werte</h3>
 
 <div
 	class={[

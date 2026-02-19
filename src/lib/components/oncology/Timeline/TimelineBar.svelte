@@ -41,7 +41,10 @@
 </script>
 
 <button
-	class={["flex cursor-pointer flex-col rounded-lg p-2 hover:shadow-md", getEventColor(event.type)]}
+	class={[
+		"focus-visible:ring-ring flex cursor-pointer flex-col rounded-lg border border-black/10 p-2 shadow-sm hover:shadow-md focus-visible:ring-2 focus-visible:ring-offset-1",
+		getEventColor(event.type),
+	]}
 	style="grid-column: {lane}/span 1;grid-row-start: {rowStart}; grid-row-end: {rowEnd};"
 	data-tutorial-bar={tutorialBar ? "timeline-bar-first" : undefined}
 	data-tutorial={tutorialEventAttr(tutorialEventType)}
@@ -50,16 +53,16 @@
 	<div
 		class={[
 			"flex flex-col items-start justify-start",
-			stickyTitle ? "sticky top-[100px]" : undefined,
+			stickyTitle ? "sticky top-[6.25rem]" : undefined,
 		]}
 	>
 		<div class="flex items-start space-x-2">
 			{#if Icon}
-				<Icon class="text-primary-foreground mt-[6px] size-4 shrink-0" />
+				<Icon class="text-foreground mt-[0.375rem] size-4 shrink-0" />
 			{/if}
-			<div class="text-primary-foreground text-xl font-semibold">{getTitleForEvent(event)}</div>
+			<div class="text-foreground text-xl font-semibold underline">{getTitleForEvent(event)}</div>
 		</div>
-		<div class="text-primary-foreground text-sm">
+		<div class="text-foreground text-sm">
 			{formatDateRange(event.startDate, event.endDate)}
 		</div>
 	</div>

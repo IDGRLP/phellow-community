@@ -224,7 +224,7 @@
 	const medicationInfo = getMedicationInfo();
 </script>
 
-<h3 class="font-xl mt-0">Systemische Therapie</h3>
+<h3 class="mt-0 text-xl">Systemische Therapie</h3>
 
 <div class={["grid grid-cols-1 gap-8 md:grid-cols-2", classes]}>
 	<!-- Therapy Information Section -->

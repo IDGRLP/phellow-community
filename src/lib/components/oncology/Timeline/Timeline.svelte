@@ -126,7 +126,7 @@
 <div class="flex w-full flex-col items-center">
 	<div
 		data-tutorial="timeline-legend"
-		style="--columns: {lanes.length}; --rows: {totalDuration}; --rowGap: 1px;"
+		style="--columns: {lanes.length}; --rows: {totalDuration}; --rowGap: 0.0625rem;"
 		class={["timeline-grid", "with-legend"]}
 	>
 		<div
@@ -202,7 +202,7 @@
 			{@const entry = bundle.entry?.find((e) => e.resource?.id === selectedEvent?.resourceId)}
 			<Drawer.Content
 				showDefaultOverlay={false}
-				class="border-b-none border-border fixed right-0 bottom-0 left-0 -mx-px flex h-full max-h-[95%] flex-col rounded-t-[10px] border"
+				class="border-b-none border-border fixed right-0 bottom-0 left-0 -mx-px flex h-full max-h-[95%] flex-col rounded-t-[0.625rem] border"
 			>
 				<div
 					class="mx-auto flex w-full flex-col gap-8 overflow-y-auto p-2 px-4 pt-0 select-text md:p-4 md:px-8"
@@ -231,7 +231,9 @@
 									{/if}
 								</div>
 							</Drawer.Title>
-							<Drawer.Close class={[buttonVariants({ variant: "outline" }), "fixed top-8 right-8"]}>
+							<Drawer.Close
+								class={[buttonVariants({ variant: "outline" }), "fixed top-8 right-8 size-11"]}
+							>
 								<X />
 							</Drawer.Close>
 						</div>
@@ -249,7 +251,9 @@
 						<div class="-mb-6 flex justify-end">
 							<Button
 								variant="ghost"
-								class={cn("hover:cursor-pointer hover:ring")}
+								class={cn(
+									"hover:border-border cursor-pointer border border-transparent hover:ring"
+								)}
 								size="sm"
 								onclick={() => {
 									onSelectEvent(undefined);
@@ -270,7 +274,9 @@
 						<div class="-mb-6 flex justify-end">
 							<Button
 								variant="ghost"
-								class={cn("hover:cursor-pointer hover:ring")}
+								class={cn(
+									"hover:border-border cursor-pointer border border-transparent hover:ring"
+								)}
 								size="sm"
 								onclick={() => {
 									onSelectEvent(undefined);
@@ -291,7 +297,9 @@
 						<div class="-mb-6 flex justify-end">
 							<Button
 								variant="ghost"
-								class={cn("hover:cursor-pointer hover:ring")}
+								class={cn(
+									"hover:border-border cursor-pointer border border-transparent hover:ring"
+								)}
 								size="sm"
 								onclick={() => {
 									onSelectEvent(undefined);
@@ -312,7 +320,9 @@
 						<div class="-mb-6 flex justify-end">
 							<Button
 								variant="ghost"
-								class={cn("hover:cursor-pointer hover:ring")}
+								class={cn(
+									"hover:border-border cursor-pointer border border-transparent hover:ring"
+								)}
 								size="sm"
 								onclick={() => {
 									onSelectEvent(undefined);
@@ -333,7 +343,9 @@
 						<div class="-mb-6 flex justify-end">
 							<Button
 								variant="ghost"
-								class={cn("hover:cursor-pointer hover:ring")}
+								class={cn(
+									"hover:border-border cursor-pointer border border-transparent hover:ring"
+								)}
 								size="sm"
 								onclick={() => {
 									onSelectEvent(undefined);
@@ -354,7 +366,9 @@
 						<div class="-mb-6 flex justify-end">
 							<Button
 								variant="ghost"
-								class={cn("hover:cursor-pointer hover:ring")}
+								class={cn(
+									"hover:border-border cursor-pointer border border-transparent hover:ring"
+								)}
 								size="sm"
 								onclick={() => {
 									onSelectEvent(undefined);
@@ -385,16 +399,16 @@
 	.timeline-grid {
 		display: grid;
 		justify-content: center;
-		column-gap: 8px;
+		column-gap: 0.5rem;
 		row-gap: var(--rowGap);
 		grid-auto-rows: min-content;
 	}
 
 	.with-legend {
-		grid-template-columns: minmax(64px, 1fr) 24px repeat(var(--columns), minmax(64px, 2fr));
+		grid-template-columns: minmax(4rem, 1fr) 1.5rem repeat(var(--columns), minmax(4rem, 2fr));
 	}
 
 	.without-legend {
-		grid-template-columns: repeat(var(--columns), minmax(64px, 1fr));
+		grid-template-columns: repeat(var(--columns), minmax(4rem, 1fr));
 	}
 </style>

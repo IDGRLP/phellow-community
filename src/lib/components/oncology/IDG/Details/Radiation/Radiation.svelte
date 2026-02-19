@@ -59,7 +59,7 @@
 
 <div data-tutorial="radiation-targets">
 	<div class="flex flex-row items-baseline justify-start gap-2">
-		<h3 class="font-xl mt-0">Zielgebiete</h3>
+		<h3 class="mt-0 text-xl">Zielgebiete</h3>
 	</div>
 
 	<div
@@ -88,7 +88,7 @@
 
 <div data-tutorial="radiation-end">
 	<div class="flex flex-row items-baseline justify-start gap-2">
-		<h3 class="font-xl mt-0">Ende</h3>
+		<h3 class="mt-0 text-xl">Ende</h3>
 	</div>
 
 	{#if treatmentEndReason}

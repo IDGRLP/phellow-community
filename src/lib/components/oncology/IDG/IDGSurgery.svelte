@@ -295,7 +295,7 @@
 				</div>
 			{:else}
 				<div data-tutorial="surgery-histology" class="m-0.5">
-					<h3 class="font-xl my-0">Histologie</h3>
+					<h3 class="my-0 text-xl">Histologie</h3>
 					<p
 						class={[
 							"text-muted-foreground",

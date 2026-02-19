@@ -64,15 +64,16 @@
 					href="/module/oncology?file={item.file}"
 					variant="secondary"
 					class={[
+						"h-11",
 						buttonIsActive(item.file)
-							? "bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground"
-							: "hover:ring-1",
+							? "bg-primary text-primary-foreground border-primary ring-primary hover:bg-primary/90 border shadow-md ring-2"
+							: "border border-transparent hover:ring-1",
 					]}>{item.title}</Button
 				>
 			{/each}
 			<Button
 				variant="ghost"
-				class={cn("hover:cursor-pointer hover:ring")}
+				class={cn("hover:border-border h-11 cursor-pointer border border-transparent hover:ring")}
 				onclick={() => tutorialStore.activate(timelineTutorial)}
 			>
 				<CircleHelp class="size-5" />

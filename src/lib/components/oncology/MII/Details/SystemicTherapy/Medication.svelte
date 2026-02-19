@@ -31,7 +31,7 @@
 				{medicationInfo.medicationName}
 				{#if medicationInfo.medicationCode}
 					<span
-						class="text-muted-foreground ml-2 inline-block rounded bg-gray-100 px-2 py-0.5 text-xs font-medium"
+						class="text-muted-foreground ml-2 inline-block rounded bg-gray-100 px-2 py-1 text-sm font-medium"
 					>
 						{medicationInfo.medicationCode}
 					</span>

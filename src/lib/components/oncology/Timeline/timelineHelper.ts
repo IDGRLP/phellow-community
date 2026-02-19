@@ -34,11 +34,11 @@ export interface Event {
 // Get a color based on event type
 export function getEventColor(type: EventType): string {
 	const colors: Record<string, string> = {
-		surgery: "bg-[#A48CA2]",
+		surgery: "bg-[#8A6F87]",
 		radiation: "bg-[#D4B866]",
-		progression: "bg-[#5A9E9F]",
+		progression: "bg-[#3D7F80]",
 		systemicTherapy: "bg-[#9CAF88]",
-		diagnosis: "bg-[#708090]",
+		diagnosis: "bg-[#506070]",
 		tnm: "bg-[#B0C4DE]",
 	};
 

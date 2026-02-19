@@ -23,7 +23,7 @@
 	</div>
 	<div class="flex items-center justify-start gap-2">
 		<h4 class="font-normal">Lokalisation</h4>
-		<span class="bg-muted text-muted-foreground inline-block rounded px-2 py-1 text-xs font-medium">
+		<span class="bg-muted text-foreground inline-block rounded px-2 py-1 text-sm font-medium">
 			{code}
 		</span>
 	</div>

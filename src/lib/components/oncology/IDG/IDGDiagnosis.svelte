@@ -581,7 +581,7 @@
 				</div>
 			{:else}
 				<div data-tutorial="diagnosis-histology">
-					<h3 class="font-xl my-0">Histologie</h3>
+					<h3 class="my-0 text-xl">Histologie</h3>
 					<p class="text-muted-foreground">Keine Histologieinformationen verfügbar.</p>
 				</div>
 			{/if}
@@ -596,7 +596,7 @@
 				</div>
 			{:else}
 				<div data-tutorial="diagnosis-metastases">
-					<h3 class="font-xl my-0">Fernmetastasen</h3>
+					<h3 class="my-0 text-xl">Fernmetastasen</h3>
 					<p class="text-muted-foreground">Keine Fernmetastaseninformationen verfügbar.</p>
 				</div>
 			{/if}

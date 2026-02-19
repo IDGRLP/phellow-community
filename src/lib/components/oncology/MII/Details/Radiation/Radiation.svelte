@@ -325,7 +325,7 @@
 	const radiationDetails = getRadiationDetails();
 </script>
 
-<h3 class="font-xl mt-0">Strahlentherapie</h3>
+<h3 class="mt-0 text-xl">Strahlentherapie</h3>
 
 <div class={["grid grid-cols-1 gap-8 md:grid-cols-2", classes]}>
 	<!-- Treatment Period and Intention Section -->

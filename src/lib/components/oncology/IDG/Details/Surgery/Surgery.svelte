@@ -36,7 +36,7 @@
 </script>
 
 <div data-tutorial="surgery-header" class="flex flex-row items-baseline justify-start gap-2">
-	<h3 class="font-xl mt-0">Operation</h3>
+	<h3 class="mt-0 text-xl">Operation</h3>
 	<div
 		class={[
 			"text-muted-foreground",

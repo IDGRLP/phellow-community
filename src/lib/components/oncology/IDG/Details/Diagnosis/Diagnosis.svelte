@@ -60,7 +60,7 @@
 </script>
 
 <div class="flex flex-row items-baseline justify-start gap-2" data-tutorial="diagnosis-header">
-	<h3 class="font-xl mt-0">Diagnose</h3>
+	<h3 class="mt-0 text-xl">Diagnose</h3>
 	<div
 		class={[
 			"text-muted-foreground",
