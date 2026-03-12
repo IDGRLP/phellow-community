@@ -20,7 +20,10 @@ scenarios.
 ├── docker-compose.yml      # Default (production-ready)
 ├── docker-compose.development.yml  # Full development stack
 ├── docker-compose.local.yml # Local development
-└── docker-compose.test.yml  # Testing environment
+├── docker-compose.test.yml  # Testing environment
+└── scripts/
+    ├── dev-entrypoint.sh    # Auto-installs deps when lockfile changes
+    └── migrate.sh           # Database migration script
 ```
 
 ## 🚀 Quick Start
@@ -66,6 +69,7 @@ Full development stack with hot reloading at <http://localhost:5173>
 
 - ✅ Hot reloading with volume mounts
 - ✅ All mock services (OIDC, API, DB)
+- ✅ Auto-syncing dependencies (no rebuild needed for `pnpm add/remove`)
 - ✅ Debug environment
 - 🔗 App: <http://localhost:5173>
 - 🔗 API Mock: <http://localhost:3000>
@@ -179,6 +183,19 @@ docker-compose down && docker-compose up
 # Or just run migration manually
 docker-compose run --rm migrate
 ```
+
+### Dependency Sync (Development)
+
+The development `web` service uses a named volume for `node_modules` and an entrypoint script
+(`scripts/dev-entrypoint.sh`) that automatically runs `pnpm install` when `pnpm-lock.yaml` changes.
+
+- **Adding/removing dependencies**: Just run `pnpm add <pkg>` on your host, then restart the
+  container: `docker compose -f docker-compose.development.yml restart web`
+- **No rebuild needed**: The container detects lockfile changes and installs automatically on
+  startup
+- **Clean dependency state**: To force a fresh install, remove the named volume:
+  `docker compose -f docker-compose.development.yml down -v` (also removes database data) or
+  `docker volume rm inkapp-dev_web_node_modules`
 
 ### Troubleshooting
 

@@ -92,7 +92,7 @@ mkdir -p inkapp-deployment-package
 cp -r src inkapp-deployment-package/
 cp -r static inkapp-deployment-package/
 cp -r samples inkapp-deployment-package/
-cp -r scripts inkapp-deployment-package/
+cp -r scripts inkapp-deployment-package/          # includes dev-entrypoint.sh
 cp -r drizzle inkapp-deployment-package/
 cp -r messages inkapp-deployment-package/
 cp -r patches inkapp-deployment-package/
@@ -357,6 +357,16 @@ The development environment supports hot reload:
 - Changes automatically reflected in browser
 - No need to restart containers
 
+### Dependency Changes
+
+Dependencies are managed via a named Docker volume and auto-synced on container startup:
+
+- After adding/removing packages (updating `pnpm-lock.yaml`), just restart the web service:
+  `docker compose -f docker-compose.development.yml restart web`
+- No image rebuild is needed — the entrypoint script detects lockfile changes and runs
+  `pnpm install`
+- To force a clean reinstall: `docker volume rm inkapp-dev_web_node_modules` then start again
+
 ## Troubleshooting
 
 ### Services Won't Start
@@ -416,7 +426,12 @@ docker compose -f docker-compose.development.yml exec web ls -la src/
 # Verify all dependencies installed
 docker compose -f docker-compose.development.yml exec web pnpm list
 
-# Rebuild if needed
+# Force dependency reinstall (clear the named volume)
+docker compose -f docker-compose.development.yml down
+docker volume rm inkapp-dev_web_node_modules
+docker compose -f docker-compose.development.yml up -d
+
+# Rebuild base image if needed (e.g. Node.js version change)
 docker compose -f docker-compose.development.yml up -d --build web
 ```
 
@@ -473,6 +488,10 @@ When you have new versions:
 4. Stop services: `docker compose -f docker-compose.development.yml down`
 5. Load new images: `docker load -i new-image.tar`
 6. Start services: `docker compose -f docker-compose.development.yml up -d`
+
+> **Note**: For dependency-only changes (no Node.js or system-level changes), you do **not** need to
+> rebuild and transfer images. Just update `package.json` and `pnpm-lock.yaml` in the source code —
+> the container will auto-install new dependencies on next startup.
 
 ### Backup Database
 

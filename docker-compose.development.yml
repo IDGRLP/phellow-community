@@ -108,6 +108,16 @@ services:
       - ./svelte.config.js:/home/node/app/svelte.config.js
       - ./tsconfig.ts:/home/node/app/tsconfig.ts
       - ./messages:/home/node/app/messages
+      # Dependency sync - mount lockfile so container auto-installs on changes
+      - ./package.json:/home/node/app/package.json:ro
+      - ./pnpm-lock.yaml:/home/node/app/pnpm-lock.yaml:ro
+      - ./patches:/home/node/app/patches:ro
+      # Named volume for node_modules (container-owned, survives restarts)
+      - web_node_modules:/home/node/app/node_modules
+      # Entrypoint script
+      - ./scripts/dev-entrypoint.sh:/home/node/app/dev-entrypoint.sh:ro
+    entrypoint: ["/sbin/tini", "--", "/home/node/app/dev-entrypoint.sh"]
+    command: ["pnpm", "dev", "--host", "0.0.0.0"]
     environment:
       - NODE_ENV=development
     env_file:
@@ -116,3 +126,4 @@ services:
 
 volumes:
   postgres_dev_data:
+  web_node_modules:
