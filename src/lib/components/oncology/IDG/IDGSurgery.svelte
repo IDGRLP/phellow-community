@@ -20,6 +20,11 @@
 			| undefined
 	);
 
+	let subjectReference = $derived(
+		procedure?.id ? { reference: `Procedure/${procedure.id}` } : undefined
+	);
+	let sourceReference = $derived(procedure?.subject);
+
 	let currentItemLinkId = $state<string | undefined>(undefined);
 
 	function handleCurrentItemChange(itemLinkId?: string): void {
@@ -47,6 +52,8 @@
 	{cancelFeedback}
 	questionnaire={surgeryFeedback}
 	onCurrentItemChange={handleCurrentItemChange}
+	subject={subjectReference}
+	source={sourceReference}
 >
 	{#snippet children()}
 		{#if procedure}

@@ -326,4 +326,43 @@ describe("createQuestionnaireResponse", () => {
 		// Default full date
 		expect(response.item?.[4]?.answer?.[0]?.valueDate).toBe("2023-06-15");
 	});
+
+	test("sets subject and source when references are provided", () => {
+		const questionnaire: Questionnaire = {
+			resourceType: "Questionnaire",
+			status: "active",
+			title: "Ref Test",
+			id: "ref_test",
+			item: [{ linkId: "q1", text: "Q", type: "string" }],
+		};
+
+		const answers = new SvelteMap<string, QuestionnaireAnswer>();
+		answers.set("q1", { linkId: "q1", value: "A" });
+
+		const response = createQuestionnaireResponse(questionnaire, answers, {
+			subject: { reference: "Condition/cond-1" },
+			source: { reference: "Patient/pat-1" },
+		});
+
+		expect(response.subject).toEqual({ reference: "Condition/cond-1" });
+		expect(response.source).toEqual({ reference: "Patient/pat-1" });
+	});
+
+	test("omits subject and source when references are not provided", () => {
+		const questionnaire: Questionnaire = {
+			resourceType: "Questionnaire",
+			status: "active",
+			title: "No Ref Test",
+			id: "no_ref_test",
+			item: [{ linkId: "q1", text: "Q", type: "string" }],
+		};
+
+		const answers = new SvelteMap<string, QuestionnaireAnswer>();
+		answers.set("q1", { linkId: "q1", value: "A" });
+
+		const response = createQuestionnaireResponse(questionnaire, answers);
+
+		expect(response.subject).toBeUndefined();
+		expect(response.source).toBeUndefined();
+	});
 });

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Questionnaire, QuestionnaireResponse } from "fhir/r4";
+	import type { Questionnaire, QuestionnaireResponse, Reference } from "fhir/r4";
 	import QuestionnaireForm from "$components/questionnaire/QuestionnaireForm.svelte";
 	import { Button } from "$ui/button";
 	import { type Snippet } from "svelte";
@@ -11,6 +11,8 @@
 		children: Snippet;
 		feedback?: Snippet;
 		onCurrentItemChange?: (itemLinkId?: string) => void;
+		subject?: Reference;
+		source?: Reference;
 	}
 
 	let {
@@ -20,6 +22,8 @@
 		children,
 		feedback,
 		onCurrentItemChange,
+		subject,
+		source,
 	}: Props = $props();
 
 	function onSubmit(response: QuestionnaireResponse): void {
@@ -47,7 +51,13 @@
 			{#if feedback}
 				{@render feedback()}
 			{:else if questionnaire}
-				<QuestionnaireForm resource={questionnaire} {onSubmit} {onCurrentItemChange} />
+				<QuestionnaireForm
+					resource={questionnaire}
+					{onSubmit}
+					{onCurrentItemChange}
+					{subject}
+					{source}
+				/>
 			{/if}
 			<Button variant="destructive" onclick={onCancelFeedback}>Feedback Abbrechen</Button>
 		</div>

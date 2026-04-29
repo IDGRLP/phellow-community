@@ -29,6 +29,10 @@
 				},
 				{
 					"type": "route",
+					"uuid": "c1e7d8a4-2f3b-4d5e-9a0b-7c4f1e2b3d9a"
+				},
+				{
+					"type": "route",
 					"uuid": "8723a8b8-1c10-4ea4-9895-bbcf8dda92d6"
 				},
 				{
@@ -298,6 +302,64 @@
 					"filePath": "./fhir/questionnaires/{{urlParam 'id'}}-response.json",
 					"databucketID": "",
 					"sendFileAsBody": true,
+					"rules": [],
+					"rulesOperator": "OR",
+					"disableTemplating": false,
+					"fallbackTo404": false,
+					"default": true,
+					"crudKey": "id",
+					"callbacks": []
+				}
+			],
+			"responseMode": null,
+			"streamingMode": null,
+			"streamingInterval": 0
+		},
+		{
+			"uuid": "c1e7d8a4-2f3b-4d5e-9a0b-7c4f1e2b3d9a",
+			"type": "http",
+			"documentation": "Search QuestionnaireResponse by subject (briefing §3.4)",
+			"method": "get",
+			"endpoint": "fhir/QuestionnaireResponse",
+			"responses": [
+				{
+					"uuid": "d2f8e9b5-3a4c-4e6f-a1b2-8d5f2a3c4e0b",
+					"body": "{}",
+					"latency": 0,
+					"statusCode": 200,
+					"label": "Searchset with diagnose feedback QR for Condition/e5fab94a...",
+					"headers": [],
+					"bodyType": "FILE",
+					"filePath": "./fhir/inkapp/questionnaireResponses/diagnoseFeedback.searchset.json",
+					"databucketID": "",
+					"sendFileAsBody": true,
+					"rules": [
+						{
+							"target": "query",
+							"modifier": "subject",
+							"value": "Condition/e5fab94a17c480d911d43b23bf87d290f868c84400edf8e224ffa4db68c90ef6",
+							"invert": false,
+							"operator": "equals"
+						}
+					],
+					"rulesOperator": "OR",
+					"disableTemplating": false,
+					"fallbackTo404": false,
+					"default": false,
+					"crudKey": "id",
+					"callbacks": []
+				},
+				{
+					"uuid": "e3a9f0c6-4b5d-4f7a-b2c3-9e6a3b4d5f1c",
+					"body": "{\n\t\"resourceType\": \"Bundle\",\n\t\"id\": \"qr-search-empty\",\n\t\"type\": \"searchset\",\n\t\"total\": 0,\n\t\"link\": [\n\t\t{\n\t\t\t\"relation\": \"self\",\n\t\t\t\"url\": \"http://{{hostname}}:3000/fhir/QuestionnaireResponse\"\n\t\t}\n\t],\n\t\"entry\": []\n}",
+					"latency": 0,
+					"statusCode": 200,
+					"label": "Empty searchset (no prior QR for this subject)",
+					"headers": [],
+					"bodyType": "INLINE",
+					"filePath": "",
+					"databucketID": "",
+					"sendFileAsBody": false,
 					"rules": [],
 					"rulesOperator": "OR",
 					"disableTemplating": false,

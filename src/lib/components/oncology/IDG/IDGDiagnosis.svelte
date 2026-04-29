@@ -73,6 +73,11 @@
 			.filter((observation) => observation.focus?.some((f) => f.reference?.includes(conditionId)))
 	);
 
+	let subjectReference = $derived(
+		condition?.id ? { reference: `Condition/${condition.id}` } : undefined
+	);
+	let sourceReference = $derived(condition?.subject);
+
 	let psaValues = $derived(
 		bundle.entry
 			?.filter((entry) =>
@@ -90,6 +95,8 @@
 	{cancelFeedback}
 	questionnaire={diagnosisFeedback}
 	onCurrentItemChange={handleCurrentItemChange}
+	subject={subjectReference}
+	source={sourceReference}
 >
 	{#snippet children()}
 		{#if condition}

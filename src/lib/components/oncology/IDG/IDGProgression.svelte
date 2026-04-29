@@ -24,6 +24,11 @@
 	function handleCurrentItemChange(itemLinkId?: string): void {
 		currentItemLinkId = itemLinkId;
 	}
+
+	let subjectReference = $derived(
+		observation?.id ? { reference: `Observation/${observation.id}` } : undefined
+	);
+	let sourceReference = $derived(observation?.subject);
 </script>
 
 <IDGLayout
@@ -31,6 +36,8 @@
 	{cancelFeedback}
 	questionnaire={progressionFeedback}
 	onCurrentItemChange={handleCurrentItemChange}
+	subject={subjectReference}
+	source={sourceReference}
 >
 	{#snippet children()}
 		{#if observation}

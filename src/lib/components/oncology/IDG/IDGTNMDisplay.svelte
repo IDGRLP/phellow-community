@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Bundle } from "fhir/r4";
+	import type { Bundle, Observation } from "fhir/r4";
 	import tnmFeedback from "./IDGTNMFeedback";
 	import TnmDisplay from "../TNMDisplay.svelte";
 	import { parseStageGroupObservation } from "./parseTNM";
@@ -21,6 +21,14 @@
 	}
 
 	let tnmData = $derived(parseStageGroupObservation(observationId, bundle));
+
+	let tnmObservation = $derived(
+		bundle.entry?.find((entry) => entry.resource?.id === observationId)?.resource as
+			| Observation
+			| undefined
+	);
+	let subjectReference = $derived({ reference: `Observation/${observationId}` });
+	let sourceReference = $derived(tnmObservation?.subject);
 </script>
 
 <IDGLayout
@@ -28,6 +36,8 @@
 	{cancelFeedback}
 	questionnaire={tnmFeedback}
 	onCurrentItemChange={handleCurrentItemChange}
+	subject={subjectReference}
+	source={sourceReference}
 >
 	{#snippet children()}
 		{#if tnmData}

@@ -1,6 +1,6 @@
 <!-- src/lib/components/questionnaire/QuestionnaireRenderer.svelte -->
 <script lang="ts">
-	import type { Questionnaire, QuestionnaireResponse } from "fhir/r4";
+	import type { Questionnaire, QuestionnaireResponse, Reference } from "fhir/r4";
 
 	import * as m from "$lib/paraglide/messages";
 
@@ -19,9 +19,11 @@
 		questionnaire: Questionnaire;
 		onSubmit?: (response: QuestionnaireResponse) => void;
 		onCurrentItemChange?: (itemLinkId: string) => void;
+		subject?: Reference;
+		source?: Reference;
 	}
 
-	let { questionnaire, onSubmit, onCurrentItemChange }: Props = $props();
+	let { questionnaire, onSubmit, onCurrentItemChange, subject, source }: Props = $props();
 
 	const questionnaireState = createQuestionnaireState(questionnaire);
 
@@ -65,7 +67,10 @@
 		}
 
 		// Create FHIR QuestionnaireResponse
-		const response = createQuestionnaireResponse(questionnaire, questionnaireState.answers);
+		const response = createQuestionnaireResponse(questionnaire, questionnaireState.answers, {
+			subject,
+			source,
+		});
 
 		// Call the onSubmit handler
 		if (onSubmit) {

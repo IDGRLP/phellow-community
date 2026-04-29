@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Questionnaire, QuestionnaireResponse } from "fhir/r4";
+	import type { Questionnaire, QuestionnaireResponse, Reference } from "fhir/r4";
 
 	import * as m from "$lib/paraglide/messages";
 
@@ -16,9 +16,18 @@
 		onSubmit?: (response: QuestionnaireResponse) => void;
 		canStartOver?: boolean;
 		onCurrentItemChange?: (itemLinkId: string) => void;
+		subject?: Reference;
+		source?: Reference;
 	}
 
-	let { resource, onSubmit, canStartOver = false, onCurrentItemChange }: Props = $props();
+	let {
+		resource,
+		onSubmit,
+		canStartOver = false,
+		onCurrentItemChange,
+		subject,
+		source,
+	}: Props = $props();
 
 	let submitted = $state(false);
 	let response = $state<QuestionnaireResponse | null>(null);
@@ -51,6 +60,8 @@
 				questionnaire={resource}
 				onSubmit={handleSubmit}
 				{onCurrentItemChange}
+				{subject}
+				{source}
 			/>
 		</div>
 	{:else}

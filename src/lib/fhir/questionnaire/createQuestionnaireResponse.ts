@@ -5,14 +5,21 @@ import type {
 	QuestionnaireResponse,
 	QuestionnaireResponseItem,
 	QuestionnaireResponseItemAnswer,
+	Reference,
 } from "fhir/r4";
+
+export interface QuestionnaireResponseReferences {
+	subject?: Reference;
+	source?: Reference;
+}
 
 /**
  * Creates a FHIR QuestionnaireResponse from the given questionnaire and answers
  */
 export function createQuestionnaireResponse(
 	questionnaire: Questionnaire,
-	answers: Map<string, QuestionnaireAnswer>
+	answers: Map<string, QuestionnaireAnswer>,
+	references?: QuestionnaireResponseReferences
 ): QuestionnaireResponse {
 	const now = new Date().toISOString();
 
@@ -28,6 +35,13 @@ export function createQuestionnaireResponse(
 	// Add metadata
 	if (questionnaire.id) {
 		response.questionnaire = questionnaire.id;
+	}
+
+	if (references?.subject) {
+		response.subject = references.subject;
+	}
+	if (references?.source) {
+		response.source = references.source;
 	}
 
 	return response;
