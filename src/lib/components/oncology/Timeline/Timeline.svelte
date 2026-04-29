@@ -18,7 +18,8 @@
 	import IdgSystemicTherapy from "../IDG/IDGSystemicTherapy.svelte";
 	import IdgRadiation from "../IDG/IDGRadiation.svelte";
 	import IdgTNMDisplay from "../IDG/IDGTNMDisplay.svelte";
-	import type { Bundle } from "fhir/r4";
+	import type { Bundle, QuestionnaireResponse } from "fhir/r4";
+	import MessageCircleCheck from "@lucide/svelte/icons/message-circle-check";
 
 	import * as m from "$lib/paraglide/messages";
 	import CircleHelp from "@lucide/svelte/icons/circle-help";
@@ -48,6 +49,39 @@
 	}
 
 	let showDrawer = $derived(!!selectedEvent);
+
+	let selectedResource = $derived(
+		bundle.entry?.find((e) => e.resource?.id === selectedEvent?.resourceId)?.resource
+	);
+	let selectedSubjectRef = $derived(
+		selectedResource?.id && selectedResource?.resourceType
+			? `${selectedResource.resourceType}/${selectedResource.id}`
+			: undefined
+	);
+	let existingResponse = $state<QuestionnaireResponse | null>(null);
+
+	$effect(() => {
+		const ref = selectedSubjectRef;
+		existingResponse = null;
+		if (!ref) return;
+
+		const controller = new AbortController();
+		fetch(`/fhir/searchQuestionnaireResponse?subject=${encodeURIComponent(ref)}`, {
+			signal: controller.signal,
+		})
+			.then((res) => (res.ok ? res.json() : null))
+			.then((bundle) => {
+				const entry = bundle?.entry?.[0]?.resource as QuestionnaireResponse | undefined;
+				existingResponse = entry ?? null;
+			})
+			.catch((err) => {
+				if (err?.name !== "AbortError") {
+					console.error("Failed to fetch existing QuestionnaireResponse", err);
+				}
+			});
+
+		return () => controller.abort();
+	});
 
 	// Sort events by start date
 	let sortedEvents = $derived([...events].sort((a, b) => compareAsc(a.startDate, b.startDate)));
@@ -228,6 +262,14 @@
 										>
 											Feedback zu diesem Datensatz geben
 										</Button>
+									{/if}
+									{#if existingResponse}
+										<div
+											class="bg-muted text-muted-foreground inline-flex items-center gap-2 self-center rounded-full px-3 py-1 text-xs"
+										>
+											<MessageCircleCheck class="size-3.5" />
+											<span>Bereits abgegebenes Feedback gefunden</span>
+										</div>
 									{/if}
 								</div>
 							</Drawer.Title>

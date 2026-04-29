@@ -39,6 +39,7 @@ const PAGES = {
  */
 const SERVERS = {
   "GET /fhir/resolveReference": `/fhir/resolveReference`,
+  "GET /fhir/searchQuestionnaireResponse": `/fhir/searchQuestionnaireResponse`,
   "GET /documents/[documentId]": (params: { documentId: (string | number) }) => {
     return `/documents/${params['documentId']}`
   }
@@ -167,7 +168,7 @@ export function route<T extends keyof AllTypes>(key: T, ...params: any[]): strin
 */
 export type KIT_ROUTES = {
   PAGES: { '/': never, '/account': never, '/appointments': never, '/appointments/[appointmentId]': 'appointmentId', '/dashboard': never, '/documents': never, '/documents/[documentId]': 'documentId', '/glossary': never, '/labs': never, '/labs/[coding]': 'coding', '/module/oncology': never, '/tasks': never, '/tasks/[id]': 'id', '/login': never, '/login/callback': never }
-  SERVERS: { 'GET /fhir/resolveReference': never, 'GET /documents/[documentId]': 'documentId' }
+  SERVERS: { 'GET /fhir/resolveReference': never, 'GET /fhir/searchQuestionnaireResponse': never, 'GET /documents/[documentId]': 'documentId' }
   ACTIONS: { 'logoutEverywhere /account': never, 'uploadDocument /documents': never, 'login /login': never, 'login /login/callback': never }
   LINKS: Record<string, never>
   Params: { 'appointmentId': never, 'documentId': never, 'coding': never, 'id': never }
