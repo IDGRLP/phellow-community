@@ -1,0 +1,60 @@
+{
+  "resourceType": "QuestionnaireResponse",
+  "questionnaire": "6_Fd",
+  "status": "completed",
+  "subject": {
+    "reference": "Observation/e207fbacd1d077d44f8b448932d0c3de4e1f2e9930f091d92824a5ad322630bb"
+  },
+  "source": {
+    "reference": "Patient/1fbe90622a7eb3955f73cf83279640361b5490b280d6386e91ef2fffc33b2652"
+  },
+  "authored": "2026-04-29T09:05:43.507Z",
+  "item": [
+    {
+      "linkId": "6_Fd_Ver_ins",
+      "text": "Sind die Angaben zum Verlauf korrekt?",
+      "answer": [
+        {
+          "valueCoding": {
+            "code": "incorrectButComplete",
+            "display": "Nein, die angezeigten Informationen sind (teilweise) fehlerhaft, aber an sich vollst\u00e4ndig (falsch, aber vollst\u00e4ndig)"
+          }
+        }
+      ]
+    },
+    {
+      "linkId": "6_1_Fd_Ver_datum",
+      "item": [
+        {
+          "linkId": "6_1_Fd_Ver_datum_choice",
+          "text": "Stimmt das Datum der Verlaufsmeldung?",
+          "answer": [
+            {
+              "valueCoding": {
+                "code": "unknown",
+                "display": "Ich wei\u00df nicht"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "linkId": "6_2_Fd_Ver_target",
+      "item": [
+        {
+          "linkId": "6_2_Fd_Ver_target_choice",
+          "text": "Ist die Angabe zur Gesamtbeurteilung korrekt?",
+          "answer": [
+            {
+              "valueCoding": {
+                "code": "na",
+                "display": "Hierzu m\u00f6chte ich keine Angabe machen"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

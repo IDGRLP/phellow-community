@@ -154,7 +154,7 @@
 					class={[
 						"px-1",
 						showColorForClassifications ? "text-[#3A7070]" : undefined,
-						hovered === "t" ? "rounded-sm bg-[#3A707066]" : "",
+						hovered === "t" ? "rounded-sm bg-[#3A707066] text-black" : "",
 					]}
 				>
 					<b>T</b> steht für Tumor. Es beschreibt wie groß der Tumor ist und ob und wie er sich in angrenzende
@@ -166,7 +166,7 @@
 					class={[
 						"px-1",
 						showColorForClassifications ? "text-[#5B6C9D]" : undefined,
-						hovered === "n" ? "rounded-sm bg-[#5B6C9D66]" : "",
+						hovered === "n" ? "rounded-sm bg-[#5B6C9D66] text-black" : "",
 					]}
 				>
 					<b>N</b> steht für Lymphknoten (englisch Node). Es beschreibt, ob der Tumor in den in seiner
@@ -178,7 +178,7 @@
 					class={[
 						"px-1",
 						showColorForClassifications ? "text-[#5A6B47]" : undefined,
-						hovered === "m" ? "rounded-sm bg-[#5A6B4766]" : "",
+						hovered === "m" ? "rounded-sm bg-[#5A6B4766] text-black" : "",
 					]}
 				>
 					<b>M</b> steht für Metastasen. Es beschreibt, ob sich in vom Tumor entfernten Körperbereichen
@@ -190,7 +190,7 @@
 					class={[
 						"px-1",
 						showColorForClassifications ? "text-[#6E6878]" : undefined,
-						hovered === "l" ? "rounded-sm bg-[#6E687866]" : "",
+						hovered === "l" ? "rounded-sm bg-[#6E687866] text-black" : "",
 					]}
 				>
 					<b>L</b> steht für Lymphgefäßinvasion. Es beschreibt, ob in Tumornähe gelegene Gefäße des Lymphsystems
@@ -202,7 +202,7 @@
 					class={[
 						"px-1",
 						showColorForClassifications ? "text-[#7D6050]" : undefined,
-						hovered === "v" ? "rounded-sm bg-[#7D605066]" : "",
+						hovered === "v" ? "rounded-sm bg-[#7D605066] text-black" : "",
 					]}
 				>
 					<b>V</b> beschreibt, ob es Krebszellen in den Wänden der den Tumor umgebenen Blutgefäße gibt.
@@ -214,7 +214,7 @@
 					class={[
 						"px-1",
 						showColorForClassifications ? "text-[#5E6E85]" : undefined,
-						hovered === "pn" ? "rounded-sm bg-[#5E6E8566]" : "",
+						hovered === "pn" ? "rounded-sm bg-[#5E6E8566] text-black" : "",
 					]}
 				>
 					<b>Pn</b> steht für perineural. Die Nervenbahnen sind von einer Hülle umgeben – den sogenannten

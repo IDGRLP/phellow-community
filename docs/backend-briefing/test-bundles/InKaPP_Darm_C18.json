@@ -1,0 +1,3113 @@
+{
+	"resourceType": "Bundle",
+	"id": "41af809b-e177-423e-a1c5-89b731b74a07",
+	"type": "collection",
+	"timestamp": "2026-01-09T14:14:54.7314603+00:00",
+	"entry": [
+		{
+			"fullUrl": "urn:uuid:1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903",
+			"resource": {
+				"resourceType": "Condition",
+				"id": "1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-diagnose-primaertumor"
+					]
+				},
+				"extension": [
+					{
+						"url": "http://hl7.org/fhir/StructureDefinition/condition-assertedDate",
+						"valueDateTime": "2019-12-27"
+					}
+				],
+				"verificationStatus": {
+					"coding": [
+						{
+							"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-primaertumor-diagnosesicherung",
+							"code": "7"
+						}
+					]
+				},
+				"code": {
+					"coding": [
+						{
+							"system": "http://fhir.de/CodeSystem/bfarm/icd-10-gm",
+							"version": "10 2020 GM",
+							"code": "C18.0"
+						}
+					],
+					"text": "Kolonkarzinom: Zäkum (C18.0)"
+				},
+				"bodySite": [
+					{
+						"coding": [
+							{
+								"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-seitenlokalisation",
+								"code": "T"
+							},
+							{
+								"system": "http://terminology.hl7.org/CodeSystem/icd-o-3",
+								"version": "32",
+								"code": "C18.0"
+							}
+						]
+					}
+				],
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"recordedDate": "2019-12-27"
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:7a1800a744b064f22e758d0280dcfc7c0fc49881a7602a5089db466705d12e47",
+			"resource": {
+				"resourceType": "Condition",
+				"id": "7a1800a744b064f22e758d0280dcfc7c0fc49881a7602a5089db466705d12e47",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-diagnose-primaertumor"
+					]
+				},
+				"extension": [{ "url": "http://hl7.org/fhir/StructureDefinition/condition-assertedDate" }],
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				}
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:7ed63373e5189bdf2547caf5b2d7d04a728f9b0a2e233121b324a9cce7ef3e01",
+			"resource": {
+				"resourceType": "Observation",
+				"id": "7ed63373e5189bdf2547caf5b2d7d04a728f9b0a2e233121b324a9cce7ef3e01",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-fernmetastasen"
+					]
+				},
+				"status": "final",
+				"category": [
+					{
+						"coding": [
+							{
+								"system": "http://terminology.hl7.org/CodeSystem/observation-category",
+								"code": "exam",
+								"display": "Exam"
+							}
+						]
+					}
+				],
+				"code": { "coding": [{ "system": "http://snomed.info/sct", "code": "385421009" }] },
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"focus": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"effectiveDateTime": "2020-01-24",
+				"valueCodeableConcept": {
+					"coding": [
+						{
+							"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-lokalisation-fernmetastasen",
+							"code": "PER"
+						}
+					]
+				}
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:69d57b86961e6d5162c4aa193e10da530a69193df138a3d2a66f8d766a753f2e",
+			"resource": {
+				"resourceType": "Observation",
+				"id": "69d57b86961e6d5162c4aa193e10da530a69193df138a3d2a66f8d766a753f2e",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-fernmetastasen"
+					]
+				},
+				"status": "final",
+				"category": [
+					{
+						"coding": [
+							{
+								"system": "http://terminology.hl7.org/CodeSystem/observation-category",
+								"code": "exam",
+								"display": "Exam"
+							}
+						]
+					}
+				],
+				"code": { "coding": [{ "system": "http://snomed.info/sct", "code": "385421009" }] },
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"focus": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"effectiveDateTime": "2020-01-28",
+				"valueCodeableConcept": {
+					"coding": [
+						{
+							"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-lokalisation-fernmetastasen",
+							"code": "PER"
+						}
+					]
+				}
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:ac4d1bb2ad6b62146dcbd2823f5b64168c1aa80b1f6cf1fd82c245263ce71a31",
+			"resource": {
+				"resourceType": "Observation",
+				"id": "ac4d1bb2ad6b62146dcbd2823f5b64168c1aa80b1f6cf1fd82c245263ce71a31",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-histologie-icdo3"
+					]
+				},
+				"status": "final",
+				"category": [
+					{
+						"coding": [
+							{
+								"system": "http://terminology.hl7.org/CodeSystem/observation-category",
+								"code": "laboratory",
+								"display": "Laboratory"
+							}
+						]
+					}
+				],
+				"code": {
+					"coding": [{ "system": "http://loinc.org", "code": "59847-4", "display": "Histology" }]
+				},
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"focus": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"effectiveDateTime": "2020-01-29",
+				"valueCodeableConcept": {
+					"coding": [
+						{
+							"system": "http://terminology.hl7.org/CodeSystem/icd-o-3",
+							"version": "32",
+							"code": "8140/3"
+						}
+					],
+					"text": "Adeno-Ca nicht näher bez."
+				}
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:39b7a67be150c5034bfe18beef335a28d44ba94e419d7fa5ebf5ea3e2f0dc070",
+			"resource": {
+				"resourceType": "Observation",
+				"id": "39b7a67be150c5034bfe18beef335a28d44ba94e419d7fa5ebf5ea3e2f0dc070",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-histologie-icdo3"
+					]
+				},
+				"status": "final",
+				"category": [
+					{
+						"coding": [
+							{
+								"system": "http://terminology.hl7.org/CodeSystem/observation-category",
+								"code": "laboratory",
+								"display": "Laboratory"
+							}
+						]
+					}
+				],
+				"code": {
+					"coding": [{ "system": "http://loinc.org", "code": "59847-4", "display": "Histology" }]
+				},
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"focus": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"effectiveDateTime": "2020-01-28",
+				"valueCodeableConcept": {
+					"coding": [
+						{
+							"system": "http://terminology.hl7.org/CodeSystem/icd-o-3",
+							"version": "32",
+							"code": "8140/3"
+						}
+					],
+					"text": "Adenokarzinom o.n.A."
+				}
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:942a1cb080f6a33fff5e4d5fc6f211f0716ea1928cd1aa3d3caf5d2079ff2bae",
+			"resource": {
+				"resourceType": "Observation",
+				"id": "942a1cb080f6a33fff5e4d5fc6f211f0716ea1928cd1aa3d3caf5d2079ff2bae",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-histologie-icdo3"
+					]
+				},
+				"status": "final",
+				"category": [
+					{
+						"coding": [
+							{
+								"system": "http://terminology.hl7.org/CodeSystem/observation-category",
+								"code": "laboratory",
+								"display": "Laboratory"
+							}
+						]
+					}
+				],
+				"code": {
+					"coding": [{ "system": "http://loinc.org", "code": "59847-4", "display": "Histology" }]
+				},
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"focus": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"effectiveDateTime": "2020-01-24",
+				"valueCodeableConcept": {
+					"coding": [
+						{
+							"system": "http://terminology.hl7.org/CodeSystem/icd-o-3",
+							"version": "32",
+							"code": "8140/3"
+						}
+					],
+					"text": "Adenokarzinom nicht näher bez."
+				}
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:c0ab3bbe7b587c83950e3b59f7f9a54dabaf7425a75395c354a51b7cd7ce60c4",
+			"resource": {
+				"resourceType": "Observation",
+				"id": "c0ab3bbe7b587c83950e3b59f7f9a54dabaf7425a75395c354a51b7cd7ce60c4",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-grading"
+					]
+				},
+				"status": "final",
+				"category": [
+					{
+						"coding": [
+							{
+								"system": "http://terminology.hl7.org/CodeSystem/observation-category",
+								"code": "laboratory",
+								"display": "Laboratory"
+							}
+						]
+					}
+				],
+				"code": {
+					"coding": [
+						{
+							"system": "http://loinc.org",
+							"code": "33732-9",
+							"display": "Histology grade [Identifier] in Cancer specimen"
+						}
+					]
+				},
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"focus": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"effectiveDateTime": "2020-01-29",
+				"valueCodeableConcept": {
+					"coding": [
+						{
+							"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-grading",
+							"code": "2"
+						}
+					]
+				},
+				"derivedFrom": [
+					{
+						"reference": "Observation/ac4d1bb2ad6b62146dcbd2823f5b64168c1aa80b1f6cf1fd82c245263ce71a31"
+					}
+				]
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:4bf251bd0742403922c769a61546f25dc8dbf119f9e89fdb6947a36752c316a3",
+			"resource": {
+				"resourceType": "Observation",
+				"id": "4bf251bd0742403922c769a61546f25dc8dbf119f9e89fdb6947a36752c316a3",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-grading"
+					]
+				},
+				"status": "final",
+				"category": [
+					{
+						"coding": [
+							{
+								"system": "http://terminology.hl7.org/CodeSystem/observation-category",
+								"code": "laboratory",
+								"display": "Laboratory"
+							}
+						]
+					}
+				],
+				"code": {
+					"coding": [
+						{
+							"system": "http://loinc.org",
+							"code": "33732-9",
+							"display": "Histology grade [Identifier] in Cancer specimen"
+						}
+					]
+				},
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"focus": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"effectiveDateTime": "2020-01-28",
+				"valueCodeableConcept": {
+					"coding": [
+						{
+							"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-grading",
+							"code": "U"
+						}
+					]
+				},
+				"derivedFrom": [
+					{
+						"reference": "Observation/39b7a67be150c5034bfe18beef335a28d44ba94e419d7fa5ebf5ea3e2f0dc070"
+					}
+				]
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:64080b45d843be8fc7f7fee4044b8189e151aa5b8a957d01ac1f10a2a806839b",
+			"resource": {
+				"resourceType": "Observation",
+				"id": "64080b45d843be8fc7f7fee4044b8189e151aa5b8a957d01ac1f10a2a806839b",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-grading"
+					]
+				},
+				"status": "final",
+				"category": [
+					{
+						"coding": [
+							{
+								"system": "http://terminology.hl7.org/CodeSystem/observation-category",
+								"code": "laboratory",
+								"display": "Laboratory"
+							}
+						]
+					}
+				],
+				"code": {
+					"coding": [
+						{
+							"system": "http://loinc.org",
+							"code": "33732-9",
+							"display": "Histology grade [Identifier] in Cancer specimen"
+						}
+					]
+				},
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"focus": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"effectiveDateTime": "2020-01-24",
+				"valueCodeableConcept": {
+					"coding": [
+						{
+							"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-grading",
+							"code": "2"
+						}
+					]
+				},
+				"derivedFrom": [
+					{
+						"reference": "Observation/942a1cb080f6a33fff5e4d5fc6f211f0716ea1928cd1aa3d3caf5d2079ff2bae"
+					}
+				]
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:45175e6f8f8a268d0f1f28954ae8227413930b3e3ba7dae1f458fe911b1c9427",
+			"resource": {
+				"resourceType": "Observation",
+				"id": "45175e6f8f8a268d0f1f28954ae8227413930b3e3ba7dae1f458fe911b1c9427",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-anzahl-befallene-lymphknoten"
+					]
+				},
+				"status": "final",
+				"category": [
+					{
+						"coding": [
+							{
+								"system": "http://terminology.hl7.org/CodeSystem/observation-category",
+								"code": "laboratory",
+								"display": "Laboratory"
+							}
+						]
+					}
+				],
+				"code": {
+					"coding": [
+						{
+							"system": "http://loinc.org",
+							"code": "21893-3",
+							"display": "Regional lymph nodes positive [#] Specimen"
+						}
+					]
+				},
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"focus": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"effectiveDateTime": "2020-01-29",
+				"valueQuantity": { "value": 2, "system": "http://unitsofmeasure.org", "code": "1" },
+				"derivedFrom": [
+					{
+						"reference": "Observation/ac4d1bb2ad6b62146dcbd2823f5b64168c1aa80b1f6cf1fd82c245263ce71a31"
+					}
+				]
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:c1a078610b1b139f05096e19ef35db69c57b93f111d8722b73c68828df6cfa68",
+			"resource": {
+				"resourceType": "Observation",
+				"id": "c1a078610b1b139f05096e19ef35db69c57b93f111d8722b73c68828df6cfa68",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-anzahl-befallene-lymphknoten"
+					]
+				},
+				"status": "final",
+				"category": [
+					{
+						"coding": [
+							{
+								"system": "http://terminology.hl7.org/CodeSystem/observation-category",
+								"code": "laboratory",
+								"display": "Laboratory"
+							}
+						]
+					}
+				],
+				"code": {
+					"coding": [
+						{
+							"system": "http://loinc.org",
+							"code": "21893-3",
+							"display": "Regional lymph nodes positive [#] Specimen"
+						}
+					]
+				},
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"focus": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"effectiveDateTime": "2020-01-28",
+				"derivedFrom": [
+					{
+						"reference": "Observation/39b7a67be150c5034bfe18beef335a28d44ba94e419d7fa5ebf5ea3e2f0dc070"
+					}
+				]
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:9aba26578d8f0f9116874f2e032eb5409e21df2bb2e0b27a8ff4206247fab0ee",
+			"resource": {
+				"resourceType": "Observation",
+				"id": "9aba26578d8f0f9116874f2e032eb5409e21df2bb2e0b27a8ff4206247fab0ee",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-anzahl-befallene-lymphknoten"
+					]
+				},
+				"status": "final",
+				"category": [
+					{
+						"coding": [
+							{
+								"system": "http://terminology.hl7.org/CodeSystem/observation-category",
+								"code": "laboratory",
+								"display": "Laboratory"
+							}
+						]
+					}
+				],
+				"code": {
+					"coding": [
+						{
+							"system": "http://loinc.org",
+							"code": "21893-3",
+							"display": "Regional lymph nodes positive [#] Specimen"
+						}
+					]
+				},
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"focus": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"effectiveDateTime": "2020-01-24",
+				"valueQuantity": { "value": 1, "system": "http://unitsofmeasure.org", "code": "1" },
+				"derivedFrom": [
+					{
+						"reference": "Observation/942a1cb080f6a33fff5e4d5fc6f211f0716ea1928cd1aa3d3caf5d2079ff2bae"
+					}
+				]
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:00521bbb8cb4c849a55faa3a95ae939cfc4ea89c62e494088f0704a36e402ec1",
+			"resource": {
+				"resourceType": "Observation",
+				"id": "00521bbb8cb4c849a55faa3a95ae939cfc4ea89c62e494088f0704a36e402ec1",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-anzahl-untersuchte-lymphknoten"
+					]
+				},
+				"status": "final",
+				"category": [
+					{
+						"coding": [
+							{
+								"system": "http://terminology.hl7.org/CodeSystem/observation-category",
+								"code": "laboratory",
+								"display": "Laboratory"
+							}
+						]
+					}
+				],
+				"code": {
+					"coding": [
+						{
+							"system": "http://loinc.org",
+							"code": "21894-1",
+							"display": "Regional lymph nodes examined [#] Specimen"
+						}
+					]
+				},
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"focus": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"effectiveDateTime": "2020-01-29",
+				"valueQuantity": { "value": 20, "system": "http://unitsofmeasure.org", "code": "1" },
+				"derivedFrom": [
+					{
+						"reference": "Observation/ac4d1bb2ad6b62146dcbd2823f5b64168c1aa80b1f6cf1fd82c245263ce71a31"
+					}
+				]
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:415442d5619876f48c66a578512c0e60138f6777fbec7d7cc0e59ab709c6c321",
+			"resource": {
+				"resourceType": "Observation",
+				"id": "415442d5619876f48c66a578512c0e60138f6777fbec7d7cc0e59ab709c6c321",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-anzahl-untersuchte-lymphknoten"
+					]
+				},
+				"status": "final",
+				"category": [
+					{
+						"coding": [
+							{
+								"system": "http://terminology.hl7.org/CodeSystem/observation-category",
+								"code": "laboratory",
+								"display": "Laboratory"
+							}
+						]
+					}
+				],
+				"code": {
+					"coding": [
+						{
+							"system": "http://loinc.org",
+							"code": "21894-1",
+							"display": "Regional lymph nodes examined [#] Specimen"
+						}
+					]
+				},
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"focus": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"effectiveDateTime": "2020-01-28",
+				"derivedFrom": [
+					{
+						"reference": "Observation/39b7a67be150c5034bfe18beef335a28d44ba94e419d7fa5ebf5ea3e2f0dc070"
+					}
+				]
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:34a6e897abd63e9a214b9c13700a2d214c8eaeccaaa3800e6638db94c570c44e",
+			"resource": {
+				"resourceType": "Observation",
+				"id": "34a6e897abd63e9a214b9c13700a2d214c8eaeccaaa3800e6638db94c570c44e",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-anzahl-untersuchte-lymphknoten"
+					]
+				},
+				"status": "final",
+				"category": [
+					{
+						"coding": [
+							{
+								"system": "http://terminology.hl7.org/CodeSystem/observation-category",
+								"code": "laboratory",
+								"display": "Laboratory"
+							}
+						]
+					}
+				],
+				"code": {
+					"coding": [
+						{
+							"system": "http://loinc.org",
+							"code": "21894-1",
+							"display": "Regional lymph nodes examined [#] Specimen"
+						}
+					]
+				},
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"focus": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"effectiveDateTime": "2020-01-24",
+				"valueQuantity": { "value": 20, "system": "http://unitsofmeasure.org", "code": "1" },
+				"derivedFrom": [
+					{
+						"reference": "Observation/942a1cb080f6a33fff5e4d5fc6f211f0716ea1928cd1aa3d3caf5d2079ff2bae"
+					}
+				]
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:77a37215c8e910dfcf3312f5d33b4949fe1bd50f9cfd2774cc0fb9b5fb7cc38a",
+			"resource": {
+				"resourceType": "Observation",
+				"id": "77a37215c8e910dfcf3312f5d33b4949fe1bd50f9cfd2774cc0fb9b5fb7cc38a",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-anzahl-befallene-sentinel-lymphknoten"
+					]
+				},
+				"status": "final",
+				"category": [
+					{
+						"coding": [
+							{
+								"system": "http://terminology.hl7.org/CodeSystem/observation-category",
+								"code": "laboratory",
+								"display": "Laboratory"
+							}
+						]
+					}
+				],
+				"code": {
+					"coding": [
+						{
+							"system": "http://loinc.org",
+							"code": "85321-6",
+							"display": "Sentinel lymph nodes positive [#] Specimen"
+						}
+					]
+				},
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"focus": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"effectiveDateTime": "2020-01-29",
+				"derivedFrom": [
+					{
+						"reference": "Observation/ac4d1bb2ad6b62146dcbd2823f5b64168c1aa80b1f6cf1fd82c245263ce71a31"
+					}
+				]
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:8e408db73a9e5b62d092432f53e218ba13290372378b35ead755256fcb625b57",
+			"resource": {
+				"resourceType": "Observation",
+				"id": "8e408db73a9e5b62d092432f53e218ba13290372378b35ead755256fcb625b57",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-anzahl-befallene-sentinel-lymphknoten"
+					]
+				},
+				"status": "final",
+				"category": [
+					{
+						"coding": [
+							{
+								"system": "http://terminology.hl7.org/CodeSystem/observation-category",
+								"code": "laboratory",
+								"display": "Laboratory"
+							}
+						]
+					}
+				],
+				"code": {
+					"coding": [
+						{
+							"system": "http://loinc.org",
+							"code": "85321-6",
+							"display": "Sentinel lymph nodes positive [#] Specimen"
+						}
+					]
+				},
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"focus": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"effectiveDateTime": "2020-01-28",
+				"derivedFrom": [
+					{
+						"reference": "Observation/39b7a67be150c5034bfe18beef335a28d44ba94e419d7fa5ebf5ea3e2f0dc070"
+					}
+				]
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:96edabc0dbc2508c48d46bb0d71f6624d8a86e2fa1647257fa6b4253ffc32673",
+			"resource": {
+				"resourceType": "Observation",
+				"id": "96edabc0dbc2508c48d46bb0d71f6624d8a86e2fa1647257fa6b4253ffc32673",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-anzahl-befallene-sentinel-lymphknoten"
+					]
+				},
+				"status": "final",
+				"category": [
+					{
+						"coding": [
+							{
+								"system": "http://terminology.hl7.org/CodeSystem/observation-category",
+								"code": "laboratory",
+								"display": "Laboratory"
+							}
+						]
+					}
+				],
+				"code": {
+					"coding": [
+						{
+							"system": "http://loinc.org",
+							"code": "85321-6",
+							"display": "Sentinel lymph nodes positive [#] Specimen"
+						}
+					]
+				},
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"focus": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"effectiveDateTime": "2020-01-24",
+				"derivedFrom": [
+					{
+						"reference": "Observation/942a1cb080f6a33fff5e4d5fc6f211f0716ea1928cd1aa3d3caf5d2079ff2bae"
+					}
+				]
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:b3aee94f3396ea0ec14b57bf5835267b20122cd4b558b6b33ea158542238e02b",
+			"resource": {
+				"resourceType": "Observation",
+				"id": "b3aee94f3396ea0ec14b57bf5835267b20122cd4b558b6b33ea158542238e02b",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-anzahl-untersuchte-sentinel-lymphknoten"
+					]
+				},
+				"status": "final",
+				"category": [
+					{
+						"coding": [
+							{
+								"system": "http://terminology.hl7.org/CodeSystem/observation-category",
+								"code": "laboratory",
+								"display": "Laboratory"
+							}
+						]
+					}
+				],
+				"code": {
+					"coding": [
+						{
+							"system": "http://loinc.org",
+							"code": "85337-4",
+							"display": "Sentinel lymph nodes examined [#] Specimen"
+						}
+					]
+				},
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"focus": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"effectiveDateTime": "2020-01-29",
+				"derivedFrom": [
+					{
+						"reference": "Observation/ac4d1bb2ad6b62146dcbd2823f5b64168c1aa80b1f6cf1fd82c245263ce71a31"
+					}
+				]
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:6362d7afbf5f5e6abe97c8fddca3c880e83b50296fdfb5814fb6265670228340",
+			"resource": {
+				"resourceType": "Observation",
+				"id": "6362d7afbf5f5e6abe97c8fddca3c880e83b50296fdfb5814fb6265670228340",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-anzahl-untersuchte-sentinel-lymphknoten"
+					]
+				},
+				"status": "final",
+				"category": [
+					{
+						"coding": [
+							{
+								"system": "http://terminology.hl7.org/CodeSystem/observation-category",
+								"code": "laboratory",
+								"display": "Laboratory"
+							}
+						]
+					}
+				],
+				"code": {
+					"coding": [
+						{
+							"system": "http://loinc.org",
+							"code": "85337-4",
+							"display": "Sentinel lymph nodes examined [#] Specimen"
+						}
+					]
+				},
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"focus": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"effectiveDateTime": "2020-01-28",
+				"derivedFrom": [
+					{
+						"reference": "Observation/39b7a67be150c5034bfe18beef335a28d44ba94e419d7fa5ebf5ea3e2f0dc070"
+					}
+				]
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:f87d73b6c0845d62afa5a4168385f968f1f59b62038fd60f74b12f1235a2d0a5",
+			"resource": {
+				"resourceType": "Observation",
+				"id": "f87d73b6c0845d62afa5a4168385f968f1f59b62038fd60f74b12f1235a2d0a5",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-anzahl-untersuchte-sentinel-lymphknoten"
+					]
+				},
+				"status": "final",
+				"category": [
+					{
+						"coding": [
+							{
+								"system": "http://terminology.hl7.org/CodeSystem/observation-category",
+								"code": "laboratory",
+								"display": "Laboratory"
+							}
+						]
+					}
+				],
+				"code": {
+					"coding": [
+						{
+							"system": "http://loinc.org",
+							"code": "85337-4",
+							"display": "Sentinel lymph nodes examined [#] Specimen"
+						}
+					]
+				},
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"focus": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"effectiveDateTime": "2020-01-24",
+				"derivedFrom": [
+					{
+						"reference": "Observation/942a1cb080f6a33fff5e4d5fc6f211f0716ea1928cd1aa3d3caf5d2079ff2bae"
+					}
+				]
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:d238a68943102755c7ffde65219cb5a649112027fcc0fa516f2c02b7adba63e7",
+			"resource": {
+				"resourceType": "Procedure",
+				"id": "d238a68943102755c7ffde65219cb5a649112027fcc0fa516f2c02b7adba63e7",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-operation"
+					]
+				},
+				"extension": [
+					{
+						"url": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-ex-onko-operation-intention",
+						"valueCodeableConcept": {
+							"coding": [
+								{
+									"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-intention",
+									"code": "K"
+								}
+							]
+						}
+					}
+				],
+				"status": "completed",
+				"code": {
+					"coding": [
+						{ "system": "http://fhir.de/CodeSystem/bfarm/ops", "code": "5-455.41" },
+						{ "system": "http://fhir.de/CodeSystem/bfarm/ops", "code": "5-406.9" },
+						{ "system": "http://fhir.de/CodeSystem/bfarm/ops", "code": "1-559.2" }
+					]
+				},
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"performedDateTime": "2020-01-24",
+				"reasonReference": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"outcome": {
+					"coding": [
+						{
+							"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-residualstatus-lokal",
+							"code": "R1"
+						}
+					]
+				},
+				"complication": [
+					{
+						"coding": [
+							{
+								"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-operation-komplikation",
+								"code": "N"
+							}
+						]
+					}
+				]
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:306a52f1275fb939c52620a5f1ffee5fe3d4be098dee23f2b44074664f206c89",
+			"resource": {
+				"resourceType": "Observation",
+				"id": "306a52f1275fb939c52620a5f1ffee5fe3d4be098dee23f2b44074664f206c89",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-residualstatus"
+					]
+				},
+				"status": "final",
+				"category": [
+					{
+						"coding": [
+							{
+								"system": "http://terminology.hl7.org/CodeSystem/observation-category",
+								"code": "laboratory",
+								"display": "Laboratory"
+							}
+						]
+					}
+				],
+				"code": {
+					"coding": [
+						{
+							"system": "http://loinc.org",
+							"code": "84892-9",
+							"display": "Residual tumor classification"
+						}
+					]
+				},
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"focus": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"effectiveDateTime": "2021-04-19",
+				"valueCodeableConcept": {
+					"coding": [
+						{
+							"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-residualstatus",
+							"code": "RX"
+						}
+					]
+				}
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:e743ceee4ff7314b1d56185aa5907ff67923e89dba2907146fa4cf697ac17e68",
+			"resource": {
+				"resourceType": "Observation",
+				"id": "e743ceee4ff7314b1d56185aa5907ff67923e89dba2907146fa4cf697ac17e68",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-residualstatus"
+					]
+				},
+				"status": "final",
+				"category": [
+					{
+						"coding": [
+							{
+								"system": "http://terminology.hl7.org/CodeSystem/observation-category",
+								"code": "laboratory",
+								"display": "Laboratory"
+							}
+						]
+					}
+				],
+				"code": {
+					"coding": [
+						{
+							"system": "http://loinc.org",
+							"code": "84892-9",
+							"display": "Residual tumor classification"
+						}
+					]
+				},
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"focus": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"effectiveDateTime": "2020-01-24",
+				"valueCodeableConcept": {
+					"coding": [
+						{
+							"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-residualstatus",
+							"code": "R1"
+						}
+					]
+				}
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:af7a5fa16774278758fe1fd469f8a9c4449624ca718b31f8e7be4e416cecb909",
+			"resource": {
+				"resourceType": "Observation",
+				"id": "af7a5fa16774278758fe1fd469f8a9c4449624ca718b31f8e7be4e416cecb909",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-residualstatus"
+					]
+				},
+				"status": "final",
+				"category": [
+					{
+						"coding": [
+							{
+								"system": "http://terminology.hl7.org/CodeSystem/observation-category",
+								"code": "laboratory",
+								"display": "Laboratory"
+							}
+						]
+					}
+				],
+				"code": {
+					"coding": [
+						{
+							"system": "http://loinc.org",
+							"code": "84892-9",
+							"display": "Residual tumor classification"
+						}
+					]
+				},
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"focus": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"effectiveDateTime": "2021-03-20",
+				"valueCodeableConcept": {
+					"coding": [
+						{
+							"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-residualstatus",
+							"code": "RX"
+						}
+					]
+				}
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:78639711eb22800d1a2b4e54b733ecd00f77714af551d5b453dd5fb524d44798",
+			"resource": {
+				"resourceType": "Observation",
+				"id": "78639711eb22800d1a2b4e54b733ecd00f77714af551d5b453dd5fb524d44798",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-residualstatus"
+					]
+				},
+				"status": "final",
+				"category": [
+					{
+						"coding": [
+							{
+								"system": "http://terminology.hl7.org/CodeSystem/observation-category",
+								"code": "laboratory",
+								"display": "Laboratory"
+							}
+						]
+					}
+				],
+				"code": {
+					"coding": [
+						{
+							"system": "http://loinc.org",
+							"code": "84892-9",
+							"display": "Residual tumor classification"
+						}
+					]
+				},
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"focus": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"effectiveDateTime": "2021-03-20",
+				"valueCodeableConcept": {
+					"coding": [
+						{
+							"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-residualstatus",
+							"code": "RX"
+						}
+					]
+				}
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:7c82ea1762d9beaa8ef33baa7c3e1e4d1ec41695647a05fb61153f6fe859c01e",
+			"resource": {
+				"resourceType": "Procedure",
+				"id": "7c82ea1762d9beaa8ef33baa7c3e1e4d1ec41695647a05fb61153f6fe859c01e",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-strahlentherapie-neu"
+					]
+				},
+				"extension": [
+					{
+						"url": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-ex-onko-strahlentherapie-intention",
+						"valueCodeableConcept": {
+							"coding": [
+								{
+									"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-intention",
+									"code": "P"
+								}
+							]
+						}
+					},
+					{
+						"url": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-ex-onko-strahlentherapie-stellungzurop",
+						"valueCodeableConcept": {
+							"coding": [
+								{
+									"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-therapie-stellungzurop",
+									"code": "A"
+								}
+							]
+						}
+					}
+				],
+				"status": "completed",
+				"category": {
+					"coding": [
+						{
+							"system": "http://terminology.hl7.org/CodeSystem/observation-category",
+							"code": "procedure",
+							"display": "Procedure"
+						}
+					]
+				},
+				"code": {
+					"coding": [
+						{
+							"system": "http://snomed.info/sct",
+							"code": "108290001",
+							"display": "Radiation therapy procedure (procedure)"
+						}
+					]
+				},
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"performedPeriod": { "start": "2021-04-19" },
+				"reasonReference": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				]
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:68ad9a310925a8e6c6cf26e5dae0fd78e52a38ea6efa4582d49715773f1fe0a0",
+			"resource": {
+				"resourceType": "Procedure",
+				"id": "68ad9a310925a8e6c6cf26e5dae0fd78e52a38ea6efa4582d49715773f1fe0a0",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-strahlentherapie-neu"
+					]
+				},
+				"extension": [
+					{
+						"url": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-ex-onko-strahlentherapie-intention",
+						"valueCodeableConcept": {
+							"coding": [
+								{
+									"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-intention",
+									"code": "P"
+								}
+							]
+						}
+					},
+					{
+						"url": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-ex-onko-strahlentherapie-stellungzurop",
+						"valueCodeableConcept": {
+							"coding": [
+								{
+									"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-therapie-stellungzurop",
+									"code": "O"
+								}
+							]
+						}
+					}
+				],
+				"status": "completed",
+				"category": {
+					"coding": [
+						{
+							"system": "http://terminology.hl7.org/CodeSystem/observation-category",
+							"code": "procedure",
+							"display": "Procedure"
+						}
+					]
+				},
+				"code": {
+					"coding": [
+						{
+							"system": "http://snomed.info/sct",
+							"code": "108290001",
+							"display": "Radiation therapy procedure (procedure)"
+						}
+					]
+				},
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"performedPeriod": { "start": "2021-05-01", "end": "2021-05-15" },
+				"reasonReference": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"outcome": {
+					"coding": [
+						{
+							"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-therapie-ende-grund",
+							"code": "E"
+						}
+					]
+				}
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:12319758e81de64f38da357f1c0f53289caa25d4b308fad282dfe9b2fd6aee26",
+			"resource": {
+				"resourceType": "Procedure",
+				"id": "12319758e81de64f38da357f1c0f53289caa25d4b308fad282dfe9b2fd6aee26",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-strahlentherapie-bestrahlung-strahlentherapie"
+					]
+				},
+				"extension": [
+					{
+						"url": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-ex-onko-strahlentherapie-bestrahlung-gesamtdosis",
+						"valueQuantity": { "value": 30000, "unit": "Gy", "system": "http://unitsofmeasure.org" }
+					},
+					{
+						"url": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-ex-onko-strahlentherapie-bestrahlung-einzeldosis"
+					},
+					{
+						"url": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-ex-onko-strahlentherapie-bestrahlung-boost"
+					}
+				],
+				"partOf": [
+					{
+						"reference": "Procedure/7c82ea1762d9beaa8ef33baa7c3e1e4d1ec41695647a05fb61153f6fe859c01e"
+					}
+				],
+				"status": "completed",
+				"category": {
+					"coding": [
+						{
+							"system": "http://terminology.hl7.org/CodeSystem/observation-category",
+							"code": "procedure",
+							"display": "Procedure"
+						}
+					]
+				},
+				"code": {
+					"coding": [
+						{
+							"system": "http://snomed.info/sct",
+							"code": "1287742003",
+							"display": "Radiotherapy (procedure)"
+						}
+					]
+				},
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"performedPeriod": { "start": "2021-04-19" },
+				"reasonReference": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"bodySite": [
+					{
+						"extension": [
+							{
+								"url": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-ex-onko-strahlentherapie-bestrahlung-seitenlokalisation",
+								"valueCodeableConcept": {
+									"coding": [
+										{
+											"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-seitenlokalisation",
+											"code": "U"
+										}
+									]
+								}
+							}
+						],
+						"coding": [
+							{
+								"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-strahlentherapie-zielgebiet",
+								"code": "4.+"
+							}
+						]
+					}
+				],
+				"usedCode": [
+					{
+						"coding": [
+							{
+								"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-strahlentherapie-applikationsart",
+								"code": "P"
+							}
+						]
+					}
+				]
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:0301514cc827fa23f1411d1d28a66f634d04c5eb1e3ac769ab1de04519983ea1",
+			"resource": {
+				"resourceType": "Procedure",
+				"id": "0301514cc827fa23f1411d1d28a66f634d04c5eb1e3ac769ab1de04519983ea1",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-strahlentherapie-bestrahlung-strahlentherapie"
+					]
+				},
+				"extension": [
+					{
+						"url": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-ex-onko-strahlentherapie-bestrahlung-gesamtdosis",
+						"valueQuantity": { "value": 30000, "unit": "Gy", "system": "http://unitsofmeasure.org" }
+					},
+					{
+						"url": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-ex-onko-strahlentherapie-bestrahlung-einzeldosis",
+						"valueQuantity": { "value": 3000, "unit": "Gy", "system": "http://unitsofmeasure.org" }
+					},
+					{
+						"url": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-ex-onko-strahlentherapie-bestrahlung-boost"
+					}
+				],
+				"partOf": [
+					{
+						"reference": "Procedure/68ad9a310925a8e6c6cf26e5dae0fd78e52a38ea6efa4582d49715773f1fe0a0"
+					}
+				],
+				"status": "completed",
+				"category": {
+					"coding": [
+						{
+							"system": "http://terminology.hl7.org/CodeSystem/observation-category",
+							"code": "procedure",
+							"display": "Procedure"
+						}
+					]
+				},
+				"code": {
+					"coding": [
+						{
+							"system": "http://snomed.info/sct",
+							"code": "1287742003",
+							"display": "Radiotherapy (procedure)"
+						}
+					]
+				},
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"performedPeriod": { "start": "2021-05-01", "end": "2021-05-15" },
+				"reasonReference": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"bodySite": [
+					{
+						"extension": [
+							{
+								"url": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-ex-onko-strahlentherapie-bestrahlung-seitenlokalisation",
+								"valueCodeableConcept": {
+									"coding": [
+										{
+											"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-seitenlokalisation",
+											"code": "R"
+										}
+									]
+								}
+							}
+						],
+						"coding": [
+							{
+								"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-strahlentherapie-zielgebiet",
+								"code": "5.-"
+							}
+						]
+					}
+				],
+				"usedCode": [
+					{
+						"coding": [
+							{
+								"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-strahlentherapie-applikationsart",
+								"code": "PRCN"
+							}
+						]
+					}
+				]
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:8a7297c31dcf25cdb9515e248c2113cf3d5bd4fc72be3113d7cfd8ce94b54046",
+			"resource": {
+				"resourceType": "MedicationStatement",
+				"id": "8a7297c31dcf25cdb9515e248c2113cf3d5bd4fc72be3113d7cfd8ce94b54046",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-systemische-therapie-medikation"
+					]
+				},
+				"status": "active",
+				"medicationCodeableConcept": { "text": "Fluorouracil" },
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"derivedFrom": [
+					{
+						"reference": "Procedure/9f595aeee7709043d7ae7224d5401e12e691177ebc8c95c68ff9221b0e1aaa24"
+					}
+				],
+				"reasonReference": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				]
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:453d75682dd9baf75674dc9054b48cd4d83cc3dc45fdf4ca35aa6804bb359e2b",
+			"resource": {
+				"resourceType": "MedicationStatement",
+				"id": "453d75682dd9baf75674dc9054b48cd4d83cc3dc45fdf4ca35aa6804bb359e2b",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-systemische-therapie-medikation"
+					]
+				},
+				"status": "active",
+				"medicationCodeableConcept": { "text": "Folinsäure" },
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"derivedFrom": [
+					{
+						"reference": "Procedure/46e86e6547edf3483a2dba64ceb69401bbfe059541a32f6e58cefe86414d86dd"
+					}
+				],
+				"reasonReference": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				]
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:a90ca310600225464bdbfc9221fc8dd73f5d60d700fd7756e47b02c2cad7fb7e",
+			"resource": {
+				"resourceType": "MedicationStatement",
+				"id": "a90ca310600225464bdbfc9221fc8dd73f5d60d700fd7756e47b02c2cad7fb7e",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-systemische-therapie-medikation"
+					]
+				},
+				"status": "active",
+				"medicationCodeableConcept": { "text": "Irinotecan" },
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"derivedFrom": [
+					{
+						"reference": "Procedure/9f595aeee7709043d7ae7224d5401e12e691177ebc8c95c68ff9221b0e1aaa24"
+					}
+				],
+				"reasonReference": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				]
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:9f595aeee7709043d7ae7224d5401e12e691177ebc8c95c68ff9221b0e1aaa24",
+			"resource": {
+				"resourceType": "Procedure",
+				"id": "9f595aeee7709043d7ae7224d5401e12e691177ebc8c95c68ff9221b0e1aaa24",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-systemische-therapie"
+					]
+				},
+				"extension": [
+					{
+						"url": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-ex-onko-intention",
+						"valueCodeableConcept": {
+							"coding": [
+								{
+									"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-intention",
+									"code": "P"
+								}
+							]
+						}
+					}
+				],
+				"status": "completed",
+				"category": {
+					"coding": [
+						{
+							"system": "http://snomed.info/sct",
+							"code": "277132007",
+							"display": "Therapeutic procedure (procedure)"
+						}
+					]
+				},
+				"code": {
+					"coding": [
+						{
+							"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-therapietyp",
+							"code": "CH"
+						}
+					]
+				},
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"performedPeriod": { "start": "2021-03-19", "end": "2021-03-20" },
+				"reasonReference": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"outcome": {
+					"coding": [
+						{
+							"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-therapie-ende-grund",
+							"code": "A"
+						}
+					]
+				}
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:46e86e6547edf3483a2dba64ceb69401bbfe059541a32f6e58cefe86414d86dd",
+			"resource": {
+				"resourceType": "Procedure",
+				"id": "46e86e6547edf3483a2dba64ceb69401bbfe059541a32f6e58cefe86414d86dd",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-systemische-therapie"
+					]
+				},
+				"extension": [
+					{
+						"url": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-ex-onko-intention",
+						"valueCodeableConcept": {
+							"coding": [
+								{
+									"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-intention",
+									"code": "P"
+								}
+							]
+						}
+					}
+				],
+				"status": "completed",
+				"category": {
+					"coding": [
+						{
+							"system": "http://snomed.info/sct",
+							"code": "277132007",
+							"display": "Therapeutic procedure (procedure)"
+						}
+					]
+				},
+				"code": {
+					"coding": [
+						{
+							"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-therapietyp",
+							"code": "SO"
+						}
+					]
+				},
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"performedPeriod": { "start": "2021-03-19", "end": "2021-03-20" },
+				"reasonReference": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"outcome": {
+					"coding": [
+						{
+							"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-therapie-ende-grund",
+							"code": "A"
+						}
+					]
+				}
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:415fec919667f7353502a33cfbfb7e7081d051c03fb8c262806e1763010a804d",
+			"resource": {
+				"resourceType": "Observation",
+				"id": "415fec919667f7353502a33cfbfb7e7081d051c03fb8c262806e1763010a804d",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-tnm-kategorie-l"
+					]
+				},
+				"status": "final",
+				"category": [
+					{
+						"coding": [
+							{
+								"system": "http://loinc.org",
+								"code": "33745-1",
+								"display": "Lymphatic vessel invasion"
+							}
+						]
+					}
+				],
+				"code": {
+					"coding": [
+						{
+							"system": "http://loinc.org",
+							"code": "33745-1",
+							"display": "Lymphatic vessel invasion"
+						}
+					]
+				},
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"focus": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"effectiveDateTime": "2020-01-29",
+				"valueCodeableConcept": { "text": "L0" }
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:630f2502be04e530fc431492d36c6882414a2ff7f165e852ba0a27a4d416359d",
+			"resource": {
+				"resourceType": "Observation",
+				"id": "630f2502be04e530fc431492d36c6882414a2ff7f165e852ba0a27a4d416359d",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-tnm-kategorie-l"
+					]
+				},
+				"status": "final",
+				"category": [
+					{
+						"coding": [
+							{
+								"system": "http://loinc.org",
+								"code": "33745-1",
+								"display": "Lymphatic vessel invasion"
+							}
+						]
+					}
+				],
+				"code": {
+					"coding": [
+						{
+							"system": "http://loinc.org",
+							"code": "33745-1",
+							"display": "Lymphatic vessel invasion"
+						}
+					]
+				},
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"focus": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"effectiveDateTime": "2020-01-24",
+				"valueCodeableConcept": { "text": "L0" }
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:f9359d48c06ce93fd5717708b3d4b91c811c6d2da619d7fd66568ca16ca4566b",
+			"resource": {
+				"resourceType": "Observation",
+				"id": "f9359d48c06ce93fd5717708b3d4b91c811c6d2da619d7fd66568ca16ca4566b",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-tnm-m-kategorie"
+					]
+				},
+				"status": "final",
+				"category": [
+					{
+						"coding": [
+							{
+								"system": "http://loinc.org",
+								"code": "21901-4",
+								"display": "Distant metastases.pathology"
+							}
+						]
+					}
+				],
+				"code": {
+					"extension": [
+						{
+							"url": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-ex-onko-tnm-cp-praefix",
+							"valueCodeableConcept": {
+								"coding": [{ "system": "https://www.uicc.org/resources/tnm", "code": "p" }]
+							}
+						}
+					],
+					"coding": [
+						{
+							"system": "http://loinc.org",
+							"code": "21901-4",
+							"display": "Distant metastases.pathology"
+						}
+					]
+				},
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"focus": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"effectiveDateTime": "2020-01-29",
+				"valueCodeableConcept": {
+					"coding": [
+						{
+							"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-tnm-kategorie",
+							"code": "M1c"
+						}
+					]
+				}
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:efc73849e08e495942898d2304b5193a8fe390c2833a22f719bfd47e85507d8d",
+			"resource": {
+				"resourceType": "Observation",
+				"id": "efc73849e08e495942898d2304b5193a8fe390c2833a22f719bfd47e85507d8d",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-tnm-m-kategorie"
+					]
+				},
+				"status": "final",
+				"category": [
+					{
+						"coding": [
+							{
+								"system": "http://loinc.org",
+								"code": "21901-4",
+								"display": "Distant metastases.pathology"
+							}
+						]
+					}
+				],
+				"code": {
+					"extension": [
+						{
+							"url": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-ex-onko-tnm-cp-praefix",
+							"valueCodeableConcept": {
+								"coding": [{ "system": "https://www.uicc.org/resources/tnm", "code": "p" }]
+							}
+						}
+					],
+					"coding": [
+						{
+							"system": "http://loinc.org",
+							"code": "21901-4",
+							"display": "Distant metastases.pathology"
+						}
+					]
+				},
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"focus": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"effectiveDateTime": "2020-01-28",
+				"valueCodeableConcept": {
+					"coding": [
+						{
+							"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-tnm-kategorie",
+							"code": "M1c"
+						}
+					]
+				}
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:496e6ac0fa8ba9aeffeca93744d0786144c4a6f47479ae8d0193fedbcfa1eea5",
+			"resource": {
+				"resourceType": "Observation",
+				"id": "496e6ac0fa8ba9aeffeca93744d0786144c4a6f47479ae8d0193fedbcfa1eea5",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-tnm-m-kategorie"
+					]
+				},
+				"status": "final",
+				"category": [
+					{
+						"coding": [
+							{
+								"system": "http://loinc.org",
+								"code": "21901-4",
+								"display": "Distant metastases.pathology"
+							}
+						]
+					}
+				],
+				"code": {
+					"extension": [
+						{
+							"url": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-ex-onko-tnm-cp-praefix",
+							"valueCodeableConcept": {
+								"coding": [{ "system": "https://www.uicc.org/resources/tnm", "code": "c" }]
+							}
+						}
+					],
+					"coding": [
+						{
+							"system": "http://loinc.org",
+							"code": "21901-4",
+							"display": "Distant metastases.pathology"
+						}
+					]
+				},
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"focus": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"effectiveDateTime": "2020-01-24",
+				"valueCodeableConcept": {
+					"coding": [
+						{
+							"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-tnm-kategorie",
+							"code": "M1c"
+						}
+					]
+				}
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:b1b8e1173378b3ba22d97d4d0611617c8756b16cf3af4c9623aaab40b48ad2b4",
+			"resource": {
+				"resourceType": "Observation",
+				"id": "b1b8e1173378b3ba22d97d4d0611617c8756b16cf3af4c9623aaab40b48ad2b4",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-tnm-n-kategorie"
+					]
+				},
+				"status": "final",
+				"category": [
+					{
+						"coding": [
+							{
+								"system": "http://loinc.org",
+								"code": "21900-6",
+								"display": "Regional lymph nodes.pathology"
+							}
+						]
+					}
+				],
+				"code": {
+					"extension": [
+						{
+							"url": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-ex-onko-tnm-cp-praefix",
+							"valueCodeableConcept": {
+								"coding": [{ "system": "https://www.uicc.org/resources/tnm", "code": "p" }]
+							}
+						}
+					],
+					"coding": [
+						{
+							"system": "http://loinc.org",
+							"code": "21900-6",
+							"display": "Regional lymph nodes.pathology"
+						}
+					]
+				},
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"focus": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"effectiveDateTime": "2020-01-29",
+				"valueCodeableConcept": {
+					"coding": [
+						{
+							"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-tnm-kategorie",
+							"code": "N1a"
+						}
+					]
+				}
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:33e09294addb88ec16116bf355d626c8b8ea0868a2d38fe341c853b8f29cadf2",
+			"resource": {
+				"resourceType": "Observation",
+				"id": "33e09294addb88ec16116bf355d626c8b8ea0868a2d38fe341c853b8f29cadf2",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-tnm-n-kategorie"
+					]
+				},
+				"status": "final",
+				"category": [
+					{
+						"coding": [
+							{
+								"system": "http://loinc.org",
+								"code": "21900-6",
+								"display": "Regional lymph nodes.pathology"
+							}
+						]
+					}
+				],
+				"code": {
+					"extension": [
+						{
+							"url": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-ex-onko-tnm-cp-praefix",
+							"valueCodeableConcept": {
+								"coding": [{ "system": "https://www.uicc.org/resources/tnm", "code": "p" }]
+							}
+						}
+					],
+					"coding": [
+						{
+							"system": "http://loinc.org",
+							"code": "21900-6",
+							"display": "Regional lymph nodes.pathology"
+						}
+					]
+				},
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"focus": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"effectiveDateTime": "2020-01-24",
+				"valueCodeableConcept": {
+					"coding": [
+						{
+							"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-tnm-kategorie",
+							"code": "N1a"
+						}
+					]
+				}
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:fbf611d1c340aed1ed225ee89bdc561d1c609f148e5fdbd75cfc6b430067f654",
+			"resource": {
+				"resourceType": "Observation",
+				"id": "fbf611d1c340aed1ed225ee89bdc561d1c609f148e5fdbd75cfc6b430067f654",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-tnm-kategorie-pn"
+					]
+				},
+				"status": "final",
+				"category": [
+					{
+						"coding": [
+							{
+								"system": "http://loinc.org",
+								"code": "92837-4",
+								"display": "Perineural invasion [Type]"
+							}
+						]
+					}
+				],
+				"code": {
+					"coding": [
+						{
+							"system": "http://loinc.org",
+							"code": "92837-4",
+							"display": "Perineural invasion [Type]"
+						}
+					]
+				},
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"focus": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"effectiveDateTime": "2020-01-29",
+				"valueCodeableConcept": { "text": "Pn0" }
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:b114bdf7af4f1b553c24f071435fba9607b939f2f1a4dfef9695a09f245de889",
+			"resource": {
+				"resourceType": "Observation",
+				"id": "b114bdf7af4f1b553c24f071435fba9607b939f2f1a4dfef9695a09f245de889",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-tnm-kategorie-pn"
+					]
+				},
+				"status": "final",
+				"category": [
+					{
+						"coding": [
+							{
+								"system": "http://loinc.org",
+								"code": "92837-4",
+								"display": "Perineural invasion [Type]"
+							}
+						]
+					}
+				],
+				"code": {
+					"coding": [
+						{
+							"system": "http://loinc.org",
+							"code": "92837-4",
+							"display": "Perineural invasion [Type]"
+						}
+					]
+				},
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"focus": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"effectiveDateTime": "2020-01-24",
+				"valueCodeableConcept": { "text": "Pn0" }
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:9ae9be8867f07ba85d8fa478919dabd805a8086013243ee3ba12600425608418",
+			"resource": {
+				"resourceType": "Observation",
+				"id": "9ae9be8867f07ba85d8fa478919dabd805a8086013243ee3ba12600425608418",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-tnm-t-kategorie"
+					]
+				},
+				"status": "final",
+				"category": [
+					{
+						"coding": [
+							{
+								"system": "http://loinc.org",
+								"code": "21899-0",
+								"display": "Primary tumor.pathology"
+							}
+						]
+					}
+				],
+				"code": {
+					"extension": [
+						{
+							"url": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-ex-onko-tnm-cp-praefix",
+							"valueCodeableConcept": {
+								"coding": [{ "system": "https://www.uicc.org/resources/tnm", "code": "p" }]
+							}
+						}
+					],
+					"coding": [
+						{
+							"system": "http://loinc.org",
+							"code": "21899-0",
+							"display": "Primary tumor.pathology"
+						}
+					]
+				},
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"focus": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"effectiveDateTime": "2020-01-29",
+				"valueCodeableConcept": {
+					"coding": [
+						{
+							"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-tnm-kategorie",
+							"code": "T3"
+						}
+					]
+				}
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:51aeca4f7c2259d5423ddd6ef0024098a4f1520bebccd3c11fe8761d4be4a4c9",
+			"resource": {
+				"resourceType": "Observation",
+				"id": "51aeca4f7c2259d5423ddd6ef0024098a4f1520bebccd3c11fe8761d4be4a4c9",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-tnm-t-kategorie"
+					]
+				},
+				"status": "final",
+				"category": [
+					{
+						"coding": [
+							{
+								"system": "http://loinc.org",
+								"code": "21899-0",
+								"display": "Primary tumor.pathology"
+							}
+						]
+					}
+				],
+				"code": {
+					"extension": [
+						{
+							"url": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-ex-onko-tnm-cp-praefix",
+							"valueCodeableConcept": {
+								"coding": [{ "system": "https://www.uicc.org/resources/tnm", "code": "p" }]
+							}
+						}
+					],
+					"coding": [
+						{
+							"system": "http://loinc.org",
+							"code": "21899-0",
+							"display": "Primary tumor.pathology"
+						}
+					]
+				},
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"focus": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"effectiveDateTime": "2020-01-24",
+				"valueCodeableConcept": {
+					"coding": [
+						{
+							"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-tnm-kategorie",
+							"code": "T3"
+						}
+					]
+				}
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:a5e017d2ced15b71f81ca7aa2e087c51f026ccfb96e3a80d8eaf394fc29951a1",
+			"resource": {
+				"resourceType": "Observation",
+				"id": "a5e017d2ced15b71f81ca7aa2e087c51f026ccfb96e3a80d8eaf394fc29951a1",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-tnm-kategorie-v"
+					]
+				},
+				"status": "final",
+				"category": [
+					{
+						"coding": [
+							{
+								"system": "http://loinc.org",
+								"code": "95635-0",
+								"display": "Venous invasion [Type]"
+							}
+						]
+					}
+				],
+				"code": {
+					"coding": [
+						{ "system": "http://loinc.org", "code": "95635-0", "display": "Venous invasion [Type]" }
+					]
+				},
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"focus": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"effectiveDateTime": "2020-01-29",
+				"valueCodeableConcept": { "text": "V0" }
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:48b4715aaf3ffcf7fa7ff7c287cba81b2ed8c34777cdb91f8bd23de5fc4ff9d5",
+			"resource": {
+				"resourceType": "Observation",
+				"id": "48b4715aaf3ffcf7fa7ff7c287cba81b2ed8c34777cdb91f8bd23de5fc4ff9d5",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-tnm-kategorie-v"
+					]
+				},
+				"status": "final",
+				"category": [
+					{
+						"coding": [
+							{
+								"system": "http://loinc.org",
+								"code": "95635-0",
+								"display": "Venous invasion [Type]"
+							}
+						]
+					}
+				],
+				"code": {
+					"coding": [
+						{ "system": "http://loinc.org", "code": "95635-0", "display": "Venous invasion [Type]" }
+					]
+				},
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"focus": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"effectiveDateTime": "2020-01-24",
+				"valueCodeableConcept": { "text": "V0" }
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:cca2af0713f92217d0ebfee94b05c043005949406c6d4d82f3e1d61111ac8cdb",
+			"resource": {
+				"resourceType": "Observation",
+				"id": "cca2af0713f92217d0ebfee94b05c043005949406c6d4d82f3e1d61111ac8cdb",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-tnm-klassifikation"
+					]
+				},
+				"status": "final",
+				"category": [
+					{
+						"coding": [
+							{
+								"system": "http://terminology.hl7.org/CodeSystem/observation-category",
+								"code": "exam"
+							}
+						]
+					}
+				],
+				"code": {
+					"coding": [{ "system": "http://loinc.org", "code": "21908-9", "display": "Stage group" }]
+				},
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"focus": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"effectiveDateTime": "2020-01-29",
+				"method": {
+					"coding": [
+						{
+							"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-tnm-version",
+							"code": "8"
+						}
+					]
+				},
+				"hasMember": [
+					{
+						"reference": "Observation/9ae9be8867f07ba85d8fa478919dabd805a8086013243ee3ba12600425608418"
+					},
+					{
+						"reference": "Observation/b1b8e1173378b3ba22d97d4d0611617c8756b16cf3af4c9623aaab40b48ad2b4"
+					},
+					{
+						"reference": "Observation/f9359d48c06ce93fd5717708b3d4b91c811c6d2da619d7fd66568ca16ca4566b"
+					},
+					{
+						"reference": "Observation/415fec919667f7353502a33cfbfb7e7081d051c03fb8c262806e1763010a804d"
+					},
+					{
+						"reference": "Observation/a5e017d2ced15b71f81ca7aa2e087c51f026ccfb96e3a80d8eaf394fc29951a1"
+					},
+					{
+						"reference": "Observation/fbf611d1c340aed1ed225ee89bdc561d1c609f148e5fdbd75cfc6b430067f654"
+					}
+				]
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:fd77d48d9ab63d69f67f4a7039098d15232aa9467859c1deb8c02d0785aaa0a6",
+			"resource": {
+				"resourceType": "Observation",
+				"id": "fd77d48d9ab63d69f67f4a7039098d15232aa9467859c1deb8c02d0785aaa0a6",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-tnm-klassifikation"
+					]
+				},
+				"status": "final",
+				"category": [
+					{
+						"coding": [
+							{
+								"system": "http://terminology.hl7.org/CodeSystem/observation-category",
+								"code": "exam"
+							}
+						]
+					}
+				],
+				"code": {
+					"coding": [{ "system": "http://loinc.org", "code": "21908-9", "display": "Stage group" }]
+				},
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"focus": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"effectiveDateTime": "2020-01-28",
+				"method": {
+					"coding": [
+						{
+							"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-tnm-version",
+							"code": "8"
+						}
+					]
+				},
+				"hasMember": [
+					{
+						"reference": "Observation/efc73849e08e495942898d2304b5193a8fe390c2833a22f719bfd47e85507d8d"
+					}
+				]
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:822afcb420c75f77ada6b6c8a8d2c4bdd7cfe9f4550d28b08da22492ca0ea852",
+			"resource": {
+				"resourceType": "Observation",
+				"id": "822afcb420c75f77ada6b6c8a8d2c4bdd7cfe9f4550d28b08da22492ca0ea852",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-tnm-klassifikation"
+					]
+				},
+				"status": "final",
+				"category": [
+					{
+						"coding": [
+							{
+								"system": "http://terminology.hl7.org/CodeSystem/observation-category",
+								"code": "exam"
+							}
+						]
+					}
+				],
+				"code": {
+					"coding": [{ "system": "http://loinc.org", "code": "21908-9", "display": "Stage group" }]
+				},
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"focus": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"effectiveDateTime": "2020-01-24",
+				"method": {
+					"coding": [
+						{
+							"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-tnm-version",
+							"code": "8"
+						}
+					]
+				},
+				"hasMember": [
+					{
+						"reference": "Observation/51aeca4f7c2259d5423ddd6ef0024098a4f1520bebccd3c11fe8761d4be4a4c9"
+					},
+					{
+						"reference": "Observation/33e09294addb88ec16116bf355d626c8b8ea0868a2d38fe341c853b8f29cadf2"
+					},
+					{
+						"reference": "Observation/496e6ac0fa8ba9aeffeca93744d0786144c4a6f47479ae8d0193fedbcfa1eea5"
+					},
+					{
+						"reference": "Observation/630f2502be04e530fc431492d36c6882414a2ff7f165e852ba0a27a4d416359d"
+					},
+					{
+						"reference": "Observation/48b4715aaf3ffcf7fa7ff7c287cba81b2ed8c34777cdb91f8bd23de5fc4ff9d5"
+					},
+					{
+						"reference": "Observation/b114bdf7af4f1b553c24f071435fba9607b939f2f1a4dfef9695a09f245de889"
+					}
+				]
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:af64fc10422214744b046d645a3434e2169a75c0609794117a70e2d570fee42a",
+			"resource": {
+				"resourceType": "Observation",
+				"id": "af64fc10422214744b046d645a3434e2169a75c0609794117a70e2d570fee42a",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-verlauf"
+					]
+				},
+				"status": "final",
+				"category": [
+					{
+						"coding": [
+							{
+								"system": "http://terminology.hl7.org/CodeSystem/observation-category",
+								"code": "survey",
+								"display": "Survey"
+							}
+						]
+					}
+				],
+				"code": {
+					"coding": [
+						{
+							"system": "http://snomed.info/sct",
+							"code": "396432002",
+							"display": "Status of regression of tumor (observable entity)"
+						}
+					]
+				},
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"focus": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"effectiveDateTime": "2020-07-24",
+				"valueCodeableConcept": {
+					"coding": [
+						{
+							"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-verlauf-gesamtbeurteilung",
+							"code": "V"
+						}
+					]
+				},
+				"component": [
+					{
+						"code": {
+							"coding": [
+								{
+									"system": "http://snomed.info/sct",
+									"code": "277062004",
+									"display": "Status of residual tumor"
+								}
+							]
+						},
+						"valueCodeableConcept": {
+							"coding": [
+								{
+									"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-verlauf-primaertumor",
+									"code": "K"
+								}
+							]
+						}
+					},
+					{
+						"code": {
+							"coding": [
+								{
+									"system": "http://snomed.info/sct",
+									"code": "399656008",
+									"display": "Status of tumor metastasis to regional lymph nodes (observable entity)"
+								}
+							]
+						},
+						"valueCodeableConcept": {
+							"coding": [
+								{
+									"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-verlauf-lymphknoten",
+									"code": "K"
+								}
+							]
+						}
+					},
+					{
+						"code": {
+							"coding": [
+								{
+									"system": "http://snomed.info/sct",
+									"code": "399608002",
+									"display": "Status of distant metastasis (observable entity)"
+								}
+							]
+						},
+						"valueCodeableConcept": {
+							"coding": [
+								{
+									"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-verlauf-fernmetastasen",
+									"code": "K"
+								}
+							]
+						}
+					}
+				]
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:3e52e92dd94bbd99aafc7422308d9bb2b7bae564de03447b0fa98aa736704570",
+			"resource": {
+				"resourceType": "Observation",
+				"id": "3e52e92dd94bbd99aafc7422308d9bb2b7bae564de03447b0fa98aa736704570",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-verlauf"
+					]
+				},
+				"status": "final",
+				"category": [
+					{
+						"coding": [
+							{
+								"system": "http://terminology.hl7.org/CodeSystem/observation-category",
+								"code": "survey",
+								"display": "Survey"
+							}
+						]
+					}
+				],
+				"code": {
+					"coding": [
+						{
+							"system": "http://snomed.info/sct",
+							"code": "396432002",
+							"display": "Status of regression of tumor (observable entity)"
+						}
+					]
+				},
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"focus": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"effectiveDateTime": "2021-02-10",
+				"valueCodeableConcept": {
+					"coding": [
+						{
+							"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-verlauf-gesamtbeurteilung",
+							"code": "P"
+						}
+					]
+				},
+				"component": [
+					{
+						"code": {
+							"coding": [
+								{
+									"system": "http://snomed.info/sct",
+									"code": "277062004",
+									"display": "Status of residual tumor"
+								}
+							]
+						},
+						"valueCodeableConcept": {
+							"coding": [
+								{
+									"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-verlauf-primaertumor",
+									"code": "K"
+								}
+							]
+						}
+					},
+					{
+						"code": {
+							"coding": [
+								{
+									"system": "http://snomed.info/sct",
+									"code": "399656008",
+									"display": "Status of tumor metastasis to regional lymph nodes (observable entity)"
+								}
+							]
+						},
+						"valueCodeableConcept": {
+							"coding": [
+								{
+									"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-verlauf-lymphknoten",
+									"code": "K"
+								}
+							]
+						}
+					},
+					{
+						"code": {
+							"coding": [
+								{
+									"system": "http://snomed.info/sct",
+									"code": "399608002",
+									"display": "Status of distant metastasis (observable entity)"
+								}
+							]
+						},
+						"valueCodeableConcept": {
+							"coding": [
+								{
+									"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-verlauf-fernmetastasen",
+									"code": "P"
+								}
+							]
+						}
+					}
+				]
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:9adecfe272d804867ca211cd7fd24b307a2e2aa3bdb3f0c1b68aee59c4d3276f",
+			"resource": {
+				"resourceType": "Observation",
+				"id": "9adecfe272d804867ca211cd7fd24b307a2e2aa3bdb3f0c1b68aee59c4d3276f",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-verlauf"
+					]
+				},
+				"status": "final",
+				"category": [
+					{
+						"coding": [
+							{
+								"system": "http://terminology.hl7.org/CodeSystem/observation-category",
+								"code": "survey",
+								"display": "Survey"
+							}
+						]
+					}
+				],
+				"code": {
+					"coding": [
+						{
+							"system": "http://snomed.info/sct",
+							"code": "396432002",
+							"display": "Status of regression of tumor (observable entity)"
+						}
+					]
+				},
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"focus": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"effectiveDateTime": "2021-10-20",
+				"valueCodeableConcept": {
+					"coding": [
+						{
+							"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-verlauf-gesamtbeurteilung",
+							"code": "V"
+						}
+					]
+				},
+				"component": [
+					{
+						"code": {
+							"coding": [
+								{
+									"system": "http://snomed.info/sct",
+									"code": "277062004",
+									"display": "Status of residual tumor"
+								}
+							]
+						},
+						"valueCodeableConcept": {
+							"coding": [
+								{
+									"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-verlauf-primaertumor",
+									"code": "K"
+								}
+							]
+						}
+					},
+					{
+						"code": {
+							"coding": [
+								{
+									"system": "http://snomed.info/sct",
+									"code": "399656008",
+									"display": "Status of tumor metastasis to regional lymph nodes (observable entity)"
+								}
+							]
+						},
+						"valueCodeableConcept": {
+							"coding": [
+								{
+									"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-verlauf-lymphknoten",
+									"code": "K"
+								}
+							]
+						}
+					},
+					{
+						"code": {
+							"coding": [
+								{
+									"system": "http://snomed.info/sct",
+									"code": "399608002",
+									"display": "Status of distant metastasis (observable entity)"
+								}
+							]
+						},
+						"valueCodeableConcept": {
+							"coding": [
+								{
+									"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-verlauf-fernmetastasen",
+									"code": "K"
+								}
+							]
+						}
+					}
+				]
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:dda9c307bab0ab476c608a56c488524e92e14d18df084cfcb836fc50d7400fe0",
+			"resource": {
+				"resourceType": "Observation",
+				"id": "dda9c307bab0ab476c608a56c488524e92e14d18df084cfcb836fc50d7400fe0",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-verlauf"
+					]
+				},
+				"status": "final",
+				"category": [
+					{
+						"coding": [
+							{
+								"system": "http://terminology.hl7.org/CodeSystem/observation-category",
+								"code": "survey",
+								"display": "Survey"
+							}
+						]
+					}
+				],
+				"code": {
+					"coding": [
+						{
+							"system": "http://snomed.info/sct",
+							"code": "396432002",
+							"display": "Status of regression of tumor (observable entity)"
+						}
+					]
+				},
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"focus": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"effectiveDateTime": "2020-05-03",
+				"valueCodeableConcept": {
+					"coding": [
+						{
+							"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-verlauf-gesamtbeurteilung",
+							"code": "V"
+						}
+					]
+				},
+				"component": [
+					{
+						"code": {
+							"coding": [
+								{
+									"system": "http://snomed.info/sct",
+									"code": "277062004",
+									"display": "Status of residual tumor"
+								}
+							]
+						},
+						"valueCodeableConcept": {
+							"coding": [
+								{
+									"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-verlauf-primaertumor",
+									"code": "K"
+								}
+							]
+						}
+					},
+					{
+						"code": {
+							"coding": [
+								{
+									"system": "http://snomed.info/sct",
+									"code": "399656008",
+									"display": "Status of tumor metastasis to regional lymph nodes (observable entity)"
+								}
+							]
+						},
+						"valueCodeableConcept": {
+							"coding": [
+								{
+									"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-verlauf-lymphknoten",
+									"code": "K"
+								}
+							]
+						}
+					},
+					{
+						"code": {
+							"coding": [
+								{
+									"system": "http://snomed.info/sct",
+									"code": "399608002",
+									"display": "Status of distant metastasis (observable entity)"
+								}
+							]
+						},
+						"valueCodeableConcept": {
+							"coding": [
+								{
+									"system": "https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/CodeSystem/mii-cs-onko-verlauf-fernmetastasen",
+									"code": "K"
+								}
+							]
+						}
+					}
+				]
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:a35932463fc29b49393fba3e757faa7f6c31aa47b2bb2f763d1ad9d13e48b12c",
+			"resource": {
+				"resourceType": "Observation",
+				"id": "a35932463fc29b49393fba3e757faa7f6c31aa47b2bb2f763d1ad9d13e48b12c",
+				"meta": {
+					"profile": [
+						"https://www.medizininformatik-initiative.de/fhir/ext/modul-onko/StructureDefinition/mii-pr-onko-weitere-klassifikationen"
+					]
+				},
+				"status": "final",
+				"category": [
+					{
+						"coding": [
+							{
+								"system": "http://terminology.hl7.org/CodeSystem/observation-category",
+								"code": "laboratory",
+								"display": "Laboratory"
+							}
+						]
+					}
+				],
+				"code": { "text": "MSI" },
+				"subject": {
+					"reference": "Patient/6076bf2abb713e2981b33ab4746d771cd59e2ae35a0021785204c719ebe535de"
+				},
+				"focus": [
+					{
+						"reference": "Condition/1f171c1cdf50021984aae9d4bf56724261c42b8f7252b3aa85ee2ee090053903"
+					}
+				],
+				"effectiveDateTime": "2020-01-29",
+				"valueCodeableConcept": { "coding": [{ "code": "L" }] }
+			}
+		}
+	]
+}

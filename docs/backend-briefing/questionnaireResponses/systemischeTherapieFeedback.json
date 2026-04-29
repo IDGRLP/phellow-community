@@ -1,0 +1,87 @@
+{
+  "resourceType": "QuestionnaireResponse",
+  "questionnaire": "5_Fd",
+  "status": "completed",
+  "subject": {
+    "reference": "Procedure/de923cd959f48ce9d9a80f9f3f906248d5baf010bfba453215f01fa06f3a456f"
+  },
+  "source": {
+    "reference": "Patient/1fbe90622a7eb3955f73cf83279640361b5490b280d6386e91ef2fffc33b2652"
+  },
+  "authored": "2026-04-29T09:05:09.758Z",
+  "item": [
+    {
+      "linkId": "5_Fd_Sys_ins",
+      "text": "Sind die Angaben zur systemischen Therapie korrekt?",
+      "answer": [
+        {
+          "valueCoding": {
+            "code": "incorrectButComplete",
+            "display": "Nein, die angezeigten Informationen sind (teilweise) fehlerhaft, aber an sich vollst\u00e4ndig (falsch, aber vollst\u00e4ndig)"
+          }
+        }
+      ]
+    },
+    {
+      "linkId": "5_1_Fd_Sys_datum",
+      "item": [
+        {
+          "linkId": "5_1_Fd_Sys_datum_choice",
+          "text": "Stimmt das Datum der systemischen Therapie?",
+          "answer": [
+            {
+              "valueCoding": {
+                "code": "na",
+                "display": "Hierzu m\u00f6chte ich keine Angabe machen"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "linkId": "5_2_Fd_Sys_type",
+      "item": [
+        {
+          "linkId": "5_2_Fd_Sys_type_choice",
+          "text": "Ist die Angabe zum Therapietyp korrekt?",
+          "answer": [
+            {
+              "valueCoding": {
+                "code": "unknown",
+                "display": "Ich wei\u00df nicht"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "linkId": "5_3_Fd_Sys_Ende",
+      "text": "",
+      "item": [
+        {
+          "linkId": "5_3_Fd_Sys_Ende_choice",
+          "text": "Stimmt der Grund f\u00fcr das Ende der Behandlung?",
+          "answer": [
+            {
+              "valueCoding": {
+                "code": "na",
+                "display": "Hierzu m\u00f6chte ich keine Angabe machen"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "linkId": "5_4_Fd_Sys_Freitext_k",
+      "text": "Angabe sonstiger Informationen",
+      "answer": [
+        {
+          "valueString": "freitext"
+        }
+      ]
+    }
+  ]
+}

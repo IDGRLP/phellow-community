@@ -1,0 +1,26 @@
+{
+  "resourceType": "QuestionnaireResponse",
+  "questionnaire": "1_Fd",
+  "status": "completed",
+  "subject": {
+    "reference": "Condition/e5fab94a17c480d911d43b23bf87d290f868c84400edf8e224ffa4db68c90ef6"
+  },
+  "source": {
+    "reference": "Patient/1fbe90622a7eb3955f73cf83279640361b5490b280d6386e91ef2fffc33b2652"
+  },
+  "authored": "2026-04-29T09:01:31.836Z",
+  "item": [
+    {
+      "linkId": "0_Fd_Diag_ins",
+      "text": "Stimmen die Diagnosedaten?",
+      "answer": [
+        {
+          "valueCoding": {
+            "code": "correctAndComplete",
+            "display": "Ja, die angezeigten Informationen sind korrekt und vollst\u00e4ndig (richtig und vollst\u00e4ndig)"
+          }
+        }
+      ]
+    }
+  ]
+}

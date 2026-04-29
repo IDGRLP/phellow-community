@@ -1,0 +1,177 @@
+{
+  "resourceType": "QuestionnaireResponse",
+  "questionnaire": "1_Fd",
+  "status": "completed",
+  "subject": {
+    "reference": "Condition/e5fab94a17c480d911d43b23bf87d290f868c84400edf8e224ffa4db68c90ef6"
+  },
+  "source": {
+    "reference": "Patient/1fbe90622a7eb3955f73cf83279640361b5490b280d6386e91ef2fffc33b2652"
+  },
+  "authored": "2026-04-29T09:00:15.108Z",
+  "item": [
+    {
+      "linkId": "0_Fd_Diag_ins",
+      "text": "Stimmen die Diagnosedaten?",
+      "answer": [
+        {
+          "valueCoding": {
+            "code": "incorrectButComplete",
+            "display": "Nein, die angezeigten Informationen sind (teilweise) fehlerhaft, aber an sich vollst\u00e4ndig (falsch, aber vollst\u00e4ndig)"
+          }
+        }
+      ]
+    },
+    {
+      "linkId": "0_0_Fd_Diag_datum",
+      "item": [
+        {
+          "linkId": "0_0_Fd_Diag_datum_choice",
+          "text": "Stimmt das Diagnosedatum?",
+          "answer": [
+            {
+              "valueCoding": {
+                "code": "no",
+                "display": "Nein, die Information stimmt nicht"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "0_0_Fd_Diag_datum_text",
+          "text": "Welche Information beim Diagnosedatum stimmt nicht bzw. fehlt? Seien Sie bitte m\u00f6glichst pr\u00e4zise.",
+          "answer": [
+            {
+              "valueString": "9. Feb 2018 statt 8. Feb 2018"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "linkId": "0_1_Fd_Diag_ICD",
+      "item": [
+        {
+          "linkId": "0_1_Fd_Diag_ICD_choice",
+          "text": "Stimmt der ICD-10?",
+          "answer": [
+            {
+              "valueCoding": {
+                "code": "yes",
+                "display": "Ja"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "linkId": "0_1_Fd_Diag_Seitenlokalisation",
+      "text": "",
+      "item": [
+        {
+          "linkId": "0_1_Fd_Diag_Seitenlokalisation_choice",
+          "text": "Stimmt die Seitenlokalisation?",
+          "answer": [
+            {
+              "valueCoding": {
+                "code": "unknown",
+                "display": "Ich wei\u00df nicht"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "linkId": "0_1_Fd_Diag_Morphologie",
+      "text": "",
+      "item": [
+        {
+          "linkId": "0_1_Fd_Diag_Morphologie_choice",
+          "text": "Stimmt die Morphologie?",
+          "answer": [
+            {
+              "valueCoding": {
+                "code": "na",
+                "display": "Hierzu m\u00f6chte ich keine Angabe machen"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "linkId": "0_1_Fd_Diag_Topographie",
+      "text": "",
+      "item": [
+        {
+          "linkId": "0_1_Fd_Diag_Topographie_choice",
+          "text": "Stimmt die Topographie?",
+          "answer": [
+            {
+              "valueCoding": {
+                "code": "noMissing",
+                "display": "Nein, es fehlt etwas"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "0_1_Fd_Diag_Topographie_text",
+          "text": "Welche Information der Topographie stimmt nicht bzw. fehlt? Seien Sie bitte m\u00f6glichst pr\u00e4zise.",
+          "answer": [
+            {
+              "valueString": "Fehlende topographie information"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "linkId": "0_1_Fd_Diag_Histologie",
+      "text": "",
+      "item": [
+        {
+          "linkId": "0_1_Fd_Diag_Histologie_choice",
+          "text": "Stimmen die Histologie-Daten?",
+          "answer": [
+            {
+              "valueCoding": {
+                "code": "yes",
+                "display": "Ja"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "linkId": "0_1_Fd_Diag_Fernmetastasen",
+      "text": "",
+      "item": [
+        {
+          "linkId": "0_1_Fd_Diag_Fernmetastasen_choice",
+          "text": "Stimmen die Fernmetastasen-Daten?",
+          "answer": [
+            {
+              "valueCoding": {
+                "code": "yes",
+                "display": "Ja"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "linkId": "1_5_Fd_Diag_Freitext_k",
+      "text": "Angabe sonstiger Informationen",
+      "answer": [
+        {
+          "valueString": "Freitext antwort"
+        }
+      ]
+    }
+  ]
+}

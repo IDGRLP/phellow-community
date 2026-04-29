@@ -1,0 +1,87 @@
+{
+  "resourceType": "QuestionnaireResponse",
+  "questionnaire": "3_Fd",
+  "status": "completed",
+  "subject": {
+    "reference": "Procedure/d01d68886eadf6821e9fd1b1cc2374b5bb22c9ce03be36267fa6954b87dc0a93"
+  },
+  "source": {
+    "reference": "Patient/1fbe90622a7eb3955f73cf83279640361b5490b280d6386e91ef2fffc33b2652"
+  },
+  "authored": "2026-04-29T09:02:13.437Z",
+  "item": [
+    {
+      "linkId": "3_Fd_OP_ins",
+      "text": "Stimmen die Operationsdaten?",
+      "answer": [
+        {
+          "valueCoding": {
+            "code": "incorrectAndIncomplete",
+            "display": "Nein, die angezeigten Informationen sind (teilweise) fehlerhaft und unvollst\u00e4ndig (falsch und unvollst\u00e4ndig)"
+          }
+        }
+      ]
+    },
+    {
+      "linkId": "3_1_Fd_OP_datum",
+      "item": [
+        {
+          "linkId": "3_1_Fd_OP_datum_choice",
+          "text": "Stimmt das Operationsdatum?",
+          "answer": [
+            {
+              "valueCoding": {
+                "code": "yes",
+                "display": "Ja"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "linkId": "3_2_Fd_OP_residual",
+      "item": [
+        {
+          "linkId": "3_2_Fd_OP_residual_choice",
+          "text": "Ist die Angabe zur Beurteilung des Residualstatus korrekt?",
+          "answer": [
+            {
+              "valueCoding": {
+                "code": "no",
+                "display": "Nein, die Information stimmt nicht"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "3_2_Fd_OP_residual_text",
+          "text": "Welche Information zur Beurteilung des Residualstatus stimmt nicht bzw. fehlt? Seien Sie bitte m\u00f6glichst pr\u00e4zise.",
+          "answer": [
+            {
+              "valueString": "RX falsch"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "linkId": "3_3_Fd_OP_Histologie",
+      "text": "",
+      "item": [
+        {
+          "linkId": "3_3_Fd_OP_Histologie_choice",
+          "text": "Stimmen die Histologie-Daten?",
+          "answer": [
+            {
+              "valueCoding": {
+                "code": "unknown",
+                "display": "Ich wei\u00df nicht"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

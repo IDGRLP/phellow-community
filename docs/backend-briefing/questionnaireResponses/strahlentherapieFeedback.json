@@ -1,0 +1,78 @@
+{
+  "resourceType": "QuestionnaireResponse",
+  "questionnaire": "4_Fd",
+  "status": "completed",
+  "subject": {
+    "reference": "Procedure/bff33fcc7d5cc691ff9173d323fe574b050a8033bdd3fdc7174fd7b5f7f0af74"
+  },
+  "source": {
+    "reference": "Patient/1fbe90622a7eb3955f73cf83279640361b5490b280d6386e91ef2fffc33b2652"
+  },
+  "authored": "2026-04-29T09:03:12.695Z",
+  "item": [
+    {
+      "linkId": "4_Fd_Str_ins",
+      "text": "Sind die Angaben zur Strahlentherapie korrekt?",
+      "answer": [
+        {
+          "valueCoding": {
+            "code": "incorrectButComplete",
+            "display": "Nein, die angezeigten Informationen sind (teilweise) fehlerhaft, aber an sich vollst\u00e4ndig (falsch, aber vollst\u00e4ndig)"
+          }
+        }
+      ]
+    },
+    {
+      "linkId": "4_1_Fd_Str_datum",
+      "item": [
+        {
+          "linkId": "4_1_Fd_Str_datum_choice",
+          "text": "Stimmt das Datum der Strahlentherapie?",
+          "answer": [
+            {
+              "valueCoding": {
+                "code": "unknown",
+                "display": "Ich wei\u00df nicht"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "linkId": "4_2_Fd_Str_target",
+      "item": [
+        {
+          "linkId": "4_2_Fd_Str_target_choice",
+          "text": "Ist die Angabe zu den Zielgebieten korrekt?",
+          "answer": [
+            {
+              "valueCoding": {
+                "code": "unknown",
+                "display": "Ich wei\u00df nicht"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "linkId": "4_3_Fd_Str_Ende",
+      "text": "",
+      "item": [
+        {
+          "linkId": "4_3_Fd_Str_Ende_choice",
+          "text": "Stimmt der Grund f\u00fcr das Ende der Behandlung?",
+          "answer": [
+            {
+              "valueCoding": {
+                "code": "unknown",
+                "display": "Ich wei\u00df nicht"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

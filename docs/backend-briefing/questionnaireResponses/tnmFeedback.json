@@ -1,0 +1,69 @@
+{
+  "resourceType": "QuestionnaireResponse",
+  "questionnaire": "7_Fd",
+  "status": "completed",
+  "subject": {
+    "reference": "Observation/fd8875513d60f37caae6b9a7ee3b58afc1dafbed8a35a4760f0b80454edc2b1e"
+  },
+  "source": {
+    "reference": "Patient/1fbe90622a7eb3955f73cf83279640361b5490b280d6386e91ef2fffc33b2652"
+  },
+  "authored": "2026-04-29T09:02:48.168Z",
+  "item": [
+    {
+      "linkId": "7_Fd_TNM_ins",
+      "text": "Stimmen die TNM-Daten?",
+      "answer": [
+        {
+          "valueCoding": {
+            "code": "incorrectButComplete",
+            "display": "Nein, die angezeigten Informationen sind (teilweise) fehlerhaft, aber an sich vollst\u00e4ndig (falsch, aber vollst\u00e4ndig)"
+          }
+        }
+      ]
+    },
+    {
+      "linkId": "7_1_Fd_TNM_datum",
+      "item": [
+        {
+          "linkId": "7_1_Fd_TNM_datum_choice",
+          "text": "Stimmt das Datum?",
+          "answer": [
+            {
+              "valueCoding": {
+                "code": "yes",
+                "display": "Ja"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "linkId": "7_2_Fd_TNM_classification",
+      "item": [
+        {
+          "linkId": "7_2_Fd_TNM_classification_choice",
+          "text": "Stimmt die Klassifikation?",
+          "answer": [
+            {
+              "valueCoding": {
+                "code": "no",
+                "display": "Nein, die Information stimmt nicht"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "7_2_Fd_TNM_classification_text",
+          "text": "Welche Information bei der TNM-Klassifikation stimmt nicht bzw. fehlt? Seien Sie bitte m\u00f6glichst pr\u00e4zise.",
+          "answer": [
+            {
+              "valueString": "cT1"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
