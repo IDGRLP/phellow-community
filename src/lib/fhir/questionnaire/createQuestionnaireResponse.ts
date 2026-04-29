@@ -14,12 +14,18 @@ export interface QuestionnaireResponseReferences {
 }
 
 /**
- * Creates a FHIR QuestionnaireResponse from the given questionnaire and answers
+ * Creates a FHIR QuestionnaireResponse from the given questionnaire and answers.
+ *
+ * If `enabledItems` is provided, items whose linkId is not in the set are
+ * excluded from the response. This prevents stale answers from disabled
+ * enableWhen branches from leaking into the output when a user edits an
+ * existing response and toggles a conditional branch off.
  */
 export function createQuestionnaireResponse(
 	questionnaire: Questionnaire,
 	answers: Map<string, QuestionnaireAnswer>,
-	references?: QuestionnaireResponseReferences
+	references?: QuestionnaireResponseReferences,
+	enabledItems?: ReadonlySet<string>
 ): QuestionnaireResponse {
 	const now = new Date().toISOString();
 
@@ -29,7 +35,7 @@ export function createQuestionnaireResponse(
 		status: "completed",
 		questionnaire: questionnaire.url ?? questionnaire.id ?? "",
 		authored: now,
-		item: mapAnswersToResponseItems(questionnaire.item ?? [], answers),
+		item: mapAnswersToResponseItems(questionnaire.item ?? [], answers, enabledItems),
 	};
 
 	// Add metadata
@@ -52,27 +58,29 @@ export function createQuestionnaireResponse(
  */
 function mapAnswersToResponseItems(
 	items: Questionnaire["item"],
-	answers: Map<string, QuestionnaireAnswer>
+	answers: Map<string, QuestionnaireAnswer>,
+	enabledItems?: ReadonlySet<string>
 ): QuestionnaireResponse["item"] {
 	if (!items) return [];
 
 	return items
 		.map((item) => {
-			const answer = answers.get(item.linkId);
+			const isEnabled = enabledItems ? enabledItems.has(item.linkId) : true;
+			const answer = isEnabled ? answers.get(item.linkId) : undefined;
 
 			const responseItem: QuestionnaireResponseItem = {
 				linkId: item.linkId,
 				text: item.text,
 			};
 
-			// Add answer if exists
+			// Add answer if exists and the item is enabled
 			if (answer) {
 				responseItem.answer = mapValueToResponseAnswer(item.type, answer.value);
 			}
 
 			// Add child items if they exist
 			if (item.item && item.item.length > 0) {
-				const childItems = mapAnswersToResponseItems(item.item, answers);
+				const childItems = mapAnswersToResponseItems(item.item, answers, enabledItems);
 				if (childItems && childItems.length > 0) {
 					responseItem.item = childItems;
 				}

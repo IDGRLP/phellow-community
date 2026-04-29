@@ -255,6 +255,7 @@ Example FHIR Questionnaire Item:
 				<div class="flex flex-col gap-1">
 					<label for="year" class="text-sm font-medium">Jahr</label>
 					<Input
+						data-testid="date-year"
 						id="year"
 						type="number"
 						placeholder="YYYY"
@@ -276,6 +277,7 @@ Example FHIR Questionnaire Item:
 							>Monat {yearMonth ? "" : "(optional)"}</label
 						>
 						<Input
+							data-testid="date-month"
 							id="month"
 							type="number"
 							placeholder="MM"
@@ -296,6 +298,7 @@ Example FHIR Questionnaire Item:
 					<div class="inline-flex flex-col gap-1">
 						<label for="day" class="text-sm font-medium">Tag (optional)</label>
 						<Input
+							data-testid="date-day"
 							id="day"
 							type="number"
 							placeholder="DD"

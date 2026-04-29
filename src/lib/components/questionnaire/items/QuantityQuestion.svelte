@@ -130,6 +130,7 @@
 	<div class="flex gap-2">
 		<div class="flex-1">
 			<Input
+				data-testid="quantity-value"
 				type="number"
 				value={numericValue}
 				oninput={handleValueChange}
@@ -154,6 +155,7 @@
 			</div>
 		{:else if availableUnits().length === 1}
 			<div
+				data-testid="quantity-unit-fixed"
 				class="text-muted-foreground bg-muted flex min-w-16 items-center justify-center rounded-md border px-3 text-sm"
 			>
 				{availableUnits()[0].display}

@@ -61,6 +61,8 @@
 		{@const display = option.valueString ?? option.valueCoding?.display ?? optionCode}
 
 		<Button
+			data-testid={`openchoice-option-${optionCode}`}
+			data-selected={value?.code === optionCode}
 			variant={value?.code === optionCode ? "default" : "outline"}
 			class="flex h-auto w-full items-center justify-start gap-2 text-left whitespace-normal"
 			onclick={() => selectOption({ code: optionCode, text: display })}
@@ -82,7 +84,7 @@
 
 	<!-- Custom input option -->
 	{#if !showCustomInput}
-		<Button variant="default" onclick={addOption}>
+		<Button data-testid="openchoice-add-custom" variant="default" onclick={addOption}>
 			<div
 				class="border-primary-foreground flex size-5 items-center justify-center rounded-full border"
 			>
@@ -93,6 +95,7 @@
 	{:else}
 		<div class="flex items-center gap-2">
 			<Input
+				data-testid="openchoice-custom-input"
 				type="text"
 				autofocus={true}
 				placeholder="Enter your own answer"

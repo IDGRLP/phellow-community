@@ -1,4 +1,6 @@
-import type { Questionnaire } from "fhir/r4";
+import { createQuestionnaireResponse } from "$lib/fhir/questionnaire/createQuestionnaireResponse";
+import { parseQuestionnaireResponse } from "$lib/fhir/questionnaire/parseQuestionnaireResponse";
+import type { Questionnaire, QuestionnaireResponse } from "fhir/r4";
 import { describe, expect, test } from "vitest";
 import { createQuestionnaireState, type QuestionnaireAnswer } from "./questionnaireStore.svelte";
 
@@ -413,5 +415,140 @@ describe("createQuestionnaireState with initialAnswers", () => {
 		const store = createQuestionnaireState(buildQuestionnaire(), undefined);
 		expect(store.answers.size).toBe(0);
 		expect(store.enabledGroups.length).toBe(1);
+	});
+});
+
+describe("editing existing QuestionnaireResponse: disabled-branch handling", () => {
+	const branchedQuestionnaire = (): Questionnaire => ({
+		resourceType: "Questionnaire",
+		status: "active",
+		id: "branch_edit",
+		item: [
+			{
+				linkId: "trigger",
+				type: "choice",
+				text: "Show branch?",
+				answerOption: [
+					{ valueCoding: { code: "yes", display: "Yes" } },
+					{ valueCoding: { code: "no", display: "No" } },
+				],
+			},
+			{
+				linkId: "branch_q",
+				type: "string",
+				text: "Branch question",
+				enableWhen: [{ question: "trigger", operator: "=", answerCoding: { code: "yes" } }],
+			},
+		],
+	});
+
+	test("toggling a branch off excludes its prior answer from the new response", () => {
+		// Existing response: user previously chose "yes" and filled the branch.
+		const existing: QuestionnaireResponse = {
+			resourceType: "QuestionnaireResponse",
+			status: "completed",
+			questionnaire: "branch_edit",
+			item: [
+				{ linkId: "trigger", answer: [{ valueCoding: { code: "yes", display: "Yes" } }] },
+				{ linkId: "branch_q", answer: [{ valueString: "old branch answer" }] },
+			],
+		};
+
+		const q = branchedQuestionnaire();
+		const initial = parseQuestionnaireResponse(q, existing);
+		const store = createQuestionnaireState(q, initial);
+
+		// Sanity: branch is enabled and prefilled.
+		expect(store.isItemEnabled("branch_q")).toBe(true);
+		expect(store.answers.get("branch_q")?.value).toBe("old branch answer");
+
+		// User edits trigger to "no" → branch becomes disabled.
+		store.setAnswer("trigger", { code: "no", display: "No" });
+		expect(store.isItemEnabled("branch_q")).toBe(false);
+
+		// Build a new response with the renderer's enabledItems guard.
+		const response = createQuestionnaireResponse(q, store.answers, undefined, store.enabledItems);
+
+		expect(response.item).toHaveLength(1);
+		expect(response.item?.[0]?.linkId).toBe("trigger");
+		expect(response.item?.find((i) => i.linkId === "branch_q")).toBeUndefined();
+	});
+
+	test("toggling a branch back on restores its (still-cached) prior answer", () => {
+		const existing: QuestionnaireResponse = {
+			resourceType: "QuestionnaireResponse",
+			status: "completed",
+			questionnaire: "branch_edit",
+			item: [
+				{ linkId: "trigger", answer: [{ valueCoding: { code: "yes", display: "Yes" } }] },
+				{ linkId: "branch_q", answer: [{ valueString: "kept" }] },
+			],
+		};
+		const q = branchedQuestionnaire();
+		const store = createQuestionnaireState(q, parseQuestionnaireResponse(q, existing));
+
+		store.setAnswer("trigger", { code: "no", display: "No" });
+		expect(store.isItemEnabled("branch_q")).toBe(false);
+
+		// Toggle back on
+		store.setAnswer("trigger", { code: "yes", display: "Yes" });
+		expect(store.isItemEnabled("branch_q")).toBe(true);
+
+		const response = createQuestionnaireResponse(q, store.answers, undefined, store.enabledItems);
+		expect(response.item).toHaveLength(2);
+		expect(response.item?.find((i) => i.linkId === "branch_q")?.answer?.[0]?.valueString).toBe(
+			"kept"
+		);
+	});
+
+	test("disabled group branches drop their entire children subtree from the response", () => {
+		const q: Questionnaire = {
+			resourceType: "Questionnaire",
+			status: "active",
+			id: "group_drop",
+			item: [
+				{ linkId: "trigger", type: "boolean", text: "" },
+				{
+					linkId: "details",
+					type: "group",
+					text: "Details",
+					enableWhen: [{ question: "trigger", operator: "=", answerBoolean: true }],
+					item: [
+						{ linkId: "d1", type: "string", text: "" },
+						{ linkId: "d2", type: "string", text: "" },
+					],
+				},
+			],
+		};
+
+		const existing: QuestionnaireResponse = {
+			resourceType: "QuestionnaireResponse",
+			status: "completed",
+			questionnaire: "group_drop",
+			item: [
+				{ linkId: "trigger", answer: [{ valueBoolean: true }] },
+				{
+					linkId: "details",
+					item: [
+						{ linkId: "d1", answer: [{ valueString: "stale 1" }] },
+						{ linkId: "d2", answer: [{ valueString: "stale 2" }] },
+					],
+				},
+			],
+		};
+
+		const store = createQuestionnaireState(q, parseQuestionnaireResponse(q, existing));
+		expect(store.isItemEnabled("d1")).toBe(true);
+		expect(store.isItemEnabled("d2")).toBe(true);
+
+		// Toggle the trigger off
+		store.setAnswer("trigger", false);
+		expect(store.isItemEnabled("details")).toBe(false);
+		expect(store.isItemEnabled("d1")).toBe(false);
+		expect(store.isItemEnabled("d2")).toBe(false);
+
+		const response = createQuestionnaireResponse(q, store.answers, undefined, store.enabledItems);
+		expect(response.item).toHaveLength(1);
+		expect(response.item?.[0]?.linkId).toBe("trigger");
 	});
 });

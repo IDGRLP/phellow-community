@@ -17,7 +17,29 @@ export default defineConfig({
 	],
 
 	test: {
-		include: ["src/**/*.{test,spec}.{js,ts}"],
+		projects: [
+			{
+				extends: true,
+				test: {
+					name: "unit",
+					include: ["src/**/*.{test,spec}.{js,ts}"],
+					exclude: ["src/**/*.svelte.{test,spec}.{js,ts}"],
+				},
+			},
+			{
+				extends: true,
+				test: {
+					name: "browser",
+					include: ["src/**/*.svelte.{test,spec}.{js,ts}"],
+					browser: {
+						enabled: true,
+						provider: "playwright",
+						headless: true,
+						instances: [{ browser: "chromium" }],
+					},
+				},
+			},
+		],
 	},
 	optimizeDeps: {
 		exclude: ["@pdfslick/core"],

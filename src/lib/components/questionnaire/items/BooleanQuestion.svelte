@@ -12,6 +12,8 @@
 
 <div class="flex gap-4">
 	<Button
+		data-testid="boolean-yes"
+		data-selected={value === true}
 		class={[
 			value === true
 				? "bg-primary text-primary-foreground"
@@ -22,6 +24,8 @@
 		{m.questionnaire_boolean_yes()}
 	</Button>
 	<Button
+		data-testid="boolean-no"
+		data-selected={value === false}
 		class={[
 			value === false
 				? "bg-primary text-primary-foreground"

@@ -57,7 +57,11 @@
 		{@const optionValue = option.valueString ?? option.valueCoding ?? ""}
 		{@const display = option.valueString ?? option.valueCoding?.display ?? optionValue}
 
+		{@const optionCode =
+			typeof optionValue === "object" ? (optionValue.code ?? "") : optionValue}
 		<Button
+			data-testid={`choice-option-${optionCode}`}
+			data-selected={isSelected(optionValue)}
 			variant={isSelected(optionValue) ? "default" : "outline"}
 			class="flex h-auto w-full items-center justify-start gap-2 border text-left whitespace-normal"
 			onclick={() => handleSelect(optionValue)}

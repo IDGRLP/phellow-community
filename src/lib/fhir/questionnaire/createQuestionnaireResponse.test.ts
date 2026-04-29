@@ -348,6 +348,133 @@ describe("createQuestionnaireResponse", () => {
 		expect(response.source).toEqual({ reference: "Patient/pat-1" });
 	});
 
+	test("excludes stale answers from disabled enableWhen branches when enabledItems is provided", () => {
+		const questionnaire: Questionnaire = {
+			resourceType: "Questionnaire",
+			status: "active",
+			id: "branch_test",
+			item: [
+				{
+					linkId: "trigger",
+					type: "choice",
+					text: "Show branch?",
+					answerOption: [
+						{ valueCoding: { code: "yes", display: "Yes" } },
+						{ valueCoding: { code: "no", display: "No" } },
+					],
+				},
+				{
+					linkId: "branch_q",
+					type: "string",
+					text: "Branch question",
+					enableWhen: [{ question: "trigger", operator: "=", answerCoding: { code: "yes" } }],
+				},
+			],
+		};
+
+		// User originally answered "yes" and filled in branch_q, then changed
+		// trigger to "no". The branch is now disabled but the answer lingers
+		// in the answers map.
+		const answers = new SvelteMap<string, QuestionnaireAnswer>();
+		answers.set("trigger", { linkId: "trigger", value: { code: "no", display: "No" } });
+		answers.set("branch_q", { linkId: "branch_q", value: "stale answer" });
+
+		const enabledItems = new Set<string>(["trigger"]); // branch_q is NOT enabled
+
+		const response = createQuestionnaireResponse(questionnaire, answers, undefined, enabledItems);
+
+		expect(response.item).toHaveLength(1);
+		expect(response.item?.[0]?.linkId).toBe("trigger");
+		// branch_q must NOT appear since it is disabled
+		const branchItem = response.item?.find((i) => i.linkId === "branch_q");
+		expect(branchItem).toBeUndefined();
+	});
+
+	test("excludes a whole disabled subgroup, not just disabled leaves", () => {
+		const questionnaire: Questionnaire = {
+			resourceType: "Questionnaire",
+			status: "active",
+			id: "group_branch_test",
+			item: [
+				{
+					linkId: "trigger",
+					type: "boolean",
+					text: "Has details?",
+				},
+				{
+					linkId: "details_group",
+					type: "group",
+					text: "Details",
+					enableWhen: [{ question: "trigger", operator: "=", answerBoolean: true }],
+					item: [
+						{ linkId: "detail_a", type: "string", text: "A" },
+						{ linkId: "detail_b", type: "string", text: "B" },
+					],
+				},
+			],
+		};
+
+		const answers = new SvelteMap<string, QuestionnaireAnswer>();
+		answers.set("trigger", { linkId: "trigger", value: false });
+		answers.set("detail_a", { linkId: "detail_a", value: "stale a" });
+		answers.set("detail_b", { linkId: "detail_b", value: "stale b" });
+
+		// Only trigger is enabled — group + children are disabled.
+		const enabledItems = new Set<string>(["trigger"]);
+
+		const response = createQuestionnaireResponse(questionnaire, answers, undefined, enabledItems);
+
+		expect(response.item).toHaveLength(1);
+		expect(response.item?.[0]?.linkId).toBe("trigger");
+		expect(response.item?.find((i) => i.linkId === "details_group")).toBeUndefined();
+	});
+
+	test("includes branch answers when enabledItems contains them", () => {
+		const questionnaire: Questionnaire = {
+			resourceType: "Questionnaire",
+			status: "active",
+			id: "branch_enabled_test",
+			item: [
+				{ linkId: "trigger", type: "boolean", text: "" },
+				{
+					linkId: "branch_q",
+					type: "string",
+					text: "",
+					enableWhen: [{ question: "trigger", operator: "=", answerBoolean: true }],
+				},
+			],
+		};
+
+		const answers = new SvelteMap<string, QuestionnaireAnswer>();
+		answers.set("trigger", { linkId: "trigger", value: true });
+		answers.set("branch_q", { linkId: "branch_q", value: "kept" });
+
+		const enabledItems = new Set<string>(["trigger", "branch_q"]);
+		const response = createQuestionnaireResponse(questionnaire, answers, undefined, enabledItems);
+
+		expect(response.item).toHaveLength(2);
+		expect(response.item?.[1]?.answer?.[0]?.valueString).toBe("kept");
+	});
+
+	test("backwards-compat: omitting enabledItems includes all answered items (existing behavior)", () => {
+		const questionnaire: Questionnaire = {
+			resourceType: "Questionnaire",
+			status: "active",
+			id: "bc_test",
+			item: [
+				{ linkId: "a", type: "string", text: "" },
+				{ linkId: "b", type: "string", text: "" },
+			],
+		};
+
+		const answers = new SvelteMap<string, QuestionnaireAnswer>();
+		answers.set("a", { linkId: "a", value: "A" });
+		answers.set("b", { linkId: "b", value: "B" });
+
+		const response = createQuestionnaireResponse(questionnaire, answers);
+		expect(response.item).toHaveLength(2);
+	});
+
 	test("omits subject and source when references are not provided", () => {
 		const questionnaire: Questionnaire = {
 			resourceType: "Questionnaire",

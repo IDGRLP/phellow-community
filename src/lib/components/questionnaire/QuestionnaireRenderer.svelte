@@ -78,11 +78,14 @@
 			return;
 		}
 
-		// Create FHIR QuestionnaireResponse
-		const response = createQuestionnaireResponse(questionnaire, questionnaireState.answers, {
-			subject,
-			source,
-		});
+		// Create FHIR QuestionnaireResponse — pass enabledItems so stale answers
+		// from now-disabled enableWhen branches are excluded from the output.
+		const response = createQuestionnaireResponse(
+			questionnaire,
+			questionnaireState.answers,
+			{ subject, source },
+			questionnaireState.enabledItems
+		);
 
 		// Call the onSubmit handler
 		if (onSubmit) {
