@@ -311,6 +311,7 @@
 							{cancelFeedback}
 							conditionId={selectedEvent.resourceId}
 							{bundle}
+							questionnaireResponse={existingResponse ?? undefined}
 						/>
 					{:else if selectedEvent.type === "surgery"}
 						<div class="-mb-6 flex justify-end">
@@ -334,6 +335,7 @@
 							{cancelFeedback}
 							procedureId={selectedEvent.resourceId}
 							{bundle}
+							questionnaireResponse={existingResponse ?? undefined}
 						/>
 					{:else if selectedEvent.type === "radiation"}
 						<div class="-mb-6 flex justify-end">
@@ -357,6 +359,7 @@
 							{cancelFeedback}
 							procedureId={selectedEvent.resourceId}
 							{bundle}
+							questionnaireResponse={existingResponse ?? undefined}
 						/>
 					{:else if selectedEvent.type === "systemicTherapy"}
 						<div class="-mb-6 flex justify-end">
@@ -380,6 +383,7 @@
 							{cancelFeedback}
 							procedureId={selectedEvent.resourceId}
 							{bundle}
+							questionnaireResponse={existingResponse ?? undefined}
 						/>
 					{:else if selectedEvent.type === "progression"}
 						<div class="-mb-6 flex justify-end">
@@ -403,6 +407,7 @@
 							{cancelFeedback}
 							observationId={selectedEvent.resourceId}
 							{bundle}
+							questionnaireResponse={existingResponse ?? undefined}
 						/>
 					{:else if selectedEvent.type === "tnm"}
 						<div class="-mb-6 flex justify-end">
@@ -426,6 +431,7 @@
 							{cancelFeedback}
 							observationId={selectedEvent.resourceId}
 							{bundle}
+							questionnaireResponse={existingResponse ?? undefined}
 						/>
 					{/if}
 					{#if showJson}

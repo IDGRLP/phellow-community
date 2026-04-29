@@ -1,6 +1,6 @@
 import type { Questionnaire } from "fhir/r4";
 import { describe, expect, test } from "vitest";
-import { createQuestionnaireState } from "./questionnaireStore.svelte";
+import { createQuestionnaireState, type QuestionnaireAnswer } from "./questionnaireStore.svelte";
 
 describe("questionnaireStore pagination with enableWhen", () => {
 	test("filters out pages with disabled items", () => {
@@ -343,5 +343,75 @@ describe("questionnaireStore pagination with enableWhen", () => {
 		// Test non-existing item
 		const nonExistent = store.getItemByLinkId("non-existent");
 		expect(nonExistent).toBeUndefined();
+	});
+});
+
+describe("createQuestionnaireState with initialAnswers", () => {
+	const buildQuestionnaire = (): Questionnaire => ({
+		resourceType: "Questionnaire",
+		status: "active",
+		id: "prefill_test",
+		item: [
+			{
+				linkId: "first",
+				text: "First",
+				type: "choice",
+				answerOption: [
+					{ valueCoding: { code: "yes", display: "Yes" } },
+					{ valueCoding: { code: "no", display: "No" } },
+				],
+			},
+			{
+				linkId: "conditional",
+				text: "Only when first=no",
+				type: "string",
+				enableWhen: [{ question: "first", operator: "=", answerCoding: { code: "no" } }],
+			},
+		],
+	});
+
+	test("exposes prefilled answers via store.answers", () => {
+		const initial = new Map<string, QuestionnaireAnswer>([
+			["first", { linkId: "first", value: { code: "yes", display: "Yes" } }],
+		]);
+		const store = createQuestionnaireState(buildQuestionnaire(), initial);
+		expect(store.answers.get("first")?.value).toEqual({ code: "yes", display: "Yes" });
+	});
+
+	test("evaluates enableWhen against prefilled answers on first render", () => {
+		const initial = new Map<string, QuestionnaireAnswer>([
+			["first", { linkId: "first", value: { code: "no", display: "No" } }],
+		]);
+		const store = createQuestionnaireState(buildQuestionnaire(), initial);
+		expect(store.isItemEnabled("conditional")).toBe(true);
+		expect(store.enabledGroups.length).toBe(2);
+	});
+
+	test("does not enable conditional items when prefill doesn't match", () => {
+		const initial = new Map<string, QuestionnaireAnswer>([
+			["first", { linkId: "first", value: { code: "yes", display: "Yes" } }],
+		]);
+		const store = createQuestionnaireState(buildQuestionnaire(), initial);
+		expect(store.isItemEnabled("conditional")).toBe(false);
+		expect(store.enabledGroups.length).toBe(1);
+	});
+
+	test("setAnswer after prefill updates state and re-evaluates enableWhen", () => {
+		const initial = new Map<string, QuestionnaireAnswer>([
+			["first", { linkId: "first", value: { code: "yes", display: "Yes" } }],
+		]);
+		const store = createQuestionnaireState(buildQuestionnaire(), initial);
+		expect(store.enabledGroups.length).toBe(1);
+
+		store.setAnswer("first", { code: "no", display: "No" });
+		expect(store.answers.get("first")?.value).toEqual({ code: "no", display: "No" });
+		expect(store.isItemEnabled("conditional")).toBe(true);
+		expect(store.enabledGroups.length).toBe(2);
+	});
+
+	test("undefined initialAnswers behaves like empty state", () => {
+		const store = createQuestionnaireState(buildQuestionnaire(), undefined);
+		expect(store.answers.size).toBe(0);
+		expect(store.enabledGroups.length).toBe(1);
 	});
 });

@@ -13,6 +13,7 @@
 
 	interface Props {
 		resource: Questionnaire;
+		questionnaireResponse?: QuestionnaireResponse;
 		onSubmit?: (response: QuestionnaireResponse) => void;
 		canStartOver?: boolean;
 		onCurrentItemChange?: (itemLinkId: string) => void;
@@ -22,6 +23,7 @@
 
 	let {
 		resource,
+		questionnaireResponse,
 		onSubmit,
 		canStartOver = false,
 		onCurrentItemChange,
@@ -58,6 +60,7 @@
 		<div class="flex flex-1 flex-col">
 			<QuestionnaireRenderer
 				questionnaire={resource}
+				{questionnaireResponse}
 				onSubmit={handleSubmit}
 				{onCurrentItemChange}
 				{subject}

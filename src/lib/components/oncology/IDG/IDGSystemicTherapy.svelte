@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Bundle, MedicationStatement, Procedure } from "fhir/r4";
+	import type { Bundle, MedicationStatement, Procedure, QuestionnaireResponse } from "fhir/r4";
 	import systemicTherapyFeedback from "./IDGSystemicTherapyFeedback";
 	import SystemicTherapy from "./Details/SystemicTherapy/SystemicTherapy.svelte";
 	import IDGLayout from "./IDGLayout.svelte";
@@ -10,9 +10,16 @@
 		bundle: Bundle;
 		showFeedback: boolean;
 		cancelFeedback?: () => void;
+		questionnaireResponse?: QuestionnaireResponse;
 	}
 
-	let { procedureId, bundle, showFeedback, cancelFeedback }: Props = $props();
+	let {
+		procedureId,
+		bundle,
+		showFeedback,
+		cancelFeedback,
+		questionnaireResponse,
+	}: Props = $props();
 
 	let currentItemLinkId = $state<string | undefined>(undefined);
 
@@ -52,6 +59,7 @@
 	{showFeedback}
 	{cancelFeedback}
 	questionnaire={systemicTherapyFeedback}
+	{questionnaireResponse}
 	onCurrentItemChange={handleCurrentItemChange}
 	subject={subjectReference}
 	source={sourceReference}

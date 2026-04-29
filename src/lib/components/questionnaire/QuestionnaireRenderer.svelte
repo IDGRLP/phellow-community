@@ -5,6 +5,7 @@
 	import * as m from "$lib/paraglide/messages";
 
 	import { createQuestionnaireResponse } from "$lib/fhir/questionnaire/createQuestionnaireResponse";
+	import { parseQuestionnaireResponse } from "$lib/fhir/questionnaire/parseQuestionnaireResponse";
 	import { createQuestionnaireState } from "$lib/stores/questionnaireStore.svelte";
 
 	import { Button } from "$components/ui/button";
@@ -17,15 +18,26 @@
 
 	interface Props {
 		questionnaire: Questionnaire;
+		questionnaireResponse?: QuestionnaireResponse;
 		onSubmit?: (response: QuestionnaireResponse) => void;
 		onCurrentItemChange?: (itemLinkId: string) => void;
 		subject?: Reference;
 		source?: Reference;
 	}
 
-	let { questionnaire, onSubmit, onCurrentItemChange, subject, source }: Props = $props();
+	let {
+		questionnaire,
+		questionnaireResponse,
+		onSubmit,
+		onCurrentItemChange,
+		subject,
+		source,
+	}: Props = $props();
 
-	const questionnaireState = createQuestionnaireState(questionnaire);
+	const initialAnswers = questionnaireResponse
+		? parseQuestionnaireResponse(questionnaire, questionnaireResponse)
+		: undefined;
+	const questionnaireState = createQuestionnaireState(questionnaire, initialAnswers);
 
 	let currentGroup = $derived.by(() => {
 		const currentItem = questionnaireState.currentGroup;

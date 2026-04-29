@@ -8,6 +8,7 @@
 		showFeedback: boolean;
 		cancelFeedback?: () => void;
 		questionnaire?: Questionnaire;
+		questionnaireResponse?: QuestionnaireResponse;
 		children: Snippet;
 		feedback?: Snippet;
 		onCurrentItemChange?: (itemLinkId?: string) => void;
@@ -19,6 +20,7 @@
 		showFeedback,
 		cancelFeedback,
 		questionnaire,
+		questionnaireResponse,
 		children,
 		feedback,
 		onCurrentItemChange,
@@ -53,6 +55,7 @@
 			{:else if questionnaire}
 				<QuestionnaireForm
 					resource={questionnaire}
+					{questionnaireResponse}
 					{onSubmit}
 					{onCurrentItemChange}
 					{subject}

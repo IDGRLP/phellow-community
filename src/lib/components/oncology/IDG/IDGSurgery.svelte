@@ -2,7 +2,7 @@
 	import Histology from "./Details/Histology/Histology.svelte";
 	import Surgery from "./Details/Surgery/Surgery.svelte";
 	import IDGLayout from "./IDGLayout.svelte";
-	import type { Bundle, Observation, Procedure } from "fhir/r4";
+	import type { Bundle, Observation, Procedure, QuestionnaireResponse } from "fhir/r4";
 	import surgeryFeedback from "./IDGSurgeryFeedback";
 
 	interface Props {
@@ -10,9 +10,16 @@
 		bundle: Bundle;
 		showFeedback: boolean;
 		cancelFeedback?: () => void;
+		questionnaireResponse?: QuestionnaireResponse;
 	}
 
-	let { procedureId, bundle, showFeedback, cancelFeedback }: Props = $props();
+	let {
+		procedureId,
+		bundle,
+		showFeedback,
+		cancelFeedback,
+		questionnaireResponse,
+	}: Props = $props();
 
 	let procedure = $derived(
 		bundle.entry?.find((entry) => entry.resource?.id === procedureId)?.resource as
@@ -51,6 +58,7 @@
 	{showFeedback}
 	{cancelFeedback}
 	questionnaire={surgeryFeedback}
+	{questionnaireResponse}
 	onCurrentItemChange={handleCurrentItemChange}
 	subject={subjectReference}
 	source={sourceReference}

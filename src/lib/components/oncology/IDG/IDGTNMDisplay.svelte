@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Bundle, Observation } from "fhir/r4";
+	import type { Bundle, Observation, QuestionnaireResponse } from "fhir/r4";
 	import tnmFeedback from "./IDGTNMFeedback";
 	import TnmDisplay from "../TNMDisplay.svelte";
 	import { parseStageGroupObservation } from "./parseTNM";
@@ -10,9 +10,16 @@
 		bundle: Bundle;
 		showFeedback: boolean;
 		cancelFeedback?: () => void;
+		questionnaireResponse?: QuestionnaireResponse;
 	}
 
-	let { observationId, bundle, showFeedback, cancelFeedback }: Props = $props();
+	let {
+		observationId,
+		bundle,
+		showFeedback,
+		cancelFeedback,
+		questionnaireResponse,
+	}: Props = $props();
 
 	let currentItemLinkId = $state<string | undefined>(undefined);
 
@@ -35,6 +42,7 @@
 	{showFeedback}
 	{cancelFeedback}
 	questionnaire={tnmFeedback}
+	{questionnaireResponse}
 	onCurrentItemChange={handleCurrentItemChange}
 	subject={subjectReference}
 	source={sourceReference}

@@ -23,13 +23,23 @@ export interface QuestionnaireState {
 	allItems: QuestionnaireItem[];
 }
 
-export function createQuestionnaireState(questionnaire: Questionnaire) {
+export function createQuestionnaireState(
+	questionnaire: Questionnaire,
+	initialAnswers?: Map<string, QuestionnaireAnswer>
+) {
 	const flattenedGroups = flattenQuestionnaire(questionnaire);
 	const allItems = getAllItemsFromGroups(flattenedGroups);
 
+	const answers = new SvelteMap<string, QuestionnaireAnswer>();
+	if (initialAnswers) {
+		for (const [linkId, answer] of initialAnswers) {
+			answers.set(linkId, answer);
+		}
+	}
+
 	const state = $state<QuestionnaireState>({
 		currentIndex: 0,
-		answers: new SvelteMap(),
+		answers,
 		flattenedGroups,
 		visibleItems: new SvelteSet(),
 		enabledItems: new SvelteSet(),

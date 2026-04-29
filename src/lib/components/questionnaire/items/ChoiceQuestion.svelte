@@ -34,17 +34,21 @@
 		}
 	}
 
+	function codingsMatch(a: string | Coding, b: string | Coding): boolean {
+		if (typeof a === "object" && typeof b === "object") {
+			return a.code === b.code;
+		}
+		return a === b;
+	}
+
 	function isSelected(optionValue: string | Coding) {
 		if (isMultiple) {
 			return Array.isArray(value)
-				? value.some((v) =>
-						typeof v === "object"
-							? JSON.stringify(v) === JSON.stringify(optionValue)
-							: v === optionValue
-					)
+				? value.some((v) => codingsMatch(v, optionValue))
 				: false;
 		}
-		return value === optionValue;
+		if (value === undefined) return false;
+		return codingsMatch(value as string | Coding, optionValue);
 	}
 </script>
 

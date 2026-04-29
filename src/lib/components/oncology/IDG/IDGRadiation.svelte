@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Bundle, Procedure } from "fhir/r4";
+	import type { Bundle, Procedure, QuestionnaireResponse } from "fhir/r4";
 	import radiationFeedback from "./IDGRadiationFeedback";
 	import Radiation from "./Details/Radiation/Radiation.svelte";
 	import IDGLayout from "./IDGLayout.svelte";
@@ -9,9 +9,16 @@
 		bundle: Bundle;
 		showFeedback: boolean;
 		cancelFeedback?: () => void;
+		questionnaireResponse?: QuestionnaireResponse;
 	}
 
-	let { procedureId, bundle, showFeedback, cancelFeedback }: Props = $props();
+	let {
+		procedureId,
+		bundle,
+		showFeedback,
+		cancelFeedback,
+		questionnaireResponse,
+	}: Props = $props();
 
 	let currentItemLinkId = $state<string | undefined>(undefined);
 
@@ -50,6 +57,7 @@
 	{showFeedback}
 	{cancelFeedback}
 	questionnaire={radiationFeedback}
+	{questionnaireResponse}
 	onCurrentItemChange={handleCurrentItemChange}
 	subject={subjectReference}
 	source={sourceReference}

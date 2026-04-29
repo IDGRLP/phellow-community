@@ -6,7 +6,7 @@
 	import Histology from "./Details/Histology/Histology.svelte";
 	import IDGLayout from "./IDGLayout.svelte";
 
-	import type { Bundle, Condition, Observation } from "fhir/r4";
+	import type { Bundle, Condition, Observation, QuestionnaireResponse } from "fhir/r4";
 	import diagnosisFeedback from "./IDGDiagnosisFeedback";
 
 	interface Props {
@@ -14,9 +14,16 @@
 		bundle: Bundle;
 		showFeedback: boolean;
 		cancelFeedback?: () => void;
+		questionnaireResponse?: QuestionnaireResponse;
 	}
 
-	let { conditionId, bundle, showFeedback, cancelFeedback }: Props = $props();
+	let {
+		conditionId,
+		bundle,
+		showFeedback,
+		cancelFeedback,
+		questionnaireResponse,
+	}: Props = $props();
 
 	let currentItemLinkId = $state<string | undefined>(undefined);
 
@@ -94,6 +101,7 @@
 	{showFeedback}
 	{cancelFeedback}
 	questionnaire={diagnosisFeedback}
+	{questionnaireResponse}
 	onCurrentItemChange={handleCurrentItemChange}
 	subject={subjectReference}
 	source={sourceReference}
