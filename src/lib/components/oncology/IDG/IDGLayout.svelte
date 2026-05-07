@@ -28,8 +28,30 @@
 		source,
 	}: Props = $props();
 
-	function onSubmit(response: QuestionnaireResponse): void {
+	async function onSubmit(response: QuestionnaireResponse): Promise<void> {
 		onCurrentItemChange?.(undefined);
+
+		const existingId = questionnaireResponse?.id;
+		const url = existingId
+			? `/fhir/questionnaireResponse/${encodeURIComponent(existingId)}`
+			: `/fhir/questionnaireResponse`;
+		const method = existingId ? "PUT" : "POST";
+
+		try {
+			const res = await fetch(url, {
+				method,
+				headers: { "Content-Type": "application/fhir+json" },
+				body: JSON.stringify(response),
+			});
+			if (!res.ok) {
+				console.error("Failed to submit QuestionnaireResponse", res.status, await res.text());
+				return;
+			}
+		} catch (err) {
+			console.error("Failed to submit QuestionnaireResponse", err);
+			return;
+		}
+
 		if (import.meta.env.DEV) {
 			return;
 		}

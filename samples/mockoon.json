@@ -25,11 +25,11 @@
         },
         {
           "type": "route",
-          "uuid": "458a512c-d083-4ae9-a068-87b04caea89a"
+          "uuid": "c1e7d8a4-2f3b-4d5e-9a0b-7c4f1e2b3d9a"
         },
         {
           "type": "route",
-          "uuid": "c1e7d8a4-2f3b-4d5e-9a0b-7c4f1e2b3d9a"
+          "uuid": "458a512c-d083-4ae9-a068-87b04caea89a"
         },
         {
           "type": "route",
@@ -285,23 +285,28 @@
       "streamingInterval": 0
     },
     {
-      "uuid": "458a512c-d083-4ae9-a068-87b04caea89a",
+      "uuid": "c1e7d8a4-2f3b-4d5e-9a0b-7c4f1e2b3d9a",
       "type": "http",
-      "documentation": "",
+      "documentation": "Override CRUD collection-GET to wrap qres bucket in a FHIR searchset Bundle filtered by ?subject=... (briefing §3.4)",
       "method": "get",
-      "endpoint": "fhir/QuestionnaireResponse/:id",
+      "endpoint": "fhir/QuestionnaireResponse",
       "responses": [
         {
-          "uuid": "4fb591a8-a05e-4b64-b6b4-ae33ce6886a1",
-          "body": "{}",
+          "uuid": "d2f8e9b5-3a4c-4e6f-a1b2-8d5f2a3c4e0b",
+          "body": "{{{ setVar 'matches' (dataRaw 'qres' (concat '$[?(@.subject.reference==\"' (queryParam 'subject') '\")]')) }}}\n{\n\t\"resourceType\": \"Bundle\",\n\t\"id\": \"{{uuid}}\",\n\t\"meta\": { \"lastUpdated\": \"{{now}}\" },\n\t\"type\": \"searchset\",\n\t\"total\": {{len @matches}},\n\t\"link\": [\n\t\t{\n\t\t\t\"relation\": \"self\",\n\t\t\t\"url\": \"http://{{hostname}}:3000/fhir/QuestionnaireResponse?subject={{queryParam 'subject'}}\"\n\t\t}\n\t],\n\t\"entry\": [\n{{#each @matches}}\t\t{\n\t\t\t\"fullUrl\": \"http://{{hostname}}:3000/fhir/QuestionnaireResponse/{{this.id}}\",\n\t\t\t\"resource\": {{{stringify this}}},\n\t\t\t\"search\": { \"mode\": \"match\" }\n\t\t}{{#unless @last}},{{/unless}}\n{{/each}}\t]\n}\n",
           "latency": 0,
           "statusCode": 200,
-          "label": "",
-          "headers": [],
-          "bodyType": "FILE",
-          "filePath": "./fhir/questionnaires/{{urlParam 'id'}}-response.json",
+          "label": "Searchset Bundle from qres bucket filtered by subject",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/fhir+json; charset=utf-8"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
           "databucketID": "",
-          "sendFileAsBody": true,
+          "sendFileAsBody": false,
           "rules": [],
           "rulesOperator": "OR",
           "disableTemplating": false,
@@ -316,49 +321,27 @@
       "streamingInterval": 0
     },
     {
-      "uuid": "c1e7d8a4-2f3b-4d5e-9a0b-7c4f1e2b3d9a",
-      "type": "http",
-      "documentation": "Search QuestionnaireResponse by subject (briefing §3.4)",
-      "method": "get",
+      "uuid": "458a512c-d083-4ae9-a068-87b04caea89a",
+      "type": "crud",
+      "documentation": "FHIR QuestionnaireResponse CRUD store backed by qres data bucket — handles GET-by-id, POST (server-assigned id), PUT-by-id (overwrite). See briefing §3.4.",
+      "method": "",
       "endpoint": "fhir/QuestionnaireResponse",
       "responses": [
         {
-          "uuid": "d2f8e9b5-3a4c-4e6f-a1b2-8d5f2a3c4e0b",
+          "uuid": "4fb591a8-a05e-4b64-b6b4-ae33ce6886a1",
           "body": "{}",
           "latency": 0,
           "statusCode": 200,
-          "label": "Searchset with diagnose feedback QR for Condition/e5fab94a...",
-          "headers": [],
-          "bodyType": "FILE",
-          "filePath": "./fhir/inkapp/questionnaireResponses/diagnoseFeedback.searchset.json",
-          "databucketID": "",
-          "sendFileAsBody": true,
-          "rules": [
+          "label": "",
+          "headers": [
             {
-              "target": "query",
-              "modifier": "subject",
-              "value": "Condition/e5fab94a17c480d911d43b23bf87d290f868c84400edf8e224ffa4db68c90ef6",
-              "invert": false,
-              "operator": "equals"
+              "key": "Content-Type",
+              "value": "application/fhir+json; charset=utf-8"
             }
           ],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false,
-          "crudKey": "id",
-          "callbacks": []
-        },
-        {
-          "uuid": "e3a9f0c6-4b5d-4f7a-b2c3-9e6a3b4d5f1c",
-          "body": "{\n\t\"resourceType\": \"Bundle\",\n\t\"id\": \"qr-search-empty\",\n\t\"type\": \"searchset\",\n\t\"total\": 0,\n\t\"link\": [\n\t\t{\n\t\t\t\"relation\": \"self\",\n\t\t\t\"url\": \"http://{{hostname}}:3000/fhir/QuestionnaireResponse\"\n\t\t}\n\t],\n\t\"entry\": []\n}",
-          "latency": 0,
-          "statusCode": 200,
-          "label": "Empty searchset (no prior QR for this subject)",
-          "headers": [],
-          "bodyType": "INLINE",
+          "bodyType": "DATABUCKET",
           "filePath": "",
-          "databucketID": "",
+          "databucketID": "qres",
           "sendFileAsBody": false,
           "rules": [],
           "rulesOperator": "OR",
@@ -680,6 +663,13 @@
       "name": "FHIR Location Bundle",
       "documentation": "",
       "value": "{\n  \"resourceType\": \"Bundle\",\n  \"id\": \"{{uuid}}\",\n  \"meta\": {\n    \"lastUpdated\": \"{{now}}\"\n  },\n  \"type\": \"searchset\",\n  \"total\": 3,\n  \"link\": [\n    {\n      \"relation\": \"self\",\n      \"url\": \"http://{{hostname}}:3000/fhir/Location?_format=json\"\n    }\n  ],\n  \"entry\": [\n    {\n      \"fullUrl\": \"http://{{hostname}}:3000/fhir/Location/00371000\",\n      \"resource\": {\n        \"resourceType\": \"Location\",\n        \"id\": \"00371000\",\n        \"meta\": {\n          \"versionId\": \"1\",\n          \"lastUpdated\": \"2022-10-05T07:44:33.914+02:00\",\n          \"source\": \"#67as8kiii9pr88q5\"\n        },\n        \"identifier\": [\n          {\n            \"use\": \"official\",\n            \"value\": \"00371000\"\n          }\n        ],\n        \"status\": \"active\",\n        \"name\": \"Orthopädie\",\n        \"position\": {\n          \"latitude\": 49.40991059517308,\n          \"longitude\": 8.772378706746325\n        }\n      }\n    },\n    {\n      \"fullUrl\": \"http://{{hostname}}:3000/fhir/Location/00231000\",\n      \"resource\": {\n        \"resourceType\": \"Location\",\n        \"id\": \"00231000\",\n        \"meta\": {\n          \"versionId\": \"7\",\n          \"lastUpdated\": \"2023-02-02T09:57:40.809+01:00\",\n          \"source\": \"#qHYFCQ1Y4W8pIKNc\"\n        },\n        \"identifier\": [\n          {\n            \"use\": \"official\",\n            \"value\": \"00231000\"\n          }\n        ],\n        \"status\": \"active\",\n        \"name\": \"Klinik für Allgemein-, Viszeral- und Transplantationschirurgie\",\n        \"position\": {\n          \"latitude\": 49.4157669205614,\n          \"longitude\": 8.664739632853054\n        }\n      }\n    },\n    {\n      \"fullUrl\": \"http://{{hostname}}:3000/fhir/Location/00281000\",\n      \"resource\": {\n        \"resourceType\": \"Location\",\n        \"id\": \"00281000\",\n        \"meta\": {\n          \"versionId\": \"6\",\n          \"lastUpdated\": \"2023-02-02T09:57:43.382+01:00\",\n          \"source\": \"#rthmA1pe1XFZa6WP\"\n        },\n        \"identifier\": [\n          {\n            \"use\": \"official\",\n            \"value\": \"00281000\"\n          }\n        ],\n        \"status\": \"active\",\n        \"name\": \"Klinik für Endokrinologie, Diabetologie, Stoffwechselkrankheiten und Klinische Chemie\",\n        \"position\": {\n          \"latitude\": 49.416623685509435,\n          \"longitude\": 8.66692079776225\n        }\n      }\n    }\n  ]\n}\n"
+    },
+    {
+      "uuid": "f3d1ab02-7c6e-4d5a-9211-aaa1234567ab",
+      "id": "qres",
+      "name": "FHIR QuestionnaireResponse store",
+      "documentation": "Persistable, mutable store for QuestionnaireResponse resources submitted by the InKaPP feedback flow (briefing §3.4). Linked to the CRUD route at fhir/QuestionnaireResponse. Enable 'Persist data buckets' in environment settings to keep contents across Mockoon restarts.",
+      "value": "[\n\t{\n\t\t\"resourceType\": \"QuestionnaireResponse\",\n\t\t\"id\": \"qr-diagnose-seed-001\",\n\t\t\"questionnaire\": \"1_Fd\",\n\t\t\"status\": \"completed\",\n\t\t\"subject\": {\n\t\t\t\"reference\": \"Condition/e5fab94a17c480d911d43b23bf87d290f868c84400edf8e224ffa4db68c90ef6\"\n\t\t},\n\t\t\"source\": {\n\t\t\t\"reference\": \"Patient/1fbe90622a7eb3955f73cf83279640361b5490b280d6386e91ef2fffc33b2652\"\n\t\t},\n\t\t\"authored\": \"2026-04-29T09:01:31.836Z\",\n\t\t\"item\": [\n\t\t\t{\n\t\t\t\t\"linkId\": \"0_Fd_Diag_ins\",\n\t\t\t\t\"text\": \"Stimmen die Diagnosedaten?\",\n\t\t\t\t\"answer\": [\n\t\t\t\t\t{\n\t\t\t\t\t\t\"valueCoding\": {\n\t\t\t\t\t\t\t\"code\": \"correctAndComplete\",\n\t\t\t\t\t\t\t\"display\": \"Ja, die angezeigten Informationen sind korrekt und vollständig\"\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t]\n\t\t\t}\n\t\t]\n\t}\n]\n"
     }
   ],
   "callbacks": []
