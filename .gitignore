@@ -26,6 +26,9 @@ vite.config.ts.timestamp-*
 # Paraglide
 src/lib/paraglide
 
+# Mockoon data-bucket snapshots (see docs/mockoon-persistence.md)
+/mockoon-snapshots
+
 # Screenshots
 /screenshots
 /.auth-state.json

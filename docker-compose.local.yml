@@ -48,6 +48,40 @@ services:
       timeout: 5s
       retries: 3
 
+  # Periodic snapshot of the Mockoon `qres` data bucket (QuestionnaireResponse store).
+  # Mockoon CLI has no on-disk persistence, so the bucket is ephemeral; this sidecar
+  # dumps it to ./mockoon-snapshots/ on the host every 5 minutes via the admin API.
+  # See docs/mockoon-persistence.md.
+  mockoon-snapshot:
+    container_name: inkapp-mockoon-snapshot-local
+    image: alpine:3
+    depends_on:
+      mockoon:
+        condition: service_healthy
+    volumes:
+      - ./mockoon-snapshots:/snapshots
+    environment:
+      SNAPSHOT_INTERVAL_SECONDS: "300"
+      BUCKET_ID: "qres"
+    entrypoint:
+      - sh
+      - -c
+      - |
+        set -eu
+        apk add --no-cache curl >/dev/null
+        echo "mockoon-snapshot: dumping bucket '$$BUCKET_ID' every $${SNAPSHOT_INTERVAL_SECONDS}s to /snapshots"
+        while true; do
+          ts=$$(date -u +%Y%m%dT%H%M%SZ)
+          out="/snapshots/$${BUCKET_ID}-$${ts}.json"
+          if curl -fsS "http://mockoon:3000/mockoon-admin/data-buckets/$${BUCKET_ID}" -o "$$out"; then
+            echo "mockoon-snapshot: wrote $$out"
+          else
+            echo "mockoon-snapshot: dump failed at $$ts" >&2
+          fi
+          sleep "$$SNAPSHOT_INTERVAL_SECONDS"
+        done
+    restart: unless-stopped
+
   # OIDC Mock Server
   oidc-mock:
     container_name: inkapp-oidc-local
