@@ -83,9 +83,9 @@ services:
       retries: 3
 
   # Periodic snapshot of the Mockoon `qres` data bucket (QuestionnaireResponse store).
-  # Mockoon CLI has no on-disk persistence, so the bucket is ephemeral; this sidecar
-  # dumps it to ./mockoon-snapshots/ on the host every 5 minutes via the admin API.
-  # See docs/mockoon-persistence.md.
+  # Dedupes by .value hash and applies generational retention (last 12h: all,
+  # 12h–24h: hourly, 24h–7d: daily, 7d–35d: weekly, >35d: monthly). See
+  # scripts/mockoon-snapshot.sh and docs/mockoon-persistence.md.
   mockoon-snapshot:
     container_name: inkapp-mockoon-snapshot-local
     image: alpine:3
@@ -94,28 +94,13 @@ services:
         condition: service_healthy
     volumes:
       - ./mockoon-snapshots:/snapshots
+      - ./scripts/mockoon-snapshot.sh:/snapshot.sh:ro
     environment:
+      MOCKOON_URL: "http://mockoon:3000"
+      SNAPSHOT_DIR: "/snapshots"
       SNAPSHOT_INTERVAL_SECONDS: "300"
-      SNAPSHOT_RETENTION_DAYS: "7"
       BUCKET_ID: "qres"
-    entrypoint:
-      - sh
-      - -c
-      - |
-        set -eu
-        apk add --no-cache curl >/dev/null
-        echo "mockoon-snapshot: dumping bucket '$$BUCKET_ID' every $${SNAPSHOT_INTERVAL_SECONDS}s to /snapshots (retention $${SNAPSHOT_RETENTION_DAYS}d)"
-        while true; do
-          ts=$$(date -u +%Y%m%dT%H%M%SZ)
-          out="/snapshots/$${BUCKET_ID}-$${ts}.json"
-          if curl -fsS "http://mockoon:3000/mockoon-admin/data-buckets/$${BUCKET_ID}" -o "$$out"; then
-            echo "mockoon-snapshot: wrote $$out"
-          else
-            echo "mockoon-snapshot: dump failed at $$ts" >&2
-          fi
-          find /snapshots -name "$${BUCKET_ID}-*.json" -type f -mtime +$${SNAPSHOT_RETENTION_DAYS} -delete 2>/dev/null || true
-          sleep "$$SNAPSHOT_INTERVAL_SECONDS"
-        done
+    entrypoint: [ "sh", "/snapshot.sh" ]
     restart: unless-stopped
 
   # OIDC Mock Server

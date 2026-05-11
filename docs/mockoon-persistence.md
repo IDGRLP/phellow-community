@@ -15,43 +15,28 @@ curl -s http://localhost:3001/mockoon-admin/data-buckets | jq
 
 1. Manual export when you need it. Just run the curl above. Good for ad-hoc inspection / handing
    data to the customer's analytics person.
-2. Periodic snapshot to a writable host volume. Add a tiny sidecar to the compose file:
+2. **Periodic snapshot to a writable host volume**, implemented as the `mockoon-snapshot` sidecar in
+   `docker-compose.local.yml`. Every `SNAPSHOT_INTERVAL_SECONDS` (default 300) it dumps the bucket
+   via the admin API to `./mockoon-snapshots/qres-YYYYMMDDTHHMMSSZ.json` on the host. Loop logic
+   lives in `scripts/mockoon-snapshot.sh`.
 
-```yaml
-mockoon-snapshot:
-  container_name: inkapp-mockoon-snapshot-local
-  image: alpine:3
-  depends_on:
-    mockoon:
-      condition: service_healthy
-  volumes:
-    - ./mockoon-snapshots:/snapshots
-  environment:
-    SNAPSHOT_INTERVAL_SECONDS: "300"
-    BUCKET_ID: "qres"
-  entrypoint:
-    - sh
-    - -c
-    - |
-      set -eu
-      apk add --no-cache curl >/dev/null
-      echo "mockoon-snapshot: dumping bucket '$$BUCKET_ID' every $${SNAPSHOT_INTERVAL_SECONDS}s to /snapshots"
-      while true; do
-        ts=$$(date -u +%Y%m%dT%H%M%SZ)
-        out="/snapshots/$${BUCKET_ID}-$${ts}.json"
-        if curl -fsS "http://mockoon:3000/mockoon-admin/data-buckets/$${BUCKET_ID}" -o "$$out"; then
-          echo "mockoon-snapshot: wrote $$out"
-        else
-          echo "mockoon-snapshot: dump failed at $$ts" >&2
-        fi
-        sleep "$$SNAPSHOT_INTERVAL_SECONDS"
-      done
-  restart: unless-stopped
-```
+   **Dedup:** before writing, the new dump's `.value` is normalized via `jq -cS` and sha256'd
+   against the most recent existing snapshot. If they match, the new file is discarded — so long
+   idle periods don't accumulate identical copies.
 
-Snapshots land in `./mockoon-snapshots/` on the host every 5 min. Survives container restarts
-because they're on the host filesystem. The sidecar also prunes its own snapshots older than
-`SNAPSHOT_RETENTION_DAYS` (default 7) so the directory does not grow unbounded.
+   **Generational retention** (applied after every cycle, by file mtime; within each bucket the
+   newest file survives):
+
+   | Age range | Resolution kept                   |
+   | --------: | :-------------------------------- |
+   |    < 12 h | every snapshot                    |
+   |   12–24 h | one per UTC hour                  |
+   |  24 h–7 d | one per UTC day                   |
+   |    7–35 d | one per ISO week (epoch / 604800) |
+   |    > 35 d | one per UTC month                 |
+
+   So the directory size is bounded roughly by ~144 (last 12 h at 5-min cadence, minus whatever
+   dedup skipped) + 12 hourly + 6 daily + 4 weekly + N monthly.
 
 3. **Reseed on startup from the latest snapshot.** Real persistence loop, implemented as the
    `mockoon-seed` one-shot service in `docker-compose.local.yml`. Before `mockoon` starts, it:
