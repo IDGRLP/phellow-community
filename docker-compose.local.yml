@@ -31,13 +31,47 @@ services:
       timeout: 5s
       retries: 5
 
+  # One-shot init container: rewrites samples/mockoon.json with the latest
+  # qres snapshot spliced into data[id=qres].value, so Mockoon boots with
+  # the last persisted state. Falls back to the seed value when no snapshot
+  # exists. See docs/mockoon-persistence.md.
+  mockoon-seed:
+    container_name: inkapp-mockoon-seed-local
+    image: alpine:3
+    volumes:
+      - ./mockoon-snapshots:/snapshots:ro
+      - ./samples/mockoon.json:/in/mockoon.json:ro
+      - mockoon_runtime:/out
+    environment:
+      BUCKET_ID: "qres"
+    entrypoint:
+      - sh
+      - -c
+      - |
+        set -eu
+        apk add --no-cache jq >/dev/null
+        latest=$$(ls -1 "/snapshots/$${BUCKET_ID}-"*.json 2>/dev/null | sort | tail -n 1 || true)
+        if [ -n "$$latest" ]; then
+          echo "mockoon-seed: reseeding bucket '$$BUCKET_ID' from $$latest"
+          jq --slurpfile snap "$$latest" --arg id "$$BUCKET_ID" '
+            (.data[] | select(.id == $$id) | .value) |= ($$snap[0].value | tojson)
+          ' /in/mockoon.json > /out/mockoon-config.json
+        else
+          echo "mockoon-seed: no snapshot found, using seed value from samples/mockoon.json"
+          cp /in/mockoon.json /out/mockoon-config.json
+        fi
+    restart: "no"
+
   # Mockoon API Server
   mockoon:
     container_name: inkapp-mockoon-local
     image: mockoon/cli:latest
     command: --data "/data/mockoon-config.json" --port 3000
+    depends_on:
+      mockoon-seed:
+        condition: service_completed_successfully
     volumes:
-      - ./samples/mockoon.json:/data/mockoon-config.json:ro
+      - mockoon_runtime:/data:ro
       - ./samples/fhir:/data/fhir:ro
     ports:
       - "3001:3000" # Different port to avoid conflicts
@@ -62,6 +96,7 @@ services:
       - ./mockoon-snapshots:/snapshots
     environment:
       SNAPSHOT_INTERVAL_SECONDS: "300"
+      SNAPSHOT_RETENTION_DAYS: "7"
       BUCKET_ID: "qres"
     entrypoint:
       - sh
@@ -69,7 +104,7 @@ services:
       - |
         set -eu
         apk add --no-cache curl >/dev/null
-        echo "mockoon-snapshot: dumping bucket '$$BUCKET_ID' every $${SNAPSHOT_INTERVAL_SECONDS}s to /snapshots"
+        echo "mockoon-snapshot: dumping bucket '$$BUCKET_ID' every $${SNAPSHOT_INTERVAL_SECONDS}s to /snapshots (retention $${SNAPSHOT_RETENTION_DAYS}d)"
         while true; do
           ts=$$(date -u +%Y%m%dT%H%M%SZ)
           out="/snapshots/$${BUCKET_ID}-$${ts}.json"
@@ -78,6 +113,7 @@ services:
           else
             echo "mockoon-snapshot: dump failed at $$ts" >&2
           fi
+          find /snapshots -name "$${BUCKET_ID}-*.json" -type f -mtime +$${SNAPSHOT_RETENTION_DAYS} -delete 2>/dev/null || true
           sleep "$$SNAPSHOT_INTERVAL_SECONDS"
         done
     restart: unless-stopped
@@ -107,3 +143,4 @@ services:
 
 volumes:
   postgres_local_data:
+  mockoon_runtime:

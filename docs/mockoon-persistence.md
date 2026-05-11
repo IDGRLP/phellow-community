@@ -49,9 +49,20 @@ mockoon-snapshot:
   restart: unless-stopped
 ```
 
-2. Snapshots land in `./mockoon-snapshots/` on the host every 5 min. Survives container restarts
-   because they're on the host filesystem.
-3. **Reseed on startup from the latest snapshot.** Real persistence loop. Before `mockoon` starts,
-   run a small init container that reads the newest snapshot, splices it into a copy of
-   `mockoon.json`'s `data[*].value` field for `qres`, and writes the result to a `:rw` mount Mockoon
-   then loads from. Not included here.
+Snapshots land in `./mockoon-snapshots/` on the host every 5 min. Survives container restarts
+because they're on the host filesystem. The sidecar also prunes its own snapshots older than
+`SNAPSHOT_RETENTION_DAYS` (default 7) so the directory does not grow unbounded.
+
+3. **Reseed on startup from the latest snapshot.** Real persistence loop, implemented as the
+   `mockoon-seed` one-shot service in `docker-compose.local.yml`. Before `mockoon` starts, it:
+   1. Picks the newest `qres-*.json` from `./mockoon-snapshots/` (falls back to the seed value in
+      `samples/mockoon.json` on first run, when no snapshot exists).
+   2. Splices the snapshot's `.value` array into a copy of `samples/mockoon.json` at
+      `data[id=qres].value` via `jq` — note that Mockoon stores bucket values as JSON-encoded
+      strings, so the array is `tojson`'d before injection.
+   3. Writes the rewritten config to the `mockoon_runtime` named volume, which `mockoon` mounts
+      read-only at `/data`.
+
+   `mockoon` declares `depends_on: mockoon-seed: { condition: service_completed_successfully }`, so
+   it waits until seeding finishes. If `jq` fails, the seed container exits non-zero and `mockoon`
+   won't start — better than silently booting with stale or empty state.
