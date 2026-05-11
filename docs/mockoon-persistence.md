@@ -45,8 +45,9 @@ curl -s http://localhost:3001/mockoon-admin/data-buckets | jq
    2. Splices the snapshot's `.value` array into a copy of `samples/mockoon.json` at
       `data[id=qres].value` via `jq` — note that Mockoon stores bucket values as JSON-encoded
       strings, so the array is `tojson`'d before injection.
-   3. Writes the rewritten config to the `mockoon_runtime` named volume, which `mockoon` mounts
-      read-only at `/data`.
+   3. Writes the rewritten config to the `mockoon_runtime` named volume, which `mockoon` mounts at
+      `/cfg`. The `samples/fhir` bind also mounts under `/cfg/fhir` so Mockoon's relative
+      `filePath: "./fhir/..."` references in `mockoon.json` still resolve correctly.
 
    `mockoon` declares `depends_on: mockoon-seed: { condition: service_completed_successfully }`, so
    it waits until seeding finishes. If `jq` fails, the seed container exits non-zero and `mockoon`

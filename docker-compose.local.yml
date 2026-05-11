@@ -31,6 +31,44 @@ services:
       timeout: 5s
       retries: 5
 
+  # One-shot DB schema sync via `drizzle-kit push --force`. Pushes
+  # src/lib/server/db/schema.ts directly to Postgres (no migration files),
+  # matching the `pnpm db:push` workflow used on the host. Runs in a vanilla
+  # node:22-alpine container so the host's macOS node_modules (with native
+  # binaries) doesn't pollute the Linux runtime — deps install into the
+  # `db_migrate_node_modules` named volume, cached by pnpm-lock.yaml hash so
+  # only the first `up` (and any lockfile change) pays the install cost.
+  db-migrate:
+    container_name: inkapp-db-migrate-local
+    image: node:22-alpine
+    depends_on:
+      db:
+        condition: service_healthy
+    working_dir: /app
+    environment:
+      POSTGRES_URL: postgresql://${POSTGRES_USER:-phellow}:${POSTGRES_PASSWORD:-password}@db:5432/${POSTGRES_DB:-phellow_local}
+    volumes:
+      - .:/app
+      - db_migrate_node_modules:/app/node_modules
+    entrypoint:
+      - sh
+      - -c
+      - |
+        set -eu
+        corepack enable >/dev/null 2>&1
+        LOCKHASH_FILE=/app/node_modules/.db-migrate-lockhash
+        CURRENT=$$(md5sum /app/pnpm-lock.yaml | cut -d ' ' -f1)
+        if [ ! -f "$$LOCKHASH_FILE" ] || [ "$$(cat "$$LOCKHASH_FILE")" != "$$CURRENT" ]; then
+          echo "db-migrate: installing dependencies into container volume (first run or lockfile changed)..."
+          pnpm install --frozen-lockfile --silent
+          echo "$$CURRENT" > "$$LOCKHASH_FILE"
+        else
+          echo "db-migrate: dependencies up to date"
+        fi
+        echo "db-migrate: running drizzle-kit push --force..."
+        pnpm exec drizzle-kit push --force
+    restart: "no"
+
   # One-shot init container: rewrites samples/mockoon.json with the latest
   # qres snapshot spliced into data[id=qres].value, so Mockoon boots with
   # the last persisted state. Falls back to the seed value when no snapshot
@@ -66,13 +104,13 @@ services:
   mockoon:
     container_name: inkapp-mockoon-local
     image: mockoon/cli:latest
-    command: --data "/data/mockoon-config.json" --port 3000
+    command: --data "/cfg/mockoon-config.json" --port 3000
     depends_on:
       mockoon-seed:
         condition: service_completed_successfully
     volumes:
-      - mockoon_runtime:/data:ro
-      - ./samples/fhir:/data/fhir:ro
+      - mockoon_runtime:/cfg
+      - ./samples/fhir:/cfg/fhir:ro
     ports:
       - "3001:3000" # Different port to avoid conflicts
     restart: unless-stopped
@@ -129,3 +167,4 @@ services:
 volumes:
   postgres_local_data:
   mockoon_runtime:
+  db_migrate_node_modules:
