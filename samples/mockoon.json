@@ -495,7 +495,7 @@
       "type": "http",
       "documentation": "",
       "method": "get",
-      "endpoint": "fhir/Patient/[$]oncology",
+      "endpoint": "fhir/Patient/$oncology",
       "responses": [
         {
           "uuid": "447fedd2-c325-45e7-96e2-905c643d7efe",
@@ -505,7 +505,7 @@
           "label": "",
           "headers": [],
           "bodyType": "FILE",
-          "filePath": "./fhir/inkapp/test-bundles/{{queryParam 'file' 'InKaPP_Lunge_C34.json'}}",
+          "filePath": "./fhir/inkapp/test-bundles/{{queryParam 'file' 'default.json'}}",
           "databucketID": "uqrm",
           "sendFileAsBody": true,
           "rules": [],
@@ -515,62 +515,6 @@
           "default": true,
           "crudKey": "id",
           "callbacks": []
-        }
-      ],
-      "responseMode": null,
-      "streamingMode": null,
-      "streamingInterval": 0
-    },
-    {
-      "uuid": "597af168-09cc-49f0-afdd-0dd18d6ee8d0",
-      "type": "http",
-      "documentation": "",
-      "method": "get",
-      "endpoint": "fhir/Patient/$oncology",
-      "responses": [
-        {
-          "uuid": "a82490a8-b80f-4692-bca9-9a3f9bfb8e2f",
-          "latency": 0,
-          "statusCode": 404,
-          "label": "",
-          "headers": [
-            {
-              "key": "access-control-allow-headers",
-              "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
-            },
-            {
-              "key": "access-control-allow-methods",
-              "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
-            },
-            {
-              "key": "access-control-allow-origin",
-              "value": "*"
-            },
-            {
-              "key": "content-security-policy",
-              "value": "default-src 'none'"
-            },
-            {
-              "key": "content-type",
-              "value": "text/html; charset=utf-8"
-            },
-            {
-              "key": "x-content-type-options",
-              "value": "nosniff"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false,
-          "crudKey": "id",
-          "callbacks": [],
-          "body": "{}"
         }
       ],
       "responseMode": null,
@@ -586,10 +530,6 @@
     {
       "type": "route",
       "uuid": "a01a54c2-9839-4767-803f-02d710662867"
-    },
-    {
-      "type": "route",
-      "uuid": "597af168-09cc-49f0-afdd-0dd18d6ee8d0"
     }
   ],
   "proxyMode": false,

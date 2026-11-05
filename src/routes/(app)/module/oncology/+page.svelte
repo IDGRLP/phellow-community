@@ -17,6 +17,7 @@
 	import { timelineTutorial } from "$components/tutorial/steps/timelineTutorial";
 	import CircleHelp from "@lucide/svelte/icons/circle-help";
 	import { cn } from "$lib/utils";
+	import { DEFAULT_ONCOLOGY_DATASET_FILE } from "$components/oncology/oncologyDataset";
 
 	let { data }: { data: PageData } = $props();
 
@@ -28,8 +29,7 @@
 	];
 
 	function buttonIsActive(file: string) {
-		const currentFile = page.url.searchParams.get("file");
-		if (!currentFile) return file === "InKaPP_Lunge_C34.json";
+		const currentFile = page.url.searchParams.get("file") ?? DEFAULT_ONCOLOGY_DATASET_FILE;
 		return currentFile === file;
 	}
 

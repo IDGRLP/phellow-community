@@ -1,8 +1,9 @@
 import type { TutorialSequence } from "$lib/types/tutorial";
+import { TUTORIAL_PREREQUISITE_URL } from "../tutorialDataset";
 
 export const timelineTutorial: TutorialSequence = {
 	id: "timeline-overview",
-	prerequisiteUrl: "/module/oncology?file=InKaPP_Lunge_C34.json",
+	prerequisiteUrl: TUTORIAL_PREREQUISITE_URL,
 	steps: [
 		{
 			id: "notice-demo-data",

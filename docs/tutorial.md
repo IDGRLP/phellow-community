@@ -156,6 +156,7 @@ Example: the diagnosis tutorial opens the diagnosis drawer programmatically:
 
 ```ts
 import type { TutorialSequence } from "$lib/types/tutorial";
+import { TUTORIAL_PREREQUISITE_URL } from "../tutorialDataset";
 
 function waitFor(ms: number): Promise<void> {
 	return new Promise((resolve) => setTimeout(resolve, ms));
@@ -163,7 +164,7 @@ function waitFor(ms: number): Promise<void> {
 
 export const diagnosisTutorial: TutorialSequence = {
 	id: "diagnosis-detail",
-	prerequisiteUrl: "/module/oncology?file=InKaPP_Lunge_C34.json",
+	prerequisiteUrl: TUTORIAL_PREREQUISITE_URL,
 	async setup() {
 		await waitFor(300); // wait for timeline to render
 		const el = document.querySelector('[data-tutorial="timeline-event-diagnosis"]');

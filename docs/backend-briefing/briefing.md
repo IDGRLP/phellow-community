@@ -26,7 +26,9 @@ backend-briefing/
     ├── InKaPP_Brust_C50.json    ← breast
     ├── InKaPP_Darm_C18.json     ← colon
     ├── InKaPP_Lunge_C34.json    ← lung (referenced by the §3.3 example and all sample QRs)
-    └── InKaPP_Prostata_C61.json ← prostate
+    ├── InKaPP_Prostata_C61.json ← prostate
+    ├── tutorial.json            ← dataset the in-app tutorial requests (`?file=tutorial.json`); currently a copy of the lung bundle
+    └── default.json             ← dataset the oncology page requests when the user has not picked one (`?file=default.json`); currently a copy of the lung bundle
 ```
 
 The `questionnaires/` and `test-bundles/` directories are reference material — neither is consumed

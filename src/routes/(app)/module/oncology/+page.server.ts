@@ -1,4 +1,5 @@
 import { parseFHIRBundle } from "$components/oncology/IDG/parseBundle";
+import { DEFAULT_ONCOLOGY_DATASET_FILE } from "$components/oncology/oncologyDataset";
 import { env } from "$env/dynamic/private";
 import { parseJWT } from "@oslojs/jwt";
 import { error } from "@sveltejs/kit";
@@ -11,12 +12,10 @@ export const load = (async ({ locals, url }) => {
 	if ("scope" in payload) {
 		const scope = payload.scope as string;
 		if (scope.includes("module_onco")) {
-			let fileParam = url.searchParams.get("file");
+			const fileParam = url.searchParams.get("file") ?? DEFAULT_ONCOLOGY_DATASET_FILE;
 			console.log("Fetching oncology data, file param:", fileParam);
-			let fetchURL = new URL(env.FHIR_ONCOLOGY_URL ?? `${env.FHIR_BASE_URL!}/Patient/$oncology`);
-			if (fileParam) {
-				fetchURL.searchParams.set("file", fileParam);
-			}
+			const fetchURL = new URL(env.FHIR_ONCOLOGY_URL ?? `${env.FHIR_BASE_URL!}/Patient/$oncology`);
+			fetchURL.searchParams.set("file", fileParam);
 			console.log("Fetch URL:", fetchURL.toString());
 			const accessToken = await locals.validAccessToken();
 			const headers = {
