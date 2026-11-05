@@ -59,18 +59,20 @@
 			bitte an Ihre behandelnde Fachperson.
 		</p>
 		<div class="flex flex-row flex-wrap items-center gap-4">
-			{#each availableSampleFiles as item (item.file)}
-				<Button
-					href="/module/oncology?file={item.file}"
-					variant="secondary"
-					class={[
-						"h-11",
-						buttonIsActive(item.file)
-							? "bg-primary text-primary-foreground border-primary ring-primary hover:bg-primary/90 border shadow-md ring-2"
-							: "border border-transparent hover:ring-1",
-					]}>{item.title}</Button
-				>
-			{/each}
+			{#if data.showSampleFiles}
+				{#each availableSampleFiles as item (item.file)}
+					<Button
+						href="/module/oncology?file={item.file}"
+						variant="secondary"
+						class={[
+							"h-11",
+							buttonIsActive(item.file)
+								? "bg-primary text-primary-foreground border-primary ring-primary hover:bg-primary/90 border shadow-md ring-2"
+								: "border border-transparent hover:ring-1",
+						]}>{item.title}</Button
+					>
+				{/each}
+			{/if}
 			<Button
 				variant="ghost"
 				class={cn("hover:border-border h-11 cursor-pointer border border-transparent hover:ring")}

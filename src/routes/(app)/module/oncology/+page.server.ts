@@ -34,6 +34,7 @@ export const load = (async ({ locals, url }) => {
 			return {
 				events,
 				bundle,
+				showSampleFiles: env.ONCOLOGY_SHOW_SAMPLE_FILES === "true",
 			};
 		} else {
 			return error(403, "You do not have access to this module");
